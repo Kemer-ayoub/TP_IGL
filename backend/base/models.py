@@ -190,7 +190,6 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created and instance.role == "RADIOLOGUE":
         RadiologueProfile.objects.create(user=instance)
 
-
 #Entity Models:
 class DPI(models.Model):
     #Est que ndir dpi_id??
@@ -212,10 +211,10 @@ class DPI(models.Model):
         return self.nom
 
 class Consultation(models.Model):
-    medecin = models.ForeignKey(Medecin, on_delete=models.SET_NULL, null=True, related_name="consultations")
+    medecin = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="consultations")
     date_cons = models.DateField()
-    #diagnostic = models.TextField(null=True, blank=True)
-    ordonnance = models.OneToOneField('Ordonnance', on_delete=models.SET_NULL, null=True, related_name="consultation")
+    diagnostic = models.TextField(null=True, blank=True)
+    #ordonnance = models.OneToOneField('Ordonnance', on_delete=models.SET_NULL, null=True, related_name="consultation")
     dpi = models.ForeignKey(DPI, on_delete=models.CASCADE, related_name="consultations")
 
     def __str__(self):
@@ -230,6 +229,8 @@ class Resume(models.Model):
 
 class Ordonnance(models.Model):
     date = models.DateField()
+    valid = models.BooleanField() # ca sera validé par le pharmacie
+    consultation = models.ForeignKey(Consultation, on_delete=models.SET_NULL, null=True, related_name="ordonnances")
 
     def __str__(self):
         return self.date
@@ -323,32 +324,19 @@ class Bilan(models.Model):
         abstract = True
 
 class BilanRadiologique(Bilan):
-    radiologue = models.ForeignKey(User, on_delete=models.SET_NULL, limit_choices_to={'role': User.Role.RADIOLOGUE}, null=True, related_name="bilan_radiologiques")
-    compte_rendu = models.TextField()
-    statut = models.CharField(
-        max_length=20, 
-        choices=[
-            ('EN_ATTENTE', 'En attente'),
-            ('TERMINE', 'Terminé'),
-            ('URGENT', 'Urgent')
-        ]
-    )
-    radio = models.CharField(max_length=100)  # IRM, Scanner, Radiographie
+    radiologue = models.ForeignKey(User, on_delete=models.SET_NULL, limit_choices_to={'role': User.Role.RADIOLOGUE}, null=True, related_name="bilan_radiologiques_red")
+    medecin = models.ForeignKey(User, on_delete=models.SET_NULL, limit_choices_to={'role': User.Role.MEDECIN}, null=True, related_name="bilan_radiologiques_med")
+    title = models.TextField(max_length=50)
+    observation = models.TextField(max_length=500)
+    recommendation = models.TextField(max_length=500)
     # Image principale de l'examen
-    image_principale = models.ImageField(upload_to='examens_radiologiques/')
-    
-    # Fichiers supplémentaires (comptes-rendus, autres images, etc.)
-    images_supplementaires = models.FileField(
-        upload_to='examens_radiologiques/supplementaires/', 
-        null=True, 
-        blank=True
-    )
+    image = models.ImageField(upload_to='examens_radiologiques/')
 
     def __str__(self):
         return self.radio
 
 class BilanBiologique(Bilan):
-    laborantin = models.OneToOneField(User, on_delete=models.SET_NULL, limit_choices_to={'role': User.Role.LABORANTIN}, null=True, related_name="bilan_biologique")
+    laborantin = models.ForeignKey(User, on_delete=models.SET_NULL, limit_choices_to={'role': User.Role.LABORANTIN}, null=True, related_name="bilan_biologique")
     statut = models.CharField(
         max_length=20, 
         choices=[
@@ -361,4 +349,41 @@ class BilanBiologique(Bilan):
     def __str__(self):
         return self.status
 
+class ExamRequest(models.Model): #Request le bilan biologique
+    type_test = models.CharField(max_length=50)
+    subtype_test = models.CharField(max_length=50)
+
+    PRIORITY_CHOICES = [
+        ('standard', 'Standard'),
+        ('high_priority', 'High Priority'),
+        ('urgent', 'Urgent'),
+    ]
+    
+    priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='standard')
+    medical_just = models.CharField(max_length=500)
+    req_date = models.DateField()
+    medecin = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, limit_choices_to={'role': User.Role.MEDECIN}, related_name="exam_requests_med")
+    laborantin = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, limit_choices_to={'role': User.Role.LABORANTIN}, related_name="exam_requests_lab")
+
+    def __str__(self):
+        return self.type_test
+    
+class ReportRequest(models.Model): #Request le bilan biologique
+    type_test = models.CharField(max_length=50)
+    body_part = models.CharField(max_length=50)
+
+    PRIORITY_CHOICES = [
+        ('standard', 'Standard'),
+        ('high_priority', 'High Priority'),
+        ('urgent', 'Urgent'),
+    ]
+
+    priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='standard')
+    reason_req = models.CharField(max_length=500)
+    req_date = models.DateField()
+    medecin = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, limit_choices_to={'role': User.Role.MEDECIN}, related_name="report_requests_med")
+    radiologue = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, limit_choices_to={'role': User.Role.MEDECIN}, related_name="report_requests_rad")
+
+    def __str__(self):
+        return self.type_test
 
