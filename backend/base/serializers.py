@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import  User, Patient, PatientProfile, Pharmacien, PharmacienProfile, Medecin, MedecinProfile, Laborantin, LaborantinProfile, Infirmier, InfirmierProfile, Radiologue, RadiologueProfile, Consultation, Resume, Soin, Ordonnance, Medicament, BilanBiologique, BilanRadiologique, DPI, ExamRequest, ReportRequest
+from .models import  User, Patient, PatientProfile, Pharmacien, PharmacienProfile, Medecin, MedecinProfile, Laborantin, LaborantinProfile, Infirmier, InfirmierProfile, Radiologue, RadiologueProfile, Consultation, Soin, Ordonnance, Medicament, BilanBiologique, BilanRadiologique, DPI, ExamRequest, ReportRequest, AntecedantMed
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -72,13 +72,6 @@ class ConsultationSerializer(serializers.ModelSerializer):
         model = Consultation
         fields = '__all__'
 
-class ResumeSerializer(serializers.ModelSerializer):
-    consultation = ConsultationSerializer(read_only=True)
-
-    class Meta:
-        model = Resume
-        fields = '__all__'
-
 class OrdonnanceSerializer(serializers.ModelSerializer):
     medicaments = serializers.SerializerMethodField()
 
@@ -92,14 +85,10 @@ class OrdonnanceSerializer(serializers.ModelSerializer):
 class SoinSerializer(serializers.ModelSerializer):
     infirmier = UserSerializer(read_only=True)
     dpi = DPISerializer(read_only=True)
-    medicaments = serializers.SerializerMethodField()
 
     class Meta:
         model = Soin
         fields = '__all__'
-
-    def get_medicaments(self, obj):
-        return MedicamentSerializer(obj.medicaments.all(), many=True).data
 
 class MedicamentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -139,3 +128,15 @@ class ReportRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReportRequest
         fields = '__all__'
+
+class AntecedantMedSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AntecedantMed
+        fields = '__all__'
+
+    def validate_type_record(self, value):
+        valid_types = ['personal medical', 'allergie', 'medication', 'vaccination']
+        if value not in valid_types:
+            raise serializers.ValidationError(f"Invalid type. Must be one of {valid_types}")
+        return value

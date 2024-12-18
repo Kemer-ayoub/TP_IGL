@@ -50,7 +50,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 class PatientProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="patient_profile")
     patient_id = models.IntegerField(null=True, blank=True)
-    medecin_traitant = models.ForeignKey('User', on_delete=models.SET_NULL, limit_choices_to={'role': User.Role.MEDECIN}, null=True, related_name="patients_under_care")
+    medecins = models.ManyToManyField('User', limit_choices_to={'role': User.Role.MEDECIN}, related_name="patients_under_care")
     admin = models.ForeignKey('User', on_delete=models.SET_NULL, limit_choices_to={'role': User.Role.ADMIN}, null=True, related_name="managed_patients")
     pharmacien = models.ManyToManyField('User', limit_choices_to={'role': User.Role.PHARMACIEN}, related_name="patients_handled")
     laborantin = models.ManyToManyField('User', limit_choices_to={'role': User.Role.LABORANTIN}, related_name="patients_tested")
@@ -214,18 +214,12 @@ class Consultation(models.Model):
     medecin = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="consultations")
     date_cons = models.DateField()
     diagnostic = models.TextField(null=True, blank=True)
+    resume = models.CharField(max_length=500)
     #ordonnance = models.OneToOneField('Ordonnance', on_delete=models.SET_NULL, null=True, related_name="consultation")
     dpi = models.ForeignKey(DPI, on_delete=models.CASCADE, related_name="consultations")
 
     def __str__(self):
         return f"Consultation de {self.patient.prenom} {self.patient.nom} le {self.date_cons}"
-
-class Resume(models.Model):
-    resume = models.CharField(max_length=1000)
-    consultation = models.OneToOneField('Consultation', on_delete=models.SET_NULL, null=True, related_name="resume_details")
-
-    def __str__(self):
-        return self.resume
 
 class Ordonnance(models.Model):
     date = models.DateField()
@@ -238,6 +232,8 @@ class Ordonnance(models.Model):
 class Soin(models.Model):
     infirmier = models.ForeignKey(User, on_delete=models.SET_NULL , limit_choices_to={'role': User.Role.INFIRMIER}, null=True, related_name="soins")
     dpi = models.ForeignKey(DPI, on_delete=models.CASCADE, related_name="soins")
+    date = models.DateField()
+    time = models.TimeField()
     # Types de soins
     TYPES_SOINS = [
         ('surveillance', 'Surveillance'),
@@ -249,64 +245,19 @@ class Soin(models.Model):
     
     # Détails du soin
     type_soin = models.CharField(max_length=50, choices=TYPES_SOINS)
-    description_soin = models.TextField(help_text="Description détaillée du soin prodigué")
-
-    # Observations cliniques
-    NIVEAUX_GRAVITE = [
-        ('normal', 'Normal'),
-        ('vigilance', 'Nécessite une vigilance'),
-        ('urgent', 'Intervention urgente requise')
-    ]
-    
-    temperature = models.DecimalField(
-        max_digits=4, 
-        decimal_places=1, 
-        null=True, 
-        blank=True,
-        validators=[
-            MinValueValidator(30.0),
-            MaxValueValidator(42.0)
-        ]
-    )
-    tension_arterielle_systolique = models.PositiveSmallIntegerField(
-        null=True, 
-        blank=True,
-        validators=[
-            MinValueValidator(50),
-            MaxValueValidator(250)
-        ]
-    )
-    tension_arterielle_diastolique = models.PositiveSmallIntegerField(
-        null=True, 
-        blank=True,
-        validators=[
-            MinValueValidator(30),
-            MaxValueValidator(150)
-        ]
-    )
-    frequence_cardiaque = models.PositiveSmallIntegerField(
-        null=True, 
-        blank=True,
-        validators=[
-            MinValueValidator(30),
-            MaxValueValidator(200)
-        ]
-    )
+    description_soin = models.TextField(max_length=500, null=True, blank=True)
+    #help_text="Description détaillée du soin prodigué"
     
     # Observations générales
-    observations_generales = models.TextField(
+    observations = models.TextField(
+        max_length=500,
         blank=True, 
         null=True
-    )
-    niveau_gravite = models.CharField(
-        max_length=20, 
-        choices=NIVEAUX_GRAVITE, 
-        default='normal'
     )
 
 class Medicament(models.Model):
     nom = models.CharField(max_length=100)
-    dosage = models.IntegerField()
+    dosage = models.PositiveIntegerField()
     duree = models.CharField(max_length=100)
     ordonnance = models.ForeignKey(Ordonnance, on_delete=models.CASCADE, null=True, related_name="medicaments")
     soin = models.ForeignKey(Soin, on_delete=models.CASCADE, null=True, related_name="medicaments")
@@ -314,18 +265,10 @@ class Medicament(models.Model):
     def __str__(self):
         return self.nom
 
-class Bilan(models.Model):
-    medecin = models.ForeignKey(User, on_delete=models.SET_NULL , limit_choices_to={'role': User.Role.MEDECIN}, null=True)
-    dpi = models.ForeignKey(DPI, on_delete=models.CASCADE)
-    #patient
-
-    class Meta:
-        # This marks the model as abstract
-        abstract = True
-
-class BilanRadiologique(Bilan):
+class BilanRadiologique(models.Model):
     radiologue = models.ForeignKey(User, on_delete=models.SET_NULL, limit_choices_to={'role': User.Role.RADIOLOGUE}, null=True, related_name="bilan_radiologiques_red")
     medecin = models.ForeignKey(User, on_delete=models.SET_NULL, limit_choices_to={'role': User.Role.MEDECIN}, null=True, related_name="bilan_radiologiques_med")
+    dpi = models.ForeignKey(DPI, on_delete=models.CASCADE, related_name='bilans_radiologiques')
     title = models.TextField(max_length=50)
     observation = models.TextField(max_length=500)
     recommendation = models.TextField(max_length=500)
@@ -335,8 +278,10 @@ class BilanRadiologique(Bilan):
     def __str__(self):
         return self.radio
 
-class BilanBiologique(Bilan):
-    laborantin = models.ForeignKey(User, on_delete=models.SET_NULL, limit_choices_to={'role': User.Role.LABORANTIN}, null=True, related_name="bilan_biologique")
+class BilanBiologique(models.Model):
+    laborantin = models.ForeignKey(User, on_delete=models.SET_NULL, limit_choices_to={'role': User.Role.LABORANTIN}, null=True, related_name="bilan_biologiques_lab")
+    medecin = models.ForeignKey(User, on_delete=models.SET_NULL , limit_choices_to={'role': User.Role.MEDECIN}, null=True, related_name="bilan_biologiques_med")
+    dpi = models.ForeignKey(DPI, on_delete=models.CASCADE, related_name='bilans_biologiques')
     statut = models.CharField(
         max_length=20, 
         choices=[
@@ -387,3 +332,19 @@ class ReportRequest(models.Model): #Request le bilan biologique
     def __str__(self):
         return self.type_test
 
+class AntecedantMed(models.Model):
+    RECORDS_TYPES = [
+        ('personal medical', 'Personal Medical'),
+        ('allergie', 'Allergie'),
+        ('medication', 'Medication'),
+        ('vaccination', 'Vaccination')
+    ]
+
+    type_record = models.CharField(max_length=30, choices=RECORDS_TYPES, default='personal medical')
+    name_record = models.CharField(max_length=100)
+    antec_date = models.DateField()
+    dosage = models.PositiveIntegerField(null=True, blank=True)
+    dpi = models.ForeignKey(DPI, on_delete=models.CASCADE, null=True, related_name='antecedanrs_medicaux')
+
+    def __str__(self):
+        return self.type_record
