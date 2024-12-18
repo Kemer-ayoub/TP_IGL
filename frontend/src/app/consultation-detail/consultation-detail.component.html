@@ -1,0 +1,16 @@
+<div *ngIf="consultation" class="consultation-details">
+    <h3>Détails de la consultation</h3>
+    <p><strong>Date :</strong> {{ consultation.date }}</p>
+    <p><strong>Nom du médecin :</strong> {{ consultation.doctorName }}</p>
+    <p><strong>Raison :</strong> {{ consultation.notes }}</p>
+  
+    <h4>Prescriptions :</h4>
+    <ul>
+      <li *ngFor="let prescription of consultation.prescriptions">
+        <p><strong>Nom :</strong> {{ prescription.name }}</p>
+        <p><strong>Dose :</strong> {{ prescription.dose }}</p>
+        <p><strong>Durée :</strong> {{ prescription.duration }}</p>
+      </li>
+    </ul>
+  </div>
+  

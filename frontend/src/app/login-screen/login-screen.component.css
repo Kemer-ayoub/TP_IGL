@@ -1,0 +1,135 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+
+}
+
+.green-container {
+
+  background-color: #558A8D;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Geologica', sans-serif;
+}
+
+.login-container {
+  background-color: #DFDFDF;
+  padding: 40px;
+  border-radius: 25px;
+  text-align: center;
+  width: 650px;
+  height: 450px;
+}
+
+h2 {
+  color: #558A8D;
+  margin-bottom: 20px;
+  font-size: 35px;
+  margin-bottom: 30px;
+}
+
+.input-container {
+  position: relative;
+  margin: 15px 0;
+}
+
+input {
+  width: 450px;
+  padding: 10px;
+  margin-bottom: 4.5px;
+  border: 1px solid #558A8D;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+input:focus {
+  border-color: #DFDFDF !important;
+  outline: none !important;
+}
+
+input::placeholder {
+  color: #558A8D;
+  font-size: 14px;
+}
+
+.error-text {
+  color: #0B2025;
+  font-size: 0.7em;
+  font-family: 'Geologica', sans-serif;
+  margin-top: -2px;
+  margin-left: 230px;
+  text-align: left;
+}
+
+.login-button {
+  background-color: #558A8D;
+  color: #DFDFDF;
+  border: none;
+  border-radius: 15px;
+  padding: 10px;
+  width: 200px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: #305a66;
+}
+
+.forgot-password {
+  display: block;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #3C3C3C;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.forgot-password:hover {
+  color: #305a66;
+}
+
+.logo {
+  margin-top: -70px;
+  margin-bottom: 20px;
+}
+
+.logo-image {
+  width: 50px;
+  height: 50px;
+  margin-top: 50px;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-container input {
+  width: 450px;
+  padding: 10px 40px;
+  border: 1px solid #558A8D;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.input-container input::placeholder {
+  color: #558A8D;
+  font-size: 14px;
+}
+
+.input-container .input-icon {
+  position: absolute;
+  top: 40%;
+  left: 70px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+}

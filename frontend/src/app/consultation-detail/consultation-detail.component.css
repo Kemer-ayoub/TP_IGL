@@ -1,0 +1,46 @@
+/* Style général des détails de la consultation */
+.consultation-details {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .consultation-details h3 {
+    font-size: 24px;
+    color: #007bff;
+    margin-bottom: 15px;
+  }
+  
+  .consultation-details p {
+    font-size: 16px;
+    color: #333;
+    margin: 5px 0;
+  }
+  
+  .consultation-details h4 {
+    font-size: 20px;
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  .consultation-details ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .consultation-details li {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  .consultation-details li strong {
+    font-weight: bold;
+  }
+  
+  .consultation-details ul li p {
+    margin: 3px 0;
+  }
+  

@@ -1,0 +1,595 @@
+/* General styles */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    scroll-behavior: smooth;
+    background-color: #DFDFDF;
+    height: 100%;
+    margin: 0;
+}
+.error-message {
+    color: #305a66;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Header styles */
+.header1 {
+    margin: 0;
+    padding-right: 70px;
+    padding-left: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 88px;
+    width: 100%;
+    background-color: #DFDFDF;
+    border-bottom: 0.5px solid #558A8D;
+    position: relative; /* Assure la gestion des éléments de superposition */
+    margin-bottom: 30px;
+    margin-top: 1px;
+}
+
+.logo-container1 {
+    display: flex;
+    align-items: center;
+}
+
+.logo1 {
+    display: block;
+    width: 64px;
+    height: 64px;
+    padding-right: 20px;
+}
+
+.company-name {
+    font-family: 'Geologica', sans-serif;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 40px;
+    color: #558A8D;
+}
+
+.logout-btn {
+    width: 164px;
+    height: 37px;
+    font-family: 'Geologica', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 25px;
+    border: none;
+    border-radius: 15px;
+    background-color: #558A8D;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logout-btn:hover {
+    background-color: #305a66;
+    transform: scale(1.05);
+}
+/*  patient INfo styles */
+/* General styles for the patient information section */
+.container {
+    background-color: #DFDFDF;
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    width: 1100px;
+    max-width: 100%;
+    font-family: 'Geologica', sans-serif;
+    border: 1px solid #558A8D;
+  
+}
+
+/* Flex container for each row of information */
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Each group of info (label + value) */
+.info-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: 1;
+    gap: 10px;
+}
+
+/* Label styling */
+.info-group label {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Span styling */
+.info-group span {
+    font-size: 16px;
+    color: #333;
+    padding: 5px;
+    background-color: #DFDFDF;
+    border-radius: 5px;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Buttons Styling */
+.buttons-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Colonnes adaptatives avec minimum 150px */
+    gap: -100px; /* Espacement entre les boutons */
+    margin-top: 20px; /* Marges supérieures pour espacement global */
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.button-item {
+    display: flex;
+    flex-direction: column; /* Organisation verticale : icône + texte */
+    align-items: center; /* Centrage horizontal */
+    justify-content: center; /* Centrage vertical */
+    min-height: 100px; /* Hauteur minimale pour de grands boutons */
+    max-width: 120px;
+    cursor: pointer;
+    background-color: #558A8D; 
+    border-radius: 10px; /* Coins arrondis */
+    padding: 15px; /* Espacement interne */
+    transition: transform 0.2s, background-color 0.3s; /* Animation au survol */
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.button-item img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 15px;
+    transition: transform 0.2s;
+}
+
+.button-item span {
+    color: #DFDFDF;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Geologica', sans-serif;
+}
+
+/* Button hover effect */
+.button-item:hover {
+    background-color: #305a66;
+    transform: scale(1.05);
+}
+
+.button-item img:hover {
+    transform: scale(1.1);
+}
+
+
+/* Main container for the content */
+.main-container {
+    scroll-behavior: smooth;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    flex-direction: column;
+    background-color: #DFDFDF;
+ 
+}
+
+/* Buttons Styling */
+.buttons-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.button-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    background-color: #558A8D;
+    border-radius: 10px;
+    padding: 10px;
+    transition: transform 0.2s, background-color 0.3s;
+    text-align: center;
+}
+
+.button-item img {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+    transition: transform 0.2s;
+}
+
+.button-item span {
+    color: #DFDFDF;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Geologica', sans-serif;
+}
+
+/* Button hover effect */
+.button-item:hover {
+    background-color: #305a66;
+    transform: scale(1.05);
+}
+
+.button-item img:hover {
+    transform: scale(1.1);
+}
+
+/*----------------------------------------------------------------*/
+/*Consulattion list styles */
+.consultation-list {
+    background-color: #DFDFDF; /* Background color */
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 700px;
+    font-family: 'Geologica', sans-serif;
+    margin-top: -190px; /* Reduce or remove the top margin */
+    margin-left: -570px;
+    height: 100%;
+}
+
+/* Consultation List Styling */
+.consultation-list h3 {
+    font-size: 24px;
+    color: #558A8D;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Consultation List */
+.consultation-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Consultation List Items */
+.consultation-list li {
+    display: flex; /* Aligns the image and text horizontally */
+    align-items: center; /* Vertically centers the image and text */
+    gap: 10px; /* Space between image and text */
+    padding: 10px;
+    background-color: #DFDFDF;
+    font-size: 12px;
+    color: #0B2025;
+    cursor: pointer;
+    transition: background-color 0.3s, border-left 0.3s;
+    width: 100%; /* Ensures the element takes full width of the parent */
+    position: relative;
+}
+
+/* Hover Effect for Consultation List Items */
+.consultation-list li:hover {
+    background-color: #9EBDBF;
+    border-left: 5px solid #558A8D;
+}
+
+/* Consultation Icon */
+.consultation-icon {
+    width: 40px; /* Icon size */
+    height: 20px;
+    object-fit: contain; /* Adjusts the image */
+    margin-left: -10px;
+}
+
+/* Text for consultations */
+.consultation-list li span {
+    font-family: 'Geologica', sans-serif;
+    font-weight: bold; /* Bold text */
+    color: #305a66; /* Text color */
+    font-size: 15px; /* Text size */
+    text-transform: capitalize; /* Capitalize each word */
+    white-space: nowrap;
+}
+
+/* Selected Consultation Item Styling */
+.consultation-list li.selected {
+    background-color: #9EBDBF;
+    border-left: 17px solid #558A8D;
+}
+
+/* Style for the Back Button */
+.back-btn {
+    background-color: #558A8D;
+    color: #DFDFDF;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    width: 200px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #305a66;
+}
+/*------------------------------Consultation détail--------------------------------------*/
+/* Consultation Details Container */
+/* Consultation Details Container */
+.consultation-details {
+    background-color: #558A8D; /* Set background color */
+    color: #DFDFDF; /* Set text color */
+    font-family: 'Geologica', sans-serif; /* Set font family */
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 600px; /* Adjust the width as needed */
+    margin-top: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+    margin-bottom: 0px;
+}
+
+/* Styling for Consultation Details Title */
+.consultation-details h3 {
+    font-size: 24px;
+    color: #DFDFDF;
+    text-align: center;
+}
+
+/* Styling for Consultation Details Text */
+.consultation-details p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Prescription List Container */
+.consultation-details h4 {
+    font-size: 20px;
+    color: #558A8D;
+    margin-bottom: 15px;
+    text-align: center; /* Aligns the title in the center */
+}
+
+/* Prescription Word Styling */
+.consultation-details h4 span {
+    color: #DFDFDF;
+    font-weight: bold; /* Make it bold */
+   
+}
+
+/* Styling for Prescription List */
+.consultation-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Prescription List Item */
+.consultation-details li {
+    background-color: #DFDFDF; /* Background color for each item */
+    margin-bottom: 10px; /* Space between items */
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    height: auto; /* Adjust height to fit content */
+    position: relative; /* Needed for positioning the "Détails" link */
+    padding-left: 70px;
+    padding-right: 70px;
+   
+}
+
+/* Styling for the Prescription Number */
+.consultation-details li p strong {
+    color: #558A8D; /* Color for Prescription Number */
+    margin-right: 20px; /* Increased space between prescription number and "Détails" */
+}
+
+/* Styling for "Détails" link */
+.details-link {
+    color: #558A8D; /* Prescription color */
+    text-decoration: underline; /* Underline the link */
+    cursor: pointer; /* Make it clickable */
+    font-weight: bold;
+    position: absolute; /* Position it to the right */
+    right: 70px; /* Adjust the distance from the right side */
+    text-align: right;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+/* Prescription List Item Hover Effect */
+.consultation-details li:hover {
+    background-color:  #9EBDBF; /* Change color when hovering over the entire list item */
+    cursor: pointer; /* Change cursor to indicate it's clickable */
+    transform: scale(1.02); /* Slight zoom-in effect */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Styling for Back Button */
+.consultation-details .back-btn {
+    background-color: #305a66;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.consultation-details .back-btn:hover {
+    background-color: #9EBDBF;
+}
+
+
+/*--------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------*/
+/* Prescription Detail Container */
+.prescription-detail {
+    background-color: #558A8D; /* Set background color */
+    color: #DFDFDF; /* Set text color */
+    font-family: 'Geologica', sans-serif; /* Set font family */
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 600px; /* You can adjust the width as needed */
+    margin-top: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+    margin-bottom: 0px;
+}
+
+ 
+
+/* Styling for Medications List */
+.prescription-detail h4 {
+    font-size: 20px;
+    color: #558A8D;
+    margin-bottom: 15px;
+    text-align: center; /* Aligns the title in the center */
+}
+
+.prescription-detail ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+}
+
+.prescription-detail li {
+    background-color: #DFDFDF; /* Background color for each item */
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-bottom: 10px; /* Space between items */
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for better visual separation */
+ 
+}
+
+/* Styling for each piece of medication info */
+.prescription-detail li span {
+    font-size: 14px;
+    color: #305a66;
+    font-weight: bold;
+    padding: 5px;
+ 
+}
+
+/* Optional hover effect for each medication item */
+.prescription-detail li:hover {
+    background-color: #9EBDBF; /* Change background color on hover */
+    cursor: pointer;
+    transform: scale(1.02); /* Slight zoom-in effect */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Styling for prescription details (Doctor Name, Date, Status) */
+.prescription-detail p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.prescription-detail p strong {
+    font-weight: bold;
+}
+
+/* Button Styling */
+.prescription-detail button {
+    background-color: #305a66; /* Darker shade for button */
+    color: #DFDFDF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    
+}
+
+.prescription-detail button:hover {
+    background-color: #9EBDBF;
+}
+.prescription-detail-container {
+    background-color: #DFDFDF; /* Fond blanc pour la section des détails de la prescription */      
+    margin-top: 20px;  
+        
+}
+.medication-list {
+    margin-top: 5px; /* Espace entre le titre et la liste */
+}
+
+.medication-info {
+    display: grid; /* Utilisation de Grid pour aligner les colonnes */
+    grid-template-columns: 2fr 1fr 1fr; /* Colonnes avec proportions ajustées */
+    align-items: center; /* Centrer verticalement */
+    gap: 10px; /* Espace entre les colonnes */
+    background-color: #DFDFDF; /* Couleur de fond */
+    padding: 10px; /* Espacement interne */
+    border-radius: 8px; /* Coins arrondis */
+    margin-bottom: 10px; /* Espace entre les éléments */
+   
+}
+
+.medication-info div {
+    font-size: 15px;
+    font-weight: bold;
+    color: #558A8D;
+}
+
+.medication-info div span {
+    font-weight: normal;
+    color: #0B2025;
+}
+
+.medication-info div .medication-text {
+    font-size: 14px;
+}
+.medication-info div span.medication-pill-number {
+    color: #9EBDBF;
+}
+
+button {
+    background-color: #305a66;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #9EBDBF;
+}
+.prescription-detail button {
+    background-color: #558A8D;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin-top: 50px;
+}
+.prescription-detail button:hover {
+    background-color: #305a66;
+}
+

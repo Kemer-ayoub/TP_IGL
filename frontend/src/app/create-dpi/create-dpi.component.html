@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<div class="main-container">
+    <div class="container1">
+        <header class="header1">
+            <div class="logo-container1">
+                <img src="Photo/doctor-consultation 2.png" class="logo1" />
+                <span class="company-name">Sehhatna</span>
+            </div>
+            <div class="link">
+                <a href="" class="dpi">DPI</a>
+                <span class="usres">Useres</span>
+
+            </div>
+            <div class="logout-container">
+                <button class="logout-btn" routerLink="/home">Logout</button>
+            </div>
+        </header>
+
+        <div class="user-form">
+            <div class="icon">
+                <img src="Photo\Group 20.png" alt="Add User Icon" />
+            </div>
+            <h2>Create New DPI</h2>
+            <form class="F1" (ngSubmit)="onSubmit()">
+                <!-- Username Field -->
+                <input type="text" id="firstName" [(ngModel)]="user.firstName" name="firstName"
+                    placeholder="First Name" />
+                <p *ngIf="isSubmitted && !user.firstName" class="error-text">This field is required.</p>
+
+                <!-- Family Name Field -->
+                <input type="text" id="familyName" [(ngModel)]="user.familyName" name="familyName"
+                    placeholder="Family Name" />
+                <p *ngIf="isSubmitted && !user.familyName" class="error-text">This field is required.</p>
+
+
+                <!-- Date of Birth Field -->
+                <input type="date" id="dob" [(ngModel)]="user.dob" name="dob" placeholder="Date of Birth" />
+                <p *ngIf="isSubmitted && !user.dob" class="error-text">This field is required.</p>
+
+                <!-- Social Security Number Field -->
+                <input type="text" id="ssn" [(ngModel)]="user.ssn" name="ssn" placeholder="Social Security Number" />
+                <p *ngIf="isSubmitted && !user.ssn" class="error-text">This field is required.</p>
+                <p *ngIf="isSubmitted && user.ssn && !ssnRegex.test(user.ssn)" class="error-text">
+                    Please enter a valid 15-digit Social Security Number.
+                </p>
+                <!-- Phone Number Field -->
+                <input type="tel" id="phoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber"
+                    placeholder="Phone Number" pattern="^\+?[1-9]\d{1,14}$" />
+                <p *ngIf="isSubmitted && !user.phoneNumber" class="error-text">This field is required.</p>
+                <p *ngIf="isSubmitted && user.phoneNumber && !phoneRegex.test(user.phoneNumber)" class="error-text">
+                    Please enter a valid Algerian phone number.
+                </p>
+
+                <!-- Address Field -->
+                <input type="text" id="address" [(ngModel)]="user.address" name="address" placeholder="Address" />
+                <p *ngIf="isSubmitted && !user.address" class="error-text">This field is required.</p>
+
+                <!-- Emergency Contact Phone Number Field -->
+                <input type="tel" id="emergencyContact" [(ngModel)]="user.emergencyContact" name="emergencyContact"
+                    placeholder="Emergency Contact (Phone Number)" />
+                <p *ngIf="isSubmitted && !user.emergencyContact" class="error-text">This field is required.</p>
+                <p *ngIf="isSubmitted && user.emergencyContact && !phoneRegex.test(user.emergencyContact)"
+                    class="error-text">
+                    Please enter a valid Algerian phone number.
+                </p>
+
+
+                <!-- Care Physician Field -->
+                <input type="text" id="carePhysician" [(ngModel)]="user.carePhysician" name="carePhysician"
+                    placeholder="Care Physician" />
+                <p *ngIf="isSubmitted && !user.carePhysician" class="error-text">This field is required.</p>
+
+
+
+                <button type="submit">Create</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+</html>

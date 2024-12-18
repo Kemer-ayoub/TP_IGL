@@ -1,0 +1,217 @@
+
+* {
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+.main-container{
+    height: 100vh;
+    background-color: #DFDFDF;
+}
+.container1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: center; 
+    width: 100%;
+    height: 1200PX;
+
+    background-color: #DFDFDF;
+}
+.header1 {
+    margin: 0; 
+    padding-right: 70px;
+    padding-left: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 88px;
+    top: 0; 
+    left: 0;
+    width: 100%;  
+    background-color: #DFDFDF;
+    border-bottom: 0.5px solid #558A8D;
+    margin-bottom: 0px;
+}
+.logo-container1{
+    display: flex;
+    align-items: center;
+}
+.logo1 {
+    display: block;
+    width: 64PX;
+    height: 64px;
+    top: 16px;
+    padding-right: 20px;
+}
+.company-name {
+    width: 144PX;
+    height: 40px;
+    top: 28px;
+    font-family: 'Geologica',sans-serif;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 40px;
+    color: #558A8D;
+}
+.dpi{
+    font-family: 'Geologica',sans-serif; 
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    color: #558A8D;
+    padding-right: 10px;
+    margin-right: 70px;
+    margin-left: 20px;
+}
+.usres {
+    font-family: 'Geologica', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    color: #0B2025; 
+    margin-right: 10px;
+    margin-left: 20px; 
+}
+.link{ 
+    
+    display: flex;
+    align-items: center;
+
+}
+.error-text {
+    color: #0B2025; 
+    font-size: 0.7em; 
+    font-family: 'Geologica', sans-serif; 
+    margin-top: -5px; 
+    margin-left: 10px; 
+    text-align: left; 
+}
+.logout-btn {
+    width: 164px;
+    height: 37px; 
+    text-align: center;
+    font-family: 'Geologica', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 25px;
+    border: none;
+    border-radius: 15px;
+    background-color: #558A8D;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+
+.logout-btn:hover {
+    background-color: #305a66;
+    transform: scale(1.05); 
+}
+
+div .logout-btn {
+    border: none !important;
+}
+.link a {
+    text-decoration: none;
+    color: #558A8D; 
+    font-size: 24px;
+    margin-right: 20px;
+    font-family: 'Geologica', sans-serif;
+    transition: color 0.3s, text-decoration 0.3s;
+}
+input::placeholder {
+    color:#DFDFDF ;
+    font-family: 'Geologica', sans-serif;
+    font-size: 14px;
+}
+
+.link a:hover {
+    color: #558A8D; 
+    text-decoration: underline;
+}
+.user-form {
+    background-color: #558A8D; 
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    width: 600px;
+    margin-top: 100px;
+   
+}
+  
+.icon img {
+    width: 50px;
+    height: 50px;
+    margin-top: -35px;
+  }
+  
+h2 {
+    font-family: 'Geologica', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    color: #DFDFDF;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-family: 'Geologica', sans-serif;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: white;
+  }
+  
+  input {
+    width: 200px;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 15px;
+    border: none;
+    font-size: 14px;
+    width: 400px;
+    background-color: #558A8D;
+    border: 2px solid #DFDFDF ; /* Bordure blanche */
+    color:white ;
+ 
+   
+    
+  }
+  input:focus {
+    outline: none; 
+    border-color: #DFDFDF;
+    box-shadow: 0 0 5px #DFDFDF; 
+}
+  .F1{
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Geologica',sans-serif;
+    color:#DFDFDF;
+ 
+
+  }
+
+  
+  
+  button {
+    background-color:  #DFDFDF;
+    color:#558A8D;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    width: 200px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background-color: #305a66;
+    transform: scale(1.05); 
+  }
+  

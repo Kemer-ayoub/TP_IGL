@@ -1,0 +1,152 @@
+/* Prescription Detail Container */
+.prescription-detail {
+    background-color: #558A8D; /* Set background color */
+    color: #DFDFDF; /* Set text color */
+    font-family: 'Geologica', sans-serif; /* Set font family */
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 600px; /* You can adjust the width as needed */
+    margin-top: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+    margin-bottom: 0px;
+}
+
+ 
+
+/* Styling for Medications List */
+.prescription-detail h4 {
+    font-size: 20px;
+    color: #558A8D;
+    margin-bottom: 15px;
+    text-align: center; /* Aligns the title in the center */
+}
+
+.prescription-detail ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+}
+
+.prescription-detail li {
+    background-color: #DFDFDF; /* Background color for each item */
+    padding: 15px;
+    margin-bottom: 10px; /* Space between items */
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for better visual separation */
+}
+
+/* Styling for each piece of medication info */
+.prescription-detail li span {
+    font-size: 14px;
+    color: #305a66;
+    font-weight: bold;
+    padding: 5px;
+}
+
+/* Optional hover effect for each medication item */
+.prescription-detail li:hover {
+    background-color: #9EBDBF; /* Change background color on hover */
+    cursor: pointer;
+    transform: scale(1.02); /* Slight zoom-in effect */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Styling for prescription details (Doctor Name, Date, Status) */
+.prescription-detail p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.prescription-detail p strong {
+    font-weight: bold;
+}
+
+/* Button Styling */
+.prescription-detail button {
+    background-color: #305a66; /* Darker shade for button */
+    color: #DFDFDF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    
+}
+
+.prescription-detail button:hover {
+    background-color: #9EBDBF;
+}
+.prescription-detail-container {
+    background-color: #DFDFDF; /* Fond blanc pour la section des détails de la prescription */      
+    margin-top: 20px;  
+        
+}
+.medication-list {
+    margin-top: 5px; /* Espace entre le titre et la liste */
+}
+
+.medication-info {
+    display: grid; /* Utilisation de Grid pour aligner les colonnes */
+    grid-template-columns: 2fr 1fr 1fr; /* Colonnes avec proportions ajustées */
+    align-items: center; /* Centrer verticalement */
+    gap: 10px; /* Espace entre les colonnes */
+    background-color: #DFDFDF; /* Couleur de fond */
+    padding: 10px; /* Espacement interne */
+    border-radius: 8px; /* Coins arrondis */
+    margin-bottom: 10px; /* Espace entre les éléments */
+   
+}
+
+.medication-info div {
+    font-size: 15px;
+    font-weight: bold;
+    color: #558A8D;
+}
+
+.medication-info div span {
+    font-weight: normal;
+    color: #0B2025;
+}
+
+.medication-info div .medication-text {
+    font-size: 14px;
+}
+.medication-info div span.medication-pill-number {
+    color: #9EBDBF;
+}
+
+button {
+    background-color: #305a66;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #9EBDBF;
+}
+.prescription-detail button {
+    background-color: #558A8D;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin-top: 50px;
+}
+.prescription-detail button:hover {
+    background-color: #305a66;
+}

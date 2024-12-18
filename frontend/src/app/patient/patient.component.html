@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+
+<body>
+
+    <!-- Header -->
+
+    <header class="header1">
+        <div class="logo-container1">
+            <img src="Photo/doctor-consultation 2.png" class="logo1" />
+            <span class="company-name">Sehhatna</span>
+        </div>
+        <div class="logout-container">
+            <button class="logout-btn" routerLink="/home">Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+
+        <!-- search.component -->
+        <app-search-bar *ngIf="!showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare"
+            (ssnEntered)="onSSNEntered($event)"></app-search-bar>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="error-message">
+            <p>{{ errorMessage }}</p>
+        </div>
+
+        <!-- In parent component -->
+        <div *ngIf="patient && !showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare" class="container">
+            <div class="info-row">
+                <div class="info-group">
+                    <label>First Name:</label>
+                    <span>{{ patient.firstName }}</span>
+                </div>
+                <div class="info-group">
+                    <label>Address:</label>
+                    <span>{{ patient.address }}</span>
+                </div>
+            </div>
+            <div class="info-row">
+                <div class="info-group">
+                    <label>Family Name:</label>
+                    <span>{{ patient.lastName }}</span>
+                </div>
+                <div class="info-group">
+                    <label>Phone Number:</label>
+                    <span>{{ patient.phoneNumber }}</span>
+                </div>
+            </div>
+            <div class="info-row">
+                <div class="info-group">
+                    <label>Date of Birth:</label>
+                    <span>{{ patient.dob }}</span>
+                </div>
+                <div class="info-group">
+                    <label>Emergency Contact:</label>
+                    <span>{{ patient.emergencyContact }}</span>
+                </div>
+            </div>
+            <div class="info-row">
+                <div class="info-group">
+                    <label>Social Security Number:</label>
+                    <span>{{ patient.ssn }}</span>
+                </div>
+                <div class="info-group">
+                    <label>Care Physician:</label>
+                    <span>{{ patient.carePhysician }}</span>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="buttons-container">
+
+                <div class="button-item">
+                    <img src="Photo/Vector (9).png" alt="Medical History" />
+                    <span>Medical History</span>
+                </div>
+                <div class="button-item" (click)="onViewConsultations()">
+                    <img src="Photo/Vector (14).png" alt="Prescriptions" />
+                    <span>Consultations</span>
+                </div>
+
+
+                <div class="button-item">
+                    <img src=" Photo/Vector (11).png" alt="Doctor Visit" />
+                    <span>Exams results</span>
+                </div>
+
+                <div class="button-item" (click)="onViewNursingCareList()">
+                    <img src="Photo/Vector (9).png" alt="Appointments" />
+                    <span>Nursing</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Liste des consultations -->
+
+        <div *ngIf="patient && showConsultationsList && !selectedConsultation" class="consultation-list">
+            <h3>Mes Consultations</h3>
+            <ul>
+                <li *ngFor="let consultation of patient?.consultations; let i = index"
+                    (click)="selectConsultation(consultation)">
+                    <img src="Photo/Group (3).png" alt="Consultation" class="consultation-icon">
+                    <span>Consultation {{ i + 1 }}</span>
+                </li>
+            </ul>
+            <button class="back-btn" (click)="backToPatientInfoConsultation()">Back to Informations</button>
+        </div>
+
+        <div *ngIf="selectedConsultation && !selectedPrescription" class="consultation-details">
+            <h3>Consultation Details</h3>
+            <p><strong>Date :</strong> {{ selectedConsultation.date }}</p>
+            <p><strong>Doctor :</strong> {{ selectedConsultation.doctorName }}</p>
+            <p><strong>Reason :</strong> {{ selectedConsultation.notes }}</p>
+            <p><strong>Summary :</strong> {{ selectedConsultation.summary }}</p>
+
+            <h4>Prescriptions :</h4>
+            <ul>
+                <li *ngFor="let prescription of selectedConsultation.prescriptions; let i = index">
+                    <p><strong>Prescription {{ i + 1 }} </strong>
+                        <span class="details-link" (click)="selectPrescription(prescription)">Détails</span>
+                    </p>
+                </li>
+            </ul>
+            <button class="back-btn" (click)="backToConsultationList()">Retour à la liste des consultations</button>
+        </div>
+
+
+        <!-------------------------------------------- Prescription Detail --------------------------------------------------------- -->
+        <div class="prescription-detail-container">
+            <div *ngIf="selectedPrescription" class="prescription-detail">
+                <!-- First Row: Full Name, Age, Doctor, and Status -->
+                <div class="patient-header">
+                    <p><strong>Full Name:</strong> {{ patient.firstName }} {{ patient.lastName }}</p>
+                    <p><strong>Age:</strong> {{ calculateAge(patient.dob) }} years</p>
+                    <p><strong>Doctor:</strong> {{ selectedPrescription.doctorName }}</p>
+                    <p><strong>Status:</strong> {{ selectedPrescription.valid ? 'Valid' : 'Expired' }}</p>
+                </div>
+                <!-- Medications List -->
+                <div
+                    *ngIf="selectedPrescription && selectedPrescription.medicaments && selectedPrescription.medicaments.length > 0">
+                    <div *ngFor="let medicament of selectedPrescription.medicaments" class="medication-info">
+                        <div><strong>Médicament:</strong> {{ medicament.name }}</div>
+                        <div><strong>Dose:</strong> {{ medicament.dose }}</div>
+                        <div><strong>Durée:</strong> {{ medicament.duration }}</div>
+                    </div>
+                </div>
+
+                <!-- Back Button -->
+                <button class="back-btn" (click)="backToConsultationList()">Retour à la consultation</button>
+            </div>
+        </div>
+        <!-- Liste des Nursing -->
+
+        <div *ngIf=" patient && showNursingCareList && !selectedNursingCare" class="consultation-list">
+            <h3>Mes Soins Infirmiers</h3>
+            <ul>
+                <li *ngFor="let care of patient?.nursingCare; let i = index" (click)="selectNursingCare(care)">
+                    <img src="Photo/Group (3).png" alt="Soin" class="consultation-icon">
+                    <span>Soin {{ i + 1 }}</span>
+                </li>
+            </ul>
+            <button class="back-btn" (click)="backToPatientInfoNursing()">Retour</button>
+        </div>
+
+        <!-- Détails d'un Soin Infirmier -->
+        <div *ngIf="selectedNursingCare" class="consultation-details">
+            <h3>Détails du Soin</h3>
+            <p><strong>Date :</strong> {{ selectedNursingCare.date }}</p>
+            <p><strong>Heure :</strong> {{ selectedNursingCare.time }}</p>
+            <p><strong>Type :</strong> {{ selectedNursingCare.type }}</p>
+            <p><strong>Description :</strong> {{ selectedNursingCare.description }}</p>
+            <p><strong>Observations :</strong> {{ selectedNursingCare.observations }}</p>
+
+            <button class="back-btn" (click)="backToNursingCareList()">Retour à la Liste</button>
+        </div>
+
+
+
+
+
+        <!---------------------------------------------------------------------------------------------------------------------->
+    </div>
+</body>
+
+</html>
