@@ -1,0 +1,72 @@
+.medical-history-container {
+    background-color: #558A8D; /* Background color */
+    color: #DFDFDF; /* Text color */
+    font-family: 'Geologica', sans-serif;
+    padding: 60px;
+    border-radius: 15px;
+    width: 500px;
+    margin-top: 80px;/* Center align */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+    margin-bottom: 20px;
+  }
+  
+  .medical-history-container h3 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .medical-history-section {
+    margin-top: 20px;
+  }
+  
+  .medical-history-section h4 {
+    font-size: 20px;
+    color: #305a66;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .medical-history-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .medical-history-section li {
+    background-color: #DFDFDF;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #305a66;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .medical-history-section li:hover {
+    background-color: #9EBDBF;
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .back-button {
+    background-color: #305a66;
+    color: #DFDFDF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 0.3s;
+  }
+  
+  .back-button:hover {
+    background-color: #9EBDBF;
+  }
+  

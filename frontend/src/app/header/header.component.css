@@ -1,0 +1,70 @@
+/* Header styles */
+/* General styles */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    scroll-behavior: smooth;
+    background-color: #DFDFDF;
+    height: 100vh;
+    margin: 0;
+}
+.header1 {
+    margin: 0;
+    padding-right: 70px;
+    padding-left: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 88px;
+    width: 100%;
+    background-color: #DFDFDF;
+    border-bottom: 0.5px solid #558A8D;
+    position: relative; /* Assure la gestion des éléments de superposition */
+    
+    margin-top: 1px;
+}
+
+.logo-container1 {
+    display: flex;
+    align-items: center;
+}
+
+.logo1 {
+    display: block;
+    width: 64px;
+    height: 64px;
+    padding-right: 20px;
+}
+
+.company-name {
+    font-family: 'Geologica', sans-serif;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 40px;
+    color: #558A8D;
+}
+
+.logout-btn {
+    width: 164px;
+    height: 37px;
+    font-family: 'Geologica', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 25px;
+    border: none;
+    border-radius: 15px;
+    background-color: #558A8D;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logout-btn:hover {
+    background-color: #305a66;
+    transform: scale(1.05);
+}

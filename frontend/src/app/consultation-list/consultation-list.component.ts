@@ -10,5 +10,16 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './consultation-list.component.css'
 })
 export class ConsultationListComponent {
-  
+  @Input() consultations: any[] = [];  // Array of consultations passed from parent
+  @Input() selectedConsultation: any;   // Current selected consultation
+  @Output() consultationSelected = new EventEmitter<any>();  // Emit when consultation is selected
+  @Output() backToPatientInfo = new EventEmitter<void>();  // Emit when back button is clicked
+
+  selectConsultation(consultation: any) {
+    this.consultationSelected.emit(consultation);  // Emit selected consultation to parent
+  }
+
+  backToPatientInfoConsultation() {
+    this.backToPatientInfo.emit();  // Emit event to notify parent to go back
+  }
 }

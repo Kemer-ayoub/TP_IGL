@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-<meta charset="UTF-8">
+<html>
 
 <body>
-
     <!-- Header -->
-
     <app-header></app-header>
 
     <!-- Main Content -->
     <div class="main-container">
+        <!-- Composant de recherche -->
 
-        <!-- search.component -->
         <app-search-bar
             *ngIf="!showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory"
             (ssnEntered)="onSSNEntered($event)"></app-search-bar>
@@ -26,13 +23,15 @@
             <!-- Patient Info -->
             <app-patient-info [patient]="patient"></app-patient-info>
 
-            <!-- Buttons -->
-            <app-buttons-patient (toggleMedicalHistory)="toggleMedicalHistory()"
-                (viewConsultations)="onViewConsultations()" (viewNursingCareList)="onViewNursingCareList()"
-                (viewExamsResults)="toggleMedicalHistory()">
-            </app-buttons-patient>
-        </div>
+            <!-- Bouton pour afficher/masquer les prescriptions -->
+            <div class="single-button-container">
+                <div class="single-button" (click)="onViewConsultations()">
+                    <img src="Photo\Vector (17).png" alt="Action Icon" />
+                    <span>{{ showPrescriptionsList ? 'Hide Prescriptions' : 'Show consultations' }}</span>
+                </div>
+            </div>
 
+        </div>
         <!-- Liste des consultations -->
         <app-consultation-list *ngIf="showConsultationsList" [consultations]="patient?.consultations"
             [selectedConsultation]="selectedConsultation" (consultationSelected)="selectConsultation($event)"
@@ -49,24 +48,13 @@
 
 
         <!--- Prescription Detail  -->
-        <app-prescriptions-detail [patient]="patient" [selectedPrescription]="selectedPrescription"
+        <app-prescription-detail-pharmacien [patient]="patient" [selectedPrescription]="selectedPrescription"
             (backToConsultationList)="backToConsultationList()">
-        </app-prescriptions-detail>
-
-        <!-- Liste et détail des Nursing -->
-
-        <app-nursing [patient]="patient" [showNursingCareList]="showNursingCareList"
-            [selectedNursingCareIndex]="selectedNursingCareIndex" [selectedNursingCare]="selectedNursingCare"
-            (selectNursingCare)="selectNursingCare($event)" (backToPatientInfoNursing)=" backToPatientInfoNursing()"
-            (backToNursingCareList)=" backToNursingCareList()">
-        </app-nursing>
-
-        <!-- Affichage de l'historique médical -->
-        <app-medical-history [patient]="patient" [showMedicalHistory]="showMedicalHistory"
-            (backToPatientInfoMedicalHistory)="backToPatientInfoMedicalHistory()">
-        </app-medical-history>
+        </app-prescription-detail-pharmacien>
 
     </div>
+
+
 </body>
 
 </html>

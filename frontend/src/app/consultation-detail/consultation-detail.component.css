@@ -1,46 +1,107 @@
-/* Style général des détails de la consultation */
+/* Consultation Details Container */
 .consultation-details {
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-  }
-  
-  .consultation-details h3 {
-    font-size: 24px;
-    color: #007bff;
-    margin-bottom: 15px;
-  }
-  
-  .consultation-details p {
-    font-size: 16px;
-    color: #333;
-    margin: 5px 0;
-  }
-  
-  .consultation-details h4 {
-    font-size: 20px;
-    color: #333;
-    margin-top: 20px;
-  }
-  
-  .consultation-details ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .consultation-details li {
-    font-size: 16px;
-    color: #555;
-    margin: 5px 0;
-  }
-  
-  .consultation-details li strong {
-    font-weight: bold;
-  }
-  
-  .consultation-details ul li p {
-    margin: 3px 0;
-  }
-  
+  background-color: #558A8D; /* Set background color */
+  color: #DFDFDF; /* Set text color */
+  font-family: 'Geologica', sans-serif; /* Set font family */
+  padding: 60px;
+  border-radius: 15px;
+  width: 100%;
+  width: 500px; /* Adjust the width as needed */
+  margin-top: 80px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+  margin-bottom: 0px;
+}
+
+/* Styling for Consultation Details Title */
+.consultation-details h3 {
+  font-size: 24px;
+  color: #DFDFDF;
+  text-align: center;
+}
+
+/* Styling for Consultation Details Text */
+.consultation-details p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Prescription List Container */
+.consultation-details h4 {
+  font-size: 20px;
+  color:  #DFDFDF;
+  margin-bottom: 15px;
+  text-align: center; /* Aligns the title in the center */
+}
+
+/* Prescription Word Styling */
+.consultation-details h4 span {
+  color: #DFDFDF;
+  font-weight: bold; /* Make it bold */
+ 
+}
+
+/* Styling for Prescription List */
+.consultation-details ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Prescription List Item */
+.consultation-details li {
+  background-color: #DFDFDF; /* Background color for each item */
+  margin-bottom: 10px; /* Space between items */
+  border-radius: 10px; /* Rounded corners */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  height: auto; /* Adjust height to fit content */
+  position: relative; /* Needed for positioning the "Détails" link */
+  padding-left: 70px;
+  padding-right: 70px;
+ 
+}
+
+/* Styling for the Prescription Number */
+.consultation-details li p strong {
+  color: #558A8D; /* Color for Prescription Number */
+  margin-right: 20px; /* Increased space between prescription number and "Détails" */
+}
+
+/* Styling for "Détails" link */
+.details-link {
+  color: #558A8D; /* Prescription color */
+  text-decoration: underline; /* Underline the link */
+  cursor: pointer; /* Make it clickable */
+  font-weight: bold;
+  position: absolute; /* Position it to the right */
+  right: 70px; /* Adjust the distance from the right side */
+  text-align: right;
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+/* Prescription List Item Hover Effect */
+.consultation-details li:hover {
+  background-color:  #9EBDBF; /* Change color when hovering over the entire list item */
+  cursor: pointer; /* Change cursor to indicate it's clickable */
+  transform: scale(1.02); /* Slight zoom-in effect */
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Styling for Back Button */
+.consultation-details .back-btn {
+  background-color: #305a66;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.consultation-details .back-btn:hover {
+  background-color: #9EBDBF;
+}

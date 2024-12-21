@@ -2,13 +2,15 @@ import { Component,Input, Output, EventEmitter } from '@angular/core';
 import { PatientComponent } from '../patient/patient.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 @Component({
-  selector: 'app-prescriptions-detail',
+  selector: 'app-prescription-detail-pharmacien',
   imports: [PatientComponent,CommonModule,FormsModule],
-  templateUrl: './prescriptions-detail.component.html',
-  styleUrl: './prescriptions-detail.component.css'
+  templateUrl: './prescription-detail-pharmacien.component.html',
+  styleUrl: './prescription-detail-pharmacien.component.css'
 })
-export class PrescriptionsDetailComponent {
+export class PrescriptionDetailPharmacienComponent {
+
   @Input() patient: any = null;  // Reçoit les informations du patient
   @Input() selectedPrescription: any = null;  // Reçoit la prescription sélectionnée
   @Output() backToConsultationList = new EventEmitter<void>();
@@ -33,5 +35,4 @@ export class PrescriptionsDetailComponent {
   onBackToPrescriptionList() {
     this.backToPrescriptionList.emit();  // Émet l'événement pour retourner à la liste des prescriptions
   }
-  
 }

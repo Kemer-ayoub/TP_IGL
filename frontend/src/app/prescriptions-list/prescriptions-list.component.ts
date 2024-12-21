@@ -11,15 +11,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './prescriptions-list.component.css'
 })
 export class PrescriptionsListComponent {
-  @Input() prescriptions: any[] = [];  // Prescriptions to display
-  @Output() prescriptionSelected = new EventEmitter<any>();  // Event emitter for selected prescription
 
-  // Emit the selected prescription to the parent
-  onSelectPrescription(prescription: any) {
-    this.prescriptionSelected.emit(prescription);
-  }
-
-  onBackToPatientInfo() {
-    this.prescriptionSelected.emit(null);  // Emet l'événement pour revenir à l'info du patient
-  }
 }
+
+ 

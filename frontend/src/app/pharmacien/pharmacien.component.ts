@@ -12,16 +12,17 @@ import { RouterLink } from '@angular/router';
 import { ButtonsPatientComponent } from '../buttons-patient/buttons-patient.component';
 import { NursingComponent } from '../nursing/nursing.component';
 import { MedicalHistoryComponent } from '../medical-history/medical-history.component';
+import { PrescriptionDetailPharmacienComponent } from '../prescription-detail-pharmacien/prescription-detail-pharmacien.component';
 
-/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
 @Component({
-  selector: 'app-patient',
-  imports: [FormsModule, MedicalHistoryComponent,NursingComponent, ButtonsPatientComponent,RouterLink, ConsultationDetailComponent, CommonModule, ConsultationListComponent, HeaderComponent, SearchBarComponent, PatientInfoComponent, PrescriptionsDetailComponent, PrescriptionsListComponent,],
-  templateUrl: './patient.component.html',
-  styleUrls: ['./patient.component.css']
+  selector: 'app-pharmacien',
+  imports: [FormsModule,PrescriptionDetailPharmacienComponent, MedicalHistoryComponent,NursingComponent, ButtonsPatientComponent,RouterLink, ConsultationDetailComponent, CommonModule, ConsultationListComponent, HeaderComponent, SearchBarComponent, PatientInfoComponent, PrescriptionsDetailComponent, PrescriptionsListComponent,],
+  templateUrl: './pharmacien.component.html',
+  styleUrl: './pharmacien.component.css'
 })
-export class PatientComponent {
-  patients = [
+
+export class PharmacienComponent {
+ patients = [
     {
       ssn: '11111',
       firstName: 'Oussama',
@@ -42,29 +43,8 @@ export class PatientComponent {
             { name: 'Ibuprofen', dose: '200mg', duration: '5 days' },
           ],
         },
-        
-        
-        {
-          date: '2024-02-10',
-          doctorName: 'Dr. John',
-          notes: 'Initial consultation',
-          summary: 'Initial consultation with Dr. John, prescriptions include Amoxicillin and Loratadine.',
-          prescriptions: [
-            { name: 'Amoxicillin', dose: '250mg', duration: '7 days' },
-            { name: 'Loratadine', dose: '10mg', duration: '7 days' }
-          ]
-        },
-        
-        
       ],
       nursingCare: [
-        {
-          date: '2023-06-15',
-          time: '10:00 AM',
-          type: 'Wound Dressing',
-          description: 'Dressing of a wound on the left arm.',
-          observations: 'Healing well, no signs of infection.',
-        },
         {
           date: '2023-06-15',
           time: '10:00 AM',
@@ -136,8 +116,6 @@ export class PatientComponent {
     }
   ];
 
-
-
   ssn: string = '';
   patient: any = null;
   errorMessage: string = '';
@@ -148,7 +126,6 @@ export class PatientComponent {
   showNursingCareList: boolean = false;
   selectedNursingCare: any = null;
   showMedicalHistory: boolean = false;
-  selectedNursingCareIndex: number | null = null;
 
   searchPatient() {
     this.errorMessage = '';
@@ -160,6 +137,20 @@ export class PatientComponent {
   onSSNEntered(ssn: string) {
     this.ssn = ssn;
     this.searchPatient();
+  }
+  selectPrescription(prescription: any) {
+    if (prescription === null) {
+      this.selectedPrescription = null;
+      this.showPrescriptionsList = false;
+    } else {
+      // Si la prescription est un objet unique, le convertir en tableau
+      this.selectedPrescription = {
+        ...prescription,  // Copier les données de la prescription
+        medicaments: Array.isArray(prescription.medicaments) ? prescription.medicaments : [prescription]  // S'assurer que medicaments est un tableau
+      };
+      this.showPrescriptionsList = false;
+      console.log('Prescription sélectionnée:', this.selectedPrescription);
+    }
   }
 
   // Méthode pour afficher la liste des prescriptions
@@ -211,20 +202,7 @@ export class PatientComponent {
 
 
 
-  selectPrescription(prescription: any) {
-    if (prescription === null) {
-      this.selectedPrescription = null;
-      this.showPrescriptionsList = false;
-    } else {
-      // Si la prescription est un objet unique, le convertir en tableau
-      this.selectedPrescription = {
-        ...prescription,  // Copier les données de la prescription
-        medicaments: Array.isArray(prescription.medicaments) ? prescription.medicaments : [prescription]  // S'assurer que medicaments est un tableau
-      };
-      this.showPrescriptionsList = false;
-      console.log('Prescription sélectionnée:', this.selectedPrescription);
-    }
-  }
+ 
 
   onViewPrescriptions() {
     this.showPrescriptionsList = true;
@@ -244,58 +222,5 @@ export class PatientComponent {
     this.showPrescriptionsList = false;
     this.selectedPrescription = null;
   }
-
-  // Afficher la liste des soins infirmiers
-  onViewNursingCareList() {
-    this.showNursingCareList = true; // Montre la liste des soins infirmiers
-    this.selectedNursingCare = null; // Réinitialise le soin sélectionné
-  }
-
-  // Sélectionner un soin infirmier
-  selectNursingCare(event: { nursingCare: any, index: number }) {
-    const { nursingCare, index } = event;
-    console.log('Soin infirmier sélectionné:', nursingCare, 'Index:', index);
-  
-    if (!nursingCare) {
-      // Si aucun soin n'est sélectionné, affiche la liste des soins infirmiers
-      this.showNursingCareList = true;
-      this.selectedNursingCare = null;
-    } else {
-      // Si un soin est sélectionné, masque la liste et affiche les détails
-      this.selectedNursingCare = nursingCare;
-      this.selectedNursingCareIndex = index;  // Stocke l'index du soin sélectionné
-      this.showNursingCareList = false;
-    }
-  }
-  
-
-  // Retour à la liste des soins infirmiers
-  backToNursingCareList() {
-    this.selectedNursingCare = null; // Réinitialise le soin sélectionné
-    this.showNursingCareList = true; // Réaffiche la liste des soins
-  }
-
-  // Retour aux informations du patient depuis les soins infirmiers
-  backToPatientInfoNursing() {
-    this.showNursingCareList = false; // Cache la liste des soins
-    this.selectedNursingCare = null; // Réinitialise le soin sélectionné
-  }
-
-
-
-  // Méthode pour afficher ou masquer l'historique médical
-  toggleMedicalHistory() {
-    if (this.patient?.medicalHistory) {
-      this.showMedicalHistory = !this.showMedicalHistory;
-    } else {
-      this.errorMessage = 'Medical history not available for this patient!';
-    }
-  }
-
-  backToPatientInfoMedicalHistory() {
-    this.showMedicalHistory = false;
-  }
-
-
 
 }

@@ -1,0 +1,207 @@
+.consultation-list {
+    background-color:#DFDFDF; /* Background color */
+    padding: 0px;
+    border-radius: 15px;
+    width: 100%;
+    width: 700px;
+    font-family: 'Geologica', sans-serif;
+    margin-left: -420px;
+    height: 100%;
+    margin-top: 80px;
+  
+}
+
+/* Consultation List Styling */
+.consultation-list h3 {
+    font-size: 24px;
+    color: #558A8D;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Consultation List */
+.consultation-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column ; /* Dispose les éléments les uns sous les autres */
+    gap: 10px; /* Espace entre les éléments */
+}
+
+/* Consultation List Items */
+.consultation-list li {
+    display: flex; /* Aligns the image and text horizontally */
+    align-items: center; /* Vertically centers the image and text */
+    gap: 10px; /* Space between image and text */
+    padding: 10px;
+    background-color: #DFDFDF;
+    font-size: 12px;
+    color: #0B2025;
+    cursor: pointer;
+    transition: background-color 0.3s, border-left 0.3s;
+    width: auto; /* Adjust width to fit content */
+    position: relative;
+    border-radius: 10px; /* Optional: to round the corners */
+    max-width: 150px; /* Adjust to your preferred item width */
+   
+}
+
+/* Hover Effect for Consultation List Items */
+.consultation-list li:hover {
+    background-color: #9EBDBF;
+    border-left: 5px solid #558A8D;
+}
+
+/* Consultation Icon */
+.consultation-icon {
+    width: 40px; /* Icon size */
+    height: 20px;
+    object-fit: contain; /* Adjusts the image */
+    margin-left: -10px;
+}
+
+/* Text for consultations */
+.consultation-list li span {
+    font-family: 'Geologica', sans-serif;
+    font-weight: bold; /* Bold text */
+    color: #305a66; /* Text color */
+    font-size: 15px; /* Text size */
+    text-transform: capitalize; /* Capitalize each word */
+    white-space: nowrap;
+}
+
+/* Selected Consultation Item Styling */
+.consultation-list li.selected {
+    background-color: #9EBDBF;
+    border-left: 17px solid #558A8D;
+}
+
+/* Style for the Back Button */
+.back-btn {
+    background-color: #558A8D;
+    color: #DFDFDF;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    width: 200px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #305a66;
+}
+.separator {
+    width: 100%; /* Prend toute la largeur */
+    height: 1px; /* Épaisseur de la ligne */
+    background-color: #558A8D; /* Couleur de la ligne */
+    margin: 5px; /* Espace autour de la ligne */
+    display: block;
+}
+/* Nursing Care Details Container */
+.nursing-care-details {
+    background-color: #558A8D; /* Set background color */
+    color: #DFDFDF; /* Set text color */
+    font-family: 'Geologica', sans-serif; /* Set font family */
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    width: 500px; /* Adjust the width as needed */
+    margin-top: 80px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+    margin-bottom: 0px;
+}
+
+/* Styling for Nursing Care Details Title */
+.nursing-care-details h3 {
+    font-size: 24px;
+    color: #DFDFDF;
+    text-align: center;
+}
+
+/* Styling for Nursing Care Details Text */
+.nursing-care-details p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Prescription List Container */
+.nursing-care-details h4 {
+    font-size: 20px;
+    color: #558A8D;
+    margin-bottom: 15px;
+    text-align: center; /* Aligns the title in the center */
+}
+
+/* Prescription Word Styling */
+.nursing-care-details h4 span {
+    color: #DFDFDF;
+    font-weight: bold; /* Make it bold */
+}
+
+/* Styling for Prescription List */
+.nursing-care-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Prescription List Item */
+.nursing-care-details li {
+    background-color: #DFDFDF; /* Background color for each item */
+    margin-bottom: 10px; /* Space between items */
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    height: auto; /* Adjust height to fit content */
+    position: relative; /* Needed for positioning the "Détails" link */
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+/* Styling for the Prescription Number */
+.nursing-care-details li p strong {
+    color: #558A8D; /* Color for Prescription Number */
+    margin-right: 20px; /* Increased space between prescription number and "Détails" */
+}
+
+/* Styling for "Détails" link */
+.details-link {
+    color: #558A8D; /* Prescription color */
+    text-decoration: underline; /* Underline the link */
+    cursor: pointer; /* Make it clickable */
+    font-weight: bold;
+    position: absolute; /* Position it to the right */
+    right: 70px; /* Adjust the distance from the right side */
+    text-align: right;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+/* Prescription List Item Hover Effect */
+.nursing-care-details li:hover {
+    background-color:  #9EBDBF; /* Change color when hovering over the entire list item */
+    cursor: pointer; /* Change cursor to indicate it's clickable */
+    transform: scale(1.02); /* Slight zoom-in effect */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Styling for Back Button */
+.nursing-care-details .back-btn {
+    background-color: #305a66;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.nursing-care-details .back-btn:hover {
+    background-color: #9EBDBF;
+}

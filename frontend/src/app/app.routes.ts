@@ -4,6 +4,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { CreateDPIComponent } from './create-dpi/create-dpi.component';
 import { PatientComponent } from './patient/patient.component';
+import { PharmacienComponent } from './pharmacien/pharmacien.component';
 
 
 export const routes: Routes = [
@@ -12,7 +13,8 @@ export const routes: Routes = [
     { path: 'login', component: LoginScreenComponent},
     {path:'user', component:NewUserComponent} , 
     {path:'createDPI' , component:CreateDPIComponent} ,
-    {path:'patient',component:PatientComponent}
+    {path:'patient',component:PatientComponent},
+    {path:'pharmacien',component:PharmacienComponent},
     
 
 ];

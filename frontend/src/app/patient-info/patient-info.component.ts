@@ -1,4 +1,4 @@
-import { Component,Input, Output, EventEmitter } from '@angular/core';
+import { Component,Input, Output } from '@angular/core';
 import { PatientComponent } from '../patient/patient.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -11,5 +11,5 @@ import { FormsModule } from '@angular/forms';
 })
 export class PatientInfoComponent {
 
-  
+  @Input() patient: any;
 }

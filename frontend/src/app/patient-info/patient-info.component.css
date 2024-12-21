@@ -1,0 +1,52 @@
+.patient-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Adds spacing between rows */
+    padding: 15px;
+    background-color:#DFDFDF;
+    border-radius: 8px;
+    width: 800px;
+    margin-left: 120px;
+   
+  }
+  
+  .patient-info-row {
+    display: flex;
+    justify-content: space-between; /* Keeps the labels and spans side by side */
+    gap: 20px;  /* Adds space between the two columns */
+    align-items: center;  /* Vertically center the labels and spans */
+  }
+  
+  .info-group {
+    display: flex;
+    flex-direction: row;  /* Keeps label and span side by side */
+    justify-content: flex-start; /* Aligns content to the left */
+    align-items: center;  /* Vertically centers the label and span */
+    flex: 1;
+  }
+  
+  .info-group label {
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 0; /* Removed margin between label and span */
+    margin-right: 10px; /* Small margin to create some space between label and span */
+    text-align: center;  /* Centers the label text horizontally */
+  }
+  
+  .info-group span {
+    font-size: 14px;
+    color: #555;
+    text-align: center;  /* Centers the span text horizontally */
+  }
+  
+  @media screen and (max-width: 768px) {
+    .patient-info-row {
+      flex-direction: column;  /* Stacks the rows vertically when the screen is small */
+      gap: 10px;
+    }
+  
+    .info-group {
+      margin-right: 0; /* Remove margin when stacked */
+    }
+  }
+  
