@@ -1,0 +1,80 @@
+.card {
+  box-sizing: border-box;
+  width: 1184px;
+
+  height: auto; /* Allow height to grow based on content */
+  background: #DFDFDF;
+  border: 1px solid #558A8D;
+  border-radius: 15px;
+  padding-left: 80px;
+  padding-right: 120px;
+  display: flex;
+ gap: 60px;
+ padding-top: 25px;
+ padding-bottom: 40px;
+}
+
+.card-content {
+display: flex;
+justify-content: space-between;
+width: 100%;
+}
+
+.card-informations {
+  display: flex;
+  flex-direction: column; /* Stack the information vertically */
+  padding-bottom: 20px;
+}
+
+.info-line {
+  max-width: 100%; /* Ensures the text doesn't exceed the width of its container */
+  font-family: 'Geologica', sans-serif;
+  width: auto;
+  height: auto; 
+  font-style: normal;
+  font-weight: 200;
+  font-size: 24px;
+  line-height: 30px;
+  color: #0B2025;
+}
+
+.card-image {
+ width: 121px;
+ height: 132px;
+}  
+.btn{
+  width: 100%;     
+  background-color:#558A8D ;
+  border: none;
+  border-radius: 15px;
+  height: 47px;
+  color: white;
+    align-self: center;
+    justify-content: start;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+    padding-left: 22px;
+}
+.btn:hover{
+  background-color: #305a66;
+  transform: scale(1.02);
+}
+.card2{
+width: 100%;
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+.txt-btn{
+width: 75px;
+height: 25px;
+font-family: 'Geologica';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 25px;
+color: #DFDFDF;
+}

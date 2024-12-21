@@ -1,0 +1,41 @@
+.nav-bar{
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    padding-left: 128px;
+    padding-right:128px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: #558A8D 0.5px solid;
+}
+.nav-bar img{
+  width: 64px;
+  height: 64px;
+}
+.left-content {
+    display: flex;
+    align-items: center; /* Aligns icon and text vertically */
+    gap: 15px; 
+  }
+  .agent-name{
+    color: #558A8D;      /* Sets the position */
+    width: 144px;            /* Defines the width */
+    font-family: 'Geologica', sans-serif; 
+    font-style: normal;      
+    font-weight: 300;        
+    font-size: 32px;        
+    line-height: normal;
+  }
+
+  #log-outbtn{
+    width: 164px;     
+    background-color:#558A8D ;
+    border: none;
+    border-radius: 15px;
+    height: 37px;
+    color: white;
+    font-size: 18px; 
+      font-family: 'Geologica', sans-serif; /* Font family */
+      font-weight: 300;
+      font-style: normal; 
+  }

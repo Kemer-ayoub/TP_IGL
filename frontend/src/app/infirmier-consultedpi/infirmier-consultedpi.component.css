@@ -1,0 +1,8 @@
+
+  .infirmier-container{
+    display: flex;       
+  flex-direction: column;  
+  }
+  .test{
+    align-self: center;
+  }

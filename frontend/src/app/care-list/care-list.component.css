@@ -1,0 +1,31 @@
+.text-span{
+width: 57px;
+height: 25px;
+font-family: 'Geologica',sans-serif;
+font-style: normal;
+font-weight: 200;
+font-size: 20px;
+line-height: 25px;
+color: #0B2025;
+margin-left: 8px;
+}
+.care-item{
+border-bottom: solid 1px #558A8D;
+padding: 4px;
+margin-top: 4px;
+}
+.care-container{
+    margin-left: 128px;
+    margin-right:128px;
+    margin-top: 30px;
+}
+a {
+    text-decoration: none;
+  }
+  a:hover{
+    cursor: pointer;
+  }
+.care-item img{
+    width: 25px;
+    height: 30px;
+}

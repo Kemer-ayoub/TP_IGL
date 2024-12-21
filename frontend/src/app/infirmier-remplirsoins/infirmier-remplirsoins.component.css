@@ -1,0 +1,16 @@
+.text-header{
+width: 214px;
+height: 40px;
+margin-left: 128px;
+margin-top: 50px;
+font-family: 'Geologica';
+font-style: normal;
+font-weight: 400;
+font-size: 32px;
+line-height: 40px;
+color: #558A8D;
+}
+.newcard{
+  display: flex;
+  justify-content: center;
+}

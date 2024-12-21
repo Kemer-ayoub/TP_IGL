@@ -1,0 +1,8 @@
+<div class="care-container">
+  <div *ngFor="let care of careList" class="care-item">
+    <a (click)="navigateToDetails(care)" >
+      <img src="Group.svg"/>
+      <span class="text-span">{{ care.name }}</span>
+    </a>
+</div>
+</div>

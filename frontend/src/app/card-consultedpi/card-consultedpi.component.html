@@ -1,0 +1,44 @@
+<div class="card">
+  <img src="Rectangle 26.png" class="card-image" />
+  <div class="card2">
+      <div class="card-content">
+          <div class="card-informations">
+              <div class="info-line">
+                  <span>First Name: {{ infirmier.firstName }}</span>
+                </div>
+                <div class="info-line">
+                  <span>Family Name: {{ infirmier.lastName }}</span>
+                </div>
+                <div class="info-line">
+                  <span>Date of Birth: {{ infirmier.dob }}</span>
+                </div>
+                <div class="info-line">
+                  <span>Social Security Number : {{ infirmier.ssn }}</span>
+                </div>
+                
+          </div>
+          <div class="card-informations">
+              <div class="info-line">
+                  <span>Aderess: {{ infirmier.address }}</span>
+                </div>
+                <div class="info-line">
+                  <span>Phone number : {{ infirmier.phoneNumber }}</span>
+                </div>
+                <div class="info-line">
+                  <span>Emergency contact : {{ infirmier.emergencyContact }}</span>
+                </div>
+                <div class="info-line">
+                  <span>Care physician : {{ infirmier.carePhysician }}</span>
+                </div>
+            </div>
+       </div>
+      <button class="btn" (click)="navigatetoAdd()">
+        <img src="Vector (1).svg"  />
+        <span class="text-btn">Nursing</span>
+        </button>
+      <button class="btn" (click)="navigaetToList()">
+        <img src="Vector (1).svg" />
+        <span class="text-btn">Previous Care</span>
+      </button>
+    </div>
+</div>
