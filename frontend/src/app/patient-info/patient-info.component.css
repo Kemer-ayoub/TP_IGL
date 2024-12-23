@@ -1,52 +1,141 @@
 .patient-info-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Adds spacing between rows */
-    padding: 15px;
-    background-color:#DFDFDF;
-    border-radius: 8px;
-    width: 800px;
-    margin-left: 120px;
-   
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+  background-color: #DFDFDF;
+  border-radius: 8px;
+  width: 800px;
+  margin-left: 120px;
+}
+
+.patient-info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 1;
+}
+
+.info-group label {
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 0;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.info-group span {
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .patient-info-container {
+      width: 100%;
+      padding: 10px;
+      margin-left: 0px;
   }
-  
+
   .patient-info-row {
-    display: flex;
-    justify-content: space-between; /* Keeps the labels and spans side by side */
-    gap: 20px;  /* Adds space between the two columns */
-    align-items: center;  /* Vertically center the labels and spans */
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
   }
-  
-  .info-group {
-    display: flex;
-    flex-direction: row;  /* Keeps label and span side by side */
-    justify-content: flex-start; /* Aligns content to the left */
-    align-items: center;  /* Vertically centers the label and span */
-    flex: 1;
-  }
-  
-  .info-group label {
-    font-weight: bold;
-    color: #444;
-    margin-bottom: 0; /* Removed margin between label and span */
-    margin-right: 10px; /* Small margin to create some space between label and span */
-    text-align: center;  /* Centers the label text horizontally */
-  }
-  
+
+  .info-group label,
   .info-group span {
-    font-size: 14px;
-    color: #555;
-    text-align: center;  /* Centers the span text horizontally */
+      font-size: 12px;
+      text-align: left;
   }
-  
-  @media screen and (max-width: 768px) {
-    .patient-info-row {
-      flex-direction: column;  /* Stacks the rows vertically when the screen is small */
+
+  .info-group {
+      margin-right: 0;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .patient-info-container {
+      width: 100%;
+      padding: 10px;
+      margin-left: 0px;
+  }
+
+  .patient-info-row {
+      flex-direction: column;
       gap: 10px;
-    }
-  
-    .info-group {
-      margin-right: 0; /* Remove margin when stacked */
-    }
+      align-items: flex-start;
   }
-  
+
+  .info-group {
+      margin-right: 0;
+  }
+
+  .info-group label,
+  .info-group span {
+      font-size: 13px;
+      text-align: left;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .patient-info-container {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+  }
+
+  .patient-info-row {
+      flex-direction: row;
+      gap: 15px;
+      align-items: flex-start;
+  }
+
+  .info-group label,
+  .info-group span {
+      font-size: 14px;
+      text-align: left;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .patient-info-container {
+      width: 800px;
+      margin-left: 120px;
+  }
+
+  .patient-info-row {
+      flex-direction: row;
+      gap: 20px;
+  }
+
+  .info-group label,
+  .info-group span {
+      font-size: 15px;
+  }
+}
+
+@media (min-width: 1367px) {
+  .patient-info-container {
+      width: 800px;
+      margin-left: 120px;
+  }
+
+  .patient-info-row {
+      flex-direction: row;
+      gap: 20px;
+  }
+
+  .info-group label,
+  .info-group span {
+      font-size: 16px;
+  }
+}

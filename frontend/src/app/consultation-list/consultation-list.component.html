@@ -1,14 +1,17 @@
-<div *ngIf="consultations?.length && !selectedConsultation" class="consultation-list">
-    <h3>My Consultations</h3>
-    <ul *ngFor="let consultation of consultations; let i = index">
-        <li 
-            (click)="selectConsultation(consultation)">
-            <img src="Photo/Group (3).png" alt="Consultation" class="consultation-icon">
-            <span>Consultation {{ i + 1 }}</span>
-          
-           
-        </li>
-        <div class="separator" *ngIf="i !== consultations.length - 1"></div>
-    </ul>
-    <button class="back-btn" (click)="backToPatientInfoConsultation()">Back to Informations</button>
-</div>
+
+    <div *ngIf="consultations?.length && !selectedConsultation" class="consultation-list">
+        <h3>My Consultations</h3>
+        <ul *ngFor="let consultation of consultations; let i = index">
+            <li 
+                (click)="selectConsultation(consultation)">
+                <img src="Photo/Group (3).png" alt="Consultation" class="consultation-icon">
+                <span>Consultation {{ i + 1 }}</span>
+              
+               
+            </li>
+            <div class="separator" *ngIf="i !== consultations.length - 1"></div>
+        </ul>
+        <button class="back-btn" (click)="backToPatientInfoConsultation()">Back to Informations</button>
+    </div>
+
+

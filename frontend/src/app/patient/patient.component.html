@@ -34,10 +34,13 @@
         </div>
 
         <!-- Liste des consultations -->
-        <app-consultation-list *ngIf="showConsultationsList" [consultations]="patient?.consultations"
-            [selectedConsultation]="selectedConsultation" (consultationSelected)="selectConsultation($event)"
-            (backToPatientInfo)="backToPatientInfoConsultation()">
-        </app-consultation-list>
+        <div class="consultations_container">
+            <app-consultation-list *ngIf="showConsultationsList" [consultations]="patient?.consultations"
+                [selectedConsultation]="selectedConsultation" (consultationSelected)="selectConsultation($event)"
+                (backToPatientInfo)="backToPatientInfoConsultation()">
+            </app-consultation-list>
+        </div>
+
 
         <!--Consultation détails -->
 
@@ -54,12 +57,15 @@
         </app-prescriptions-detail>
 
         <!-- Liste et détail des Nursing -->
-
-        <app-nursing [patient]="patient" [showNursingCareList]="showNursingCareList"
+         <div class="consultations_container">
+            <app-nursing [patient]="patient" [showNursingCareList]="showNursingCareList"
             [selectedNursingCareIndex]="selectedNursingCareIndex" [selectedNursingCare]="selectedNursingCare"
             (selectNursingCare)="selectNursingCare($event)" (backToPatientInfoNursing)=" backToPatientInfoNursing()"
             (backToNursingCareList)=" backToNursingCareList()">
         </app-nursing>
+         </div>
+
+       
 
         <!-- Affichage de l'historique médical -->
         <app-medical-history [patient]="patient" [showMedicalHistory]="showMedicalHistory"

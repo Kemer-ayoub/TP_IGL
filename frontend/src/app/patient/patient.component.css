@@ -3,11 +3,13 @@
     box-sizing: border-box;
 }
 
- body {
+html, body {
 
     background-color: #DFDFDF;
-    height: 100vh;
+    min-height: 100vh;
+    min-width: 100vw;
     margin: 0;
+    overflow: hidden;
 }
 .error-message {
     color: #305a66;
@@ -20,25 +22,25 @@
     padding: 40px;
     border-radius: 25px;
     text-align: center;
-    width: 1100px;
-    max-width: 100%;
+    -width:  100vh;
+    height: 100%;
     font-family: 'Geologica', sans-serif;
     border: 1px solid #558A8D;
+    margin-right: 10px;
 }
 
 /* Main container for the content */
-.main-container {
+.main-container { 
     scroll-behavior: smooth;
     display: flex;
-    
+    min-width:  100vw;
     align-items: center;
-    min-height: 100%;
-    padding-top: 2px;
+    min-height: calc(var(--vh, 1vh) * 100);
     flex-direction: column;
     background-color:#DFDFDF;
+    height: 100%;
+    margin-right: 20px;
   
-   
-
 }
 button {
     background-color: #305a66;
@@ -53,5 +55,55 @@ button {
 button:hover {
     background-color: #9EBDBF;
 }
+.consultations_container {
+    display: flex;
+    justify-content: flex-start; /* Aligne le contenu à gauche */
+    padding: 20px;
+    margin-top: -50px; /* Ajustez ici pour déplacer toute la section */
+    width: 100%;
+    box-sizing: border-box;
+    margin-left: 8%;
+   
+}
+@media (max-width: 321px) {
+    .consultations_container {
+        padding-left: 10px;
+        padding-right: 10px;
+        
+    }
+    .main-container{
+        margin-right: 10px;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .consultations_container {
+        padding-left: 10px;
+        padding-right: 10px;
+        
+    }
+    .main-container{
+        margin-right: 20px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .consultations_container {
+        padding: 15px;
+      
+    }
+
+  
+}
+
+@media (min-width: 769px) {
+    .consultations_container {
+        padding: 20px;
+    
+    }
+}
+
+
 
 

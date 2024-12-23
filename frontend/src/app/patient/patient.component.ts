@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,HostListener, OnInit  } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
@@ -13,6 +13,7 @@ import { ButtonsPatientComponent } from '../buttons-patient/buttons-patient.comp
 import { NursingComponent } from '../nursing/nursing.component';
 import { MedicalHistoryComponent } from '../medical-history/medical-history.component';
 
+
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
 @Component({
   selector: 'app-patient',
@@ -20,7 +21,23 @@ import { MedicalHistoryComponent } from '../medical-history/medical-history.comp
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.css']
 })
-export class PatientComponent {
+export class PatientComponent implements OnInit {
+  ngOnInit(): void {
+    // Initialisation lors du chargement du composant
+    this.updateHeight();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    // Mettre à jour la hauteur lors du redimensionnement
+    this.updateHeight();
+  }
+
+  private updateHeight(): void {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
+  
   patients = [
     {
       ssn: '11111',
