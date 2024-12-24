@@ -1,43 +1,53 @@
-
 * {
     box-sizing: border-box;
 }
+
 html {
     scroll-behavior: smooth;
+    background-color: #DFDFDF;
+    min-height: 100vh;
+    max-width: 100vw;
+    margin: 0;
+    overflow: hidden;
 }
-.main-container{
+
+.main-container {
     height: 100vh;
     background-color: #DFDFDF;
 }
+
 .container1 {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; 
-    align-items: center; 
+    justify-content: flex-start;
+    align-items: center;
     width: 100%;
     height: 800PX;
 
     background-color: #DFDFDF;
 }
+
 .header1 {
-    margin: 0; 
+    margin: 0;
     padding-right: 70px;
     padding-left: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 88px;
-    top: 0; 
+    top: 0;
     left: 0;
-    width: 100%;  
+    width: 100%;
     background-color: #DFDFDF;
     border-bottom: 0.5px solid #558A8D;
     margin-bottom: 0px;
 }
-.logo-container1{
+
+.logo-container1 {
     display: flex;
     align-items: center;
 }
+
 .logo1 {
     display: block;
     width: 64PX;
@@ -45,18 +55,20 @@ html {
     top: 16px;
     padding-right: 20px;
 }
+
 .company-name {
     width: 144PX;
     height: 40px;
     top: 28px;
-    font-family: 'Geologica',sans-serif;
+    font-family: 'Geologica', sans-serif;
     font-weight: 300;
     font-size: 32px;
     line-height: 40px;
     color: #558A8D;
 }
-.usres{
-    font-family: 'Geologica',sans-serif; 
+
+.usres {
+    font-family: 'Geologica', sans-serif;
     font-weight: 400;
     font-size: 24px;
     line-height: 30px;
@@ -65,31 +77,35 @@ html {
     margin-right: 20px;
     margin-left: 40px;
 }
+
 .dpi {
     font-family: 'Geologica', sans-serif;
     font-weight: 400;
     font-size: 24px;
     line-height: 30px;
-    color: #0B2025; 
-    margin-right: 10px; 
+    color: #0B2025;
+    margin-right: 10px;
 }
-.link{ 
-    
+
+.link {
+
     display: flex;
     align-items: center;
 
 }
+
 .error-text {
-    color: #0B2025; 
-    font-size: 0.7em; 
-    font-family: 'Geologica', sans-serif; 
-    margin-top: -5px; 
-    margin-left: 10px; 
-    text-align: left; 
+    color: #0B2025;
+    font-size: 0.7em;
+    font-family: 'Geologica', sans-serif;
+    margin-top: -5px;
+    margin-left: 10px;
+    text-align: left;
 }
+
 .logout-btn {
     width: 164px;
-    height: 37px; 
+    height: 37px;
     text-align: center;
     font-family: 'Geologica', sans-serif;
     font-weight: 300;
@@ -102,70 +118,73 @@ html {
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
     display: flex;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
 }
 
 
 .logout-btn:hover {
     background-color: #305a66;
-    transform: scale(1.05); 
+    transform: scale(1.05);
 }
 
 div .logout-btn {
     border: none !important;
 }
+
 .link a {
     text-decoration: none;
-    color: #558A8D; 
+    color: #558A8D;
     font-size: 24px;
     margin-right: 20px;
     font-family: 'Geologica', sans-serif;
     transition: color 0.3s, text-decoration 0.3s;
 }
+
 input::placeholder {
-    color:#DFDFDF ;
+    color: #DFDFDF;
     font-family: 'Geologica', sans-serif;
     font-size: 14px;
 }
 
 .link a:hover {
-    color: #558A8D; 
+    color: #558A8D;
     text-decoration: underline;
 }
+
 .user-form {
-    background-color: #558A8D; 
+    background-color: #558A8D;
     padding: 40px;
     border-radius: 25px;
     text-align: center;
     width: 600px;
     margin-top: 100px;
-   
+
 }
-  
+
 .icon img {
     width: 50px;
     height: 50px;
     margin-top: -35px;
-  }
-  
+}
+
 h2 {
     font-family: 'Geologica', sans-serif;
     font-weight: 400;
     font-size: 24px;
     color: #DFDFDF;
     margin-bottom: 20px;
-  }
-  
-  label {
+}
+
+label {
     display: block;
     font-family: 'Geologica', sans-serif;
     font-size: 14px;
     margin-bottom: 5px;
     color: white;
-  }
-  
-  input {
+}
+
+input {
     width: 200px;
     padding: 10px;
     margin: 10px 0;
@@ -174,32 +193,35 @@ h2 {
     font-size: 14px;
     width: 400px;
     background-color: #558A8D;
-    border: 2px solid #DFDFDF ; /* Bordure blanche */
-    color:white ;
- 
-   
-    
-  }
-  input:focus {
-    outline: none; 
-    border-color: #DFDFDF;
-    box-shadow: 0 0 5px #DFDFDF; 
+    border: 2px solid #DFDFDF;
+    /* Bordure blanche */
+    color: white;
+
+
+
 }
-  .F1{
-    display: flex; 
+
+input:focus {
+    outline: none;
+    border-color: #DFDFDF;
+    box-shadow: 0 0 5px #DFDFDF;
+}
+
+.F1 {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: 'Geologica',sans-serif;
-    color:#DFDFDF;
- 
+    font-family: 'Geologica', sans-serif;
+    color: #DFDFDF;
 
-  }
 
-  
-  
-  button {
-    background-color:  #DFDFDF;
-    color:#558A8D;
+}
+
+
+
+button {
+    background-color: #DFDFDF;
+    color: #558A8D;
     border: none;
     border-radius: 15px;
     padding: 10px;
@@ -208,9 +230,312 @@ h2 {
     cursor: pointer;
     margin-top: 20px;
     transition: background-color 0.3s;
-  }
-  button:hover {
+}
+
+button:hover {
     background-color: #305a66;
-    transform: scale(1.05); 
-  }
-  
+    transform: scale(1.05);
+}
+
+/* Media Queries pour rendre le design responsive */
+
+/* Media Queries pour rendre le design responsive avec le header */
+
+@media (max-width: 480px) {
+    .main-container {
+        height: auto;
+        padding: 10px;
+    }
+
+    .header1 {
+        padding-right: 20px;
+        padding-left: 20px;
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    .logo-container1 {
+        margin-bottom: 10px;
+    }
+
+    .logo1 {
+        width: 50px;
+        height: 50px;
+    }
+
+    .company-name {
+        font-size: 20px;
+        width: auto;
+    }
+
+    .usres,
+    .dpi {
+        font-size: 18px;
+    }
+
+    .logout-btn {
+        width: 140px;
+        font-size: 18px;
+        height: 35px;
+    }
+
+    .link {
+        margin-top: 10px;
+    }
+
+    .user-form {
+        width: 90%;
+        margin-top: 40px;
+    }
+
+    input {
+        width: 90%;
+    }
+
+    .F1 {
+        width: 100%;
+    }
+
+    button {
+
+        width: 60%;
+
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        height: auto;
+        padding: 20px;
+    }
+
+    /* Header Ajustements */
+    .header1 {
+        padding-right: 40px;
+        padding-left: 40px;
+
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        justify-content: center;
+       
+    }
+
+    .logo-container1 {
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .logo1 {
+        width: 50px;
+        height: 50px;
+    }
+
+    .company-name {
+        font-size: 20px;
+        width: auto;
+        text-align: center;
+        /* Centré pour la petite taille */
+    }
+
+    .usres,
+    .dpi {
+        font-size: 18px;
+        margin: 0;
+        padding: 5px;
+    }
+
+    .logout-btn {
+        width: 140px;
+        font-size: 18px;
+        height: 35px;
+        margin-top: 10px;
+        /* Espacement entre le bouton et le reste */
+        display: flex;
+        justify-content: center;
+    }
+
+    .link {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* Ajustements pour les boutons de la forme utilisateur */
+    .user-form {
+        width: 90%;
+        margin-top: 40px;
+    }
+
+    input {
+        width: 90%;
+    }
+
+    .F1 {
+        width: 100%;
+    }
+
+    button {
+        width: 50%;
+    }
+}
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .main-container {
+        height: auto;
+        padding: 30px;
+    }
+
+    .header1 {
+        padding-right: 40px;
+        padding-left: 40px;
+
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        justify-content: center;
+      
+    }
+
+    .logo-container1 {
+        margin-bottom: 0px;
+    }
+
+    .logo1 {
+        width: 60px;
+        height: 60px;
+    }
+
+    .company-name {
+        font-size: 32px;
+    }
+
+    .usres,
+    .dpi {
+        font-size: 24px;
+    }
+
+    .logout-btn {
+        width: 164px;
+        font-size: 20px;
+        height: 45px;
+    }
+
+    .link {
+        margin-top: 10px;
+    }
+
+    .user-form {
+        width: 70%;
+    }
+
+    input {
+        width: 85%;
+    }
+}
+
+@media (min-width: 1025px) {
+    .main-container {
+        height: 100vh;
+        padding: 40px;
+    }
+
+    .header1 {
+        padding-right: 70px;
+        padding-left: 70px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .logo-container1 {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo1 {
+        width: 64px;
+        height: 64px;
+    }
+
+    .company-name {
+        font-size: 32px;
+    }
+
+    .usres,
+    .dpi {
+        font-size: 24px;
+    }
+
+    .logout-btn {
+        width: 164px;
+        font-size: 20px;
+        height: 45px;
+    }
+
+    .link {
+        margin-top: 0;
+    }
+
+    .user-form {
+        width: 50%;
+    }
+
+    input {
+        width: 70%;
+    }
+}
+@media (min-width: 1929px) {
+    .main-container {
+        height: 100vh;
+        padding: 40px;
+    }
+
+    .header1 {
+        padding-right: 70px;
+        padding-left: 70px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .logo-container1 {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo1 {
+        width: 64px;
+        height: 64px;
+    }
+
+    .company-name {
+        font-size: 32px;
+    }
+
+    .usres,
+    .dpi {
+        font-size: 24px;
+    }
+
+    .logout-btn {
+        width: 164px;
+        font-size: 20px;
+        height: 45px;
+    }
+
+    .link {
+        margin-top: 0;
+    }
+
+    .user-form {
+        width: 40%;
+    }
+
+    input {
+        width: 70%;
+    }
+}

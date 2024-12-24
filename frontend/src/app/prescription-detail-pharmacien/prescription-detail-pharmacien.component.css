@@ -57,7 +57,224 @@
     text-align: center; /* Aligns the title in the center */
   }
   
-  /* Prescription Word Styling */
+  /* Prescription Word Styling */.prescription-detail {
+    background-color: #558A8D;
+    color: #DFDFDF;
+    font-family: 'Geologica', sans-serif;
+    padding: 60px;
+    border-radius: 15px;
+    width: 100%;
+    width: 500px;
+    margin-top: 80px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0px;
+  }
+  
+  .prescription-detail h4 {
+    font-size: 20px;
+    color: #DFDFDF;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .prescription-detail ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .prescription-detail li {
+    background-color: #DFDFDF;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .prescription-detail li span {
+    font-size: 14px;
+    color: #305a66;
+    font-weight: bold;
+    padding: 5px;
+  }
+  
+  .prescription-detail li:hover {
+    background-color: #9EBDBF;
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .prescription-detail p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .prescription-detail p strong {
+    font-weight: bold;
+  }
+  
+  .prescription-detail button {
+    background-color: #305a66;
+    color: #DFDFDF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .prescription-detail button:hover {
+    background-color: #305a66;
+    transform: scale(1.05);
+  }
+  
+  .prescription-detail-container {
+    background-color: #DFDFDF;
+    margin-top: 20px;
+  }
+  
+  .medication-list {
+    margin-top: 5px;
+  }
+  
+  .medication-info {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    align-items: center;
+    gap: 10px;
+    background-color: #DFDFDF;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .medication-info div {
+    font-size: 15px;
+    font-weight: bold;
+    color: #558A8D;
+  }
+  
+  .medication-info div span {
+    font-weight: normal;
+    color: #0B2025;
+  }
+  
+  .medication-info div .medication-text {
+    font-size: 14px;
+  }
+  
+  .medication-info div span.medication-pill-number {
+    color: #9EBDBF;
+  }
+  
+  .prescription-detail .back-btn {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #D9D9D9;
+    color: #558A8D;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .prescription-detail .back-btn:hover {
+    background-color: #9EBDBF;
+  }
+  
+  .prescription-detail .back-btn img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  @media (max-width: 480px) {
+    .prescription-detail {
+      width: 80%;
+      padding: 20px;
+    }
+  
+    .prescription-detail h4 {
+      font-size: 16px;
+    }
+  
+    .prescription-detail li {
+      font-size: 12px;
+      padding: 10px;
+    }
+  
+    .prescription-detail button {
+      font-size: 12px;
+    }
+  
+    .prescription-detail .back-btn {
+      font-size: 12px;
+      padding: 8px;
+    }
+  }
+  
+  @media (min-width: 481px) and (max-width: 768px) {
+    .prescription-detail {
+      width: 70%;
+      padding: 30px;
+    }
+  
+    .prescription-detail h4 {
+      font-size: 18px;
+    }
+  
+    .prescription-detail li {
+      font-size: 14px;
+      padding: 15px;
+    }
+  
+    .prescription-detail button {
+      font-size: 14px;
+    }
+  
+    .prescription-detail .back-btn {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .prescription-detail {
+      width: 70%;
+      padding: 40px;
+    }
+  
+    .prescription-detail h4 {
+      font-size: 20px;
+    }
+  
+    .prescription-detail li {
+      font-size: 16px;
+      padding: 20px;
+    }
+  
+    .prescription-detail button {
+      font-size: 16px;
+    }
+  
+    .prescription-detail .back-btn {
+      font-size: 16px;
+      padding: 12px;
+    }
+  }
+  
   .prescription-detail h4 span {
     color: #DFDFDF;
     font-weight: bold; /* Make it bold */

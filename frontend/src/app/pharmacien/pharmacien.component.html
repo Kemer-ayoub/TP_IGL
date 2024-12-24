@@ -33,10 +33,12 @@
 
         </div>
         <!-- Liste des consultations -->
-        <app-consultation-list *ngIf="showConsultationsList" [consultations]="patient?.consultations"
-            [selectedConsultation]="selectedConsultation" (consultationSelected)="selectConsultation($event)"
-            (backToPatientInfo)="backToPatientInfoConsultation()">
-        </app-consultation-list>
+        <div class="consultations_container">
+            <app-consultation-list *ngIf="showConsultationsList" [consultations]="patient?.consultations"
+                [selectedConsultation]="selectedConsultation" (consultationSelected)="selectConsultation($event)"
+                (backToPatientInfo)="backToPatientInfoConsultation()">
+            </app-consultation-list>
+        </div>
 
         <!--Consultation détails -->
 

@@ -24,7 +24,7 @@ import { PrescriptionDetailPharmacienComponent } from '../prescription-detail-ph
 export class PharmacienComponent {
  patients = [
     {
-      ssn: '11111',
+      ssn: '111',
       firstName: 'Oussama',
       lastName: 'Benhebbadj',
       address: 'Algiers',

@@ -2,8 +2,13 @@
 * {
     box-sizing: border-box;
 }
-html {
-    scroll-behavior: smooth;
+html, body {
+
+    background-color: #DFDFDF;
+    min-height: 100vh;
+    max-width: 100vw;
+    margin: 0;
+    overflow: hidden;
 }
 .container {
     width: 100%;
@@ -13,14 +18,14 @@ html {
 }
 #services{
     padding: 50px 20px;
-    scroll-margin-top: -20px; /* Assurez-vous que cette marge est ajoutée pour chaque section */
-    margin-top: -20px; /* Espacement entre les sections */
+    scroll-margin-top: -20px; 
+    
 }
 
 #contact #about-us{
     padding: 50px 20px;
-    scroll-margin-top: 100px; /* Assurez-vous que cette marge est ajoutée pour chaque section */
-    margin-top: 50px; /* Espacement entre les sections */
+    scroll-margin-top: 100px;
+    margin-top: 50px;
 }
 .header {
     margin: 0; 
@@ -130,7 +135,7 @@ div .login-btn {
     border: none !important;
 }
 .container1{
-    width:  1184PX;
+    width:  100%;
     height: 671px;
     top: 232px;
 }
@@ -140,12 +145,12 @@ div .login-btn {
     top: 241px;
     display: flex;
     flex-direction: column; 
-    align-items: flex-start;
+    align-items:center;
     margin-bottom: 60px;
 }
 .container-gt{
     
-    width:  850PX;
+    width:50%;
     height: 144px;
     top: 241px;
     justify-content: center; 
@@ -153,10 +158,9 @@ div .login-btn {
    text-align: center; 
     font-family: 'Geologica',sans-serif; 
     font-weight: 400;
-     font-size: 64px;
+    font-size: 64px;
     line-height: 80px; 
-    padding-left: 110px;
-    margin-left: 120px;
+    margin-left: 20%px;
     margin-bottom: 30px;
     color: #0B2025;
 }
@@ -165,13 +169,13 @@ div .login-btn {
     width:  100%;
     height: 30px;
     top: 389px;
+    justify-content: center; 
+    place-items: center;
     text-align: center; 
     font-family:'Geologica',sans-serif; 
     font-weight: 100;
     font-size: 24px;
     line-height: 30px; 
-    padding-left: 40px;
-    margin-left: 0px;
     margin-bottom: 10px;
     color: #3C3C3C;
 }
@@ -181,24 +185,27 @@ div .login-btn {
     height: 420px;
     top: 483px;
     text-align: center; 
-    margin-left: 40px;
+   
+    justify-content: center; 
+    place-items: center;
    
 }
-.grande-image { 
-    width: 90%;
-    height: 410px; 
-    display: block; 
-    margin: 0 auto; 
-    position: relative; 
+.grande-image {
+    width: 90%; 
+    height: auto; 
+    object-fit: cover; 
+    border-radius: 10px; 
 }
 .highlight{
     color :#558A8D;
 }
 .main-container {
-    width: 1120px;
+    margin-top: -100px;
+    width: 90%;
     padding: 20px;
     margin-left: 70px;
     font-family: 'Geologica', sans-serif; 
+    height: 100%;
 }
 
 .text-container {
@@ -248,9 +255,9 @@ div .login-btn {
    
 }
 .grid-item img.grid-image {
-    margin-top: -40px;
-    width: 44px; 
-    height: 55px; 
+    max-width: 44px; 
+    max-height: 55px; 
+    object-fit: cover;
 }
 .grid-item p {
     text-align: justify;
@@ -282,8 +289,8 @@ div .login-btn {
     color: #558A8D 
   }
   
-  .paragraph {
-    width: 560px;
+.paragraph {
+    width: 75%;
     height: 273px;
     border: 1.5px solid #558A8D; 
     border-radius: 15px; 
@@ -394,8 +401,396 @@ div .login-btn {
     text-decoration: underline;
     cursor: pointer;
 }
+@media screen and (max-width: 1024px) {
+    .footer-container {
+        padding: 20px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header1 h1 {
+        font-size: 20px; /* Réduction de la taille du titre */
+    }
+
+    .contact-info p {
+        font-size: 14px; /* Réduction de la taille des informations de contact */
+    }
+
+    .logo {
+        width: 40px; /* Réduction de la taille du logo */
+    }
+}
+
+/* Smartphones (480px - 768px) */
+@media screen and (max-width: 768px) {
+    .footer-container {
+        padding: 15px;
+    }
+
+    .header1 h1 {
+        font-size: 18px; /* Réduction de la taille du titre */
+    }
+
+    .contact-info p {
+        font-size: 14px; /* Réduction de la taille des informations de contact */
+    }
+
+    .logo {
+        width: 35px; /* Réduction de la taille du logo */
+    }
+}
+
+/* Smartphones très petits (<480px) */
+@media screen and (max-width: 480px) {
+    .footer-container {
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .header1 h1 {
+        font-size: 16px; /* Réduction de la taille du titre */
+    }
+
+    .contact-info p {
+        font-size: 12px; /* Réduction de la taille des informations de contact */
+    }
+
+    .logo {
+        width: 30px; /* Réduction de la taille du logo */
+    }
+
+    .copyright-container {
+        font-size: 12px; /* Réduction de la taille du texte du copyright */
+    }
+   
+}
+
+/*-------------------------------------------------------------------------------------------------------------------*/
+@media screen and (max-width: 1024px) {
+    .container2 {
+        margin-left: 20px; /* Réduit le marge pour s'ajuster aux petits écrans */
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-content {
+        width: 100%; /* La largeur devient 100% sur les écrans plus petits */
+        text-align: center; /* Centre le texte */
+    }
+
+    .image-container {
+        width: 100%; /* L'image occupe 100% de la largeur disponible */
+        justify-content: center; /* Centre l'image */
+        padding-right: 0;
+    }
+
+    .paragraph {
+        width: 100%; /* Le paragraphe prend 100% de la largeur */
+        height: auto; /* La hauteur devient automatique */
+    }
+
+    .image {
+        max-width: 80%; /* Limite la taille de l'image */
+    }
+  
+}
 
 
+/* Smartphones (480px - 768px) */
+@media screen and (max-width: 768px) {
+    .small-text {
+        font-size: 28px; /* Réduit la taille de la police pour les petits écrans */
+    }
 
+    .paragraph {
+        font-size: 18px; /* Réduit la taille de la police du paragraphe */
+        padding: 10px; /* Réduit le padding */
+    }
+
+    .image {
+        max-width: 90%; /* L'image prend 90% de la largeur */
+    }
+    
+}
+
+/* Smartphones très petits (<480px) */
+@media screen and (max-width: 480px) {
+    .small-text {
+        font-size: 22px; /* Réduit encore la taille de la police pour les très petits écrans */
+    }
+
+    .paragraph {
+        font-size: 16px; /* Réduit la taille de la police du paragraphe */
+        padding: 8px; /* Réduit encore le padding */
+        height: auto; /* Permet à la hauteur d'être fluide */
+    }
+
+    .image {
+        max-width: 100%; /* L'image prend toute la largeur disponible */
+    }
+
+   
+}
+/*--------------------------------------------------------------------------------------------------------------------*/
+@media screen and (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* Deux colonnes */
+        gap: 16px; /* Réduit l'écart entre les éléments */
+    }
+
+    .header-text {
+        font-size: 40px;
+        line-height: 50px;
+    }
+}
+
+/* Smartphones moyens (480px - 768px) */
+@media screen and (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* Une colonne */
+    }
+
+    .header-text {
+        font-size: 32px;
+        line-height: 40px;
+    }
+
+    .grid-item img.grid-image {
+        width: 50px; /* Ajuste les images */
+        height: 50px;
+    }
+
+    .grid-item {
+        padding: 15px;
+    }
+    .main-container {
+        margin-left: 12px;
+        margin-top: -260px;
+    }
+}
+
+/* Smartphones très petits (<480px) */
+@media screen and (max-width: 480px) {
+    .header-text {
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    .grid-item img.grid-image {
+        width: 40px; /* Ajuste les images pour très petits écrans */
+        height: 40px;
+    }
+
+    .grid-item p {
+        font-size: 14px;
+    }
+
+    .grid-item {
+        padding: 10px;
+    }
+
+    .main-container {
+        margin-left: 4px;
+        margin-top: -260px;
+    }
+}
+
+/* Écrans très petits (380px et plus bas) */
+@media screen and (max-width: 380px) {
+    .header-text {
+        font-size: 20px; /* Texte réduit pour tenir sur l'écran */
+        line-height: 28px;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr; /* Une seule colonne */
+        gap: 10px; /* Réduction des espaces */
+    }
+
+    .grid-item {
+        padding: 8px; /* Padding plus réduit */
+        font-size: 12px; /* Taille de police réduite */
+    }
+
+    .grid-item img.grid-image {
+        width: 24px; /* Taille d'image réduite */
+        height: 24px;
+    }
+
+    .grid-item p {
+        font-size: 12px; /* Police encore plus petite pour les descriptions */
+    }
+}
+/*----------------------------------------------------------------------------------------------------------*/
+@media screen and (max-width: 4000px) {
+    .container1 {
+        flex-direction: column; /* Passe en colonne */
+        align-items: center;
+        gap: 20px; /* Espace entre les sections */
+    }
+
+    .container11, .container12 {
+        width: 100%; /* Prend toute la largeur */
+    }
+
+    .container-gt {
+        font-size: 40px; /* Taille réduite pour les écrans moyens */
+        line-height: 50px;
+    }
+
+    .container-pt {
+        font-size: 18px; /* Taille réduite pour les écrans moyens */
+        line-height: 24px;
+    }
+
+    .grande-image {
+        max-width: 55% /* Taille maximale de l'image */
+    }
+}
+@media screen and (max-width: 2000px) {
+    .container1 {
+        flex-direction: column; /* Passe en colonne */
+        align-items: center;
+        gap: 20px; /* Espace entre les sections */
+    }
+
+    .container11, .container12 {
+        width: 100%; /* Prend toute la largeur */
+    }
+
+    .container-gt {
+        font-size: 40px; /* Taille réduite pour les écrans moyens */
+        line-height: 50px;
+    }
+
+    .container-pt {
+        font-size: 18px; /* Taille réduite pour les écrans moyens */
+        line-height: 24px;
+    }
+
+    .grande-image {
+        max-width: 70% /* Taille maximale de l'image */
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .container1 {
+        flex-direction: column; /* Passe en colonne */
+        align-items: center;
+        gap: 20px; /* Espace entre les sections */
+    }
+
+    .container11, .container12 {
+        width: 100%; /* Prend toute la largeur */
+    }
+
+    .container-gt {
+        font-size: 40px; /* Taille réduite pour les écrans moyens */
+        line-height: 50px;
+    }
+
+    .container-pt {
+        font-size: 18px; /* Taille réduite pour les écrans moyens */
+        line-height: 24px;
+    }
+
+    .grande-image {
+        max-width: 80% /* Taille maximale de l'image */
+    }
+}
+
+/* Écrans petits (smartphones) */
+@media screen and (max-width: 768px) {
+    .container-gt {
+        font-size: 32px; /* Taille encore plus petite */
+        line-height: 40px;
+    }
+
+    .container-pt {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .grande-image {
+        max-width: 85%; /* Réduction de la taille de l'image */
+    }
+}
+
+/* Écrans très petits (moins de 480px) */
+@media screen and (max-width: 480px) {
+    .container-gt {
+        font-size: 24px; /* Ajustement pour très petits écrans */
+        line-height: 32px;
+    }
+
+    .container-pt {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .grande-image {
+        max-width: 80%; /* Limitation de la taille de l'image */
+    }
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 1024px) {
+    .header {
+        padding: 0 30px;
+    }
+
+    .company-name {
+        font-size: 22px;
+    }
+
+    .nav-links a {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        flex-wrap: wrap;
+        height: auto; /* Permet à l'en-tête de s'étendre si nécessaire */
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%; /* Prend toute la largeur */
+        margin-top: 10px;
+    }
+
+    .nav-links a {
+        font-size: 18px;
+        padding: 5px 0;
+    }
+
+    .login-btn {
+        align-self: flex-end;
+        margin-left: -4px; /* Bouton à droite */
+        margin-top: 5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo {
+        width: 40px; /* Encore plus petit */
+        height: 40px;
+    }
+
+    .company-name {
+        font-size: 18px;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+    }
+
+    .login-btn {
+        width: 120px;
+        font-size: 16px;
+    }
+}
 
 
