@@ -1,0 +1,8 @@
+<div *ngIf="selectedCare " class="consultation-details">
+    <h3>Care Details</h3>
+    <p><strong>Date and Time :</strong> {{ selectedCare.date }}</p>
+    <p><strong>Type of care :</strong> {{ selectedCare.type }}</p>
+    <p><strong>Description :</strong> {{ selectedCare.description }}</p>
+    <p><strong>Observations :</strong> {{ selectedCare.observations }}</p>
+    <button class="back-btn" (click)="onBackToConsultationList()">Retour à la liste des consultations</button>
+</div>

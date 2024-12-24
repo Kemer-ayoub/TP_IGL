@@ -13,7 +13,7 @@
 
         <!-- search.component -->
         <app-search-bar
-            *ngIf="!showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory"
+            *ngIf="!showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory" 
             (ssnEntered)="onSSNEntered($event)"></app-search-bar>
 
         <!-- Error Message -->

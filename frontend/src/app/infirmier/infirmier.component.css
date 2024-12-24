@@ -1,11 +1,8 @@
-/* General styles */
-
 * {
     box-sizing: border-box;
 }
 
  body {
-
     background-color: #DFDFDF;
     height: 100vh;
     margin: 0;
@@ -37,8 +34,6 @@
     padding-top: 2px;
     flex-direction: column;
     background-color:#DFDFDF;
-  
-   
 
 }
 button {
@@ -54,5 +49,3 @@ button {
 button:hover {
     background-color: #9EBDBF;
 }
-
-
