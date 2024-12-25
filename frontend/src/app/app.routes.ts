@@ -5,6 +5,8 @@ import { NewUserComponent } from './new-user/new-user.component';
 import { CreateDPIComponent } from './create-dpi/create-dpi.component';
 import { PatientComponent } from './patient/patient.component';
 import { PharmacienComponent } from './pharmacien/pharmacien.component';
+import { InfirmierComponent } from './infirmier/infirmier.component';
+import { RadiologueComponent } from './radiologue/radiologue.component';
 
 
 export const routes: Routes = [
@@ -15,6 +17,6 @@ export const routes: Routes = [
     {path:'createDPI' , component:CreateDPIComponent} ,
     {path:'patient',component:PatientComponent},
     {path:'pharmacien',component:PharmacienComponent},
-    
-
+    {path:'infirmier',component:InfirmierComponent},
+    {path:'radiologue',component:RadiologueComponent},
 ];

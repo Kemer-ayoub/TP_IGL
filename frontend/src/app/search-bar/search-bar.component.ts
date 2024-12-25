@@ -5,7 +5,7 @@ import { PatientComponent } from '../patient/patient.component';
 
 @Component({
   selector: 'app-search-bar',
-  imports: [CommonModule,FormsModule,PatientComponent],
+  imports: [CommonModule,FormsModule],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.css'
 })

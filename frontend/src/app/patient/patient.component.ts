@@ -174,7 +174,7 @@ export class PatientComponent implements OnInit {
       this.errorMessage = 'Patient not found!';
     }
   }
-  onSSNEntered(ssn: string) {
+  onSSNEntered(ssn: string) { // this is executed when the search
     this.ssn = ssn;
     this.searchPatient();
   }
