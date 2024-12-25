@@ -1,0 +1,18 @@
+# Fichiers Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environnement virtuel
+backend_env/
+venv/
+
+# Fichiers de base de données
+db.sqlite3
+
+# Fichiers de configuration locaux
+*.env
+
+# Fichiers de log
+*.log
