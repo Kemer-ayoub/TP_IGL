@@ -1,0 +1,359 @@
+
+
+.consultation-list {
+    background-color: #DFDFDF;
+    padding: 0;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 700px;
+    font-family: 'Geologica', sans-serif;
+    height: 100%;
+    margin-top: 80px;
+}
+
+.consultation-list h3 {
+    font-size: 24px;
+    color: #558A8D;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.consultation-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.consultation-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: #DFDFDF;
+    font-size: 12px;
+    color: #0B2025;
+    cursor: pointer;
+    transition: background-color 0.3s, border-left 0.3s;
+    width: auto;
+    position: relative;
+    border-radius: 10px;
+    max-width: 150px;
+}
+
+.consultation-list li:hover {
+    background-color: #9EBDBF;
+    border-left: 5px solid #558A8D;
+}
+
+.consultation-icon {
+    width: 40px;
+    height: 20px;
+    object-fit: contain;
+    margin-left: -10px;
+}
+
+.consultation-list li span {
+    font-family: 'Geologica', sans-serif;
+    font-weight: bold;
+    color: #305a66;
+    font-size: 15px;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+.consultation-list li.selected {
+    background-color: #9EBDBF;
+    border-left: 17px solid #558A8D;
+}
+
+.back-btn {
+    background-color: #558A8D;
+    color: #DFDFDF;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    width: 200px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #305a66;
+}
+
+.separator {
+    width: 100%;
+    height: 1px;
+    background-color: #558A8D;
+    margin: 5px;
+    display: block;
+}
+
+
+/* Nursing Care Details Container */
+.nursing-care-details {
+    background-color: #558A8D; /* Set background color */
+    color: #DFDFDF; /* Set text color */
+    font-family: 'Geologica', sans-serif; /* Set font family */
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    margin-top: 80px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow effect */  
+    margin-left: 80%; 
+}
+
+/* Styling for Nursing Care Details Title */
+.nursing-care-details h3 {
+    font-size: 24px;
+    color: #DFDFDF;
+    text-align: center;
+}
+
+/* Styling for Nursing Care Details Text */
+.nursing-care-details p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Prescription List Container */
+.nursing-care-details h4 {
+    font-size: 20px;
+    color: #558A8D;
+    margin-bottom: 15px;
+    text-align: center; /* Aligns the title in the center */
+}
+
+/* Prescription Word Styling */
+.nursing-care-details h4 span {
+    color: #DFDFDF;
+    font-weight: bold; /* Make it bold */
+}
+
+/* Styling for Prescription List */
+.nursing-care-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Prescription List Item */
+.nursing-care-details li {
+    background-color: #DFDFDF; /* Background color for each item */
+    margin-bottom: 10px; /* Space between items */
+    border-radius: 10px; /* Rounded corners */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    height: auto; /* Adjust height to fit content */
+    position: relative; /* Needed for positioning the "Détails" link */
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+/* Styling for the Prescription Number */
+.nursing-care-details li p strong {
+    color: #558A8D; /* Color for Prescription Number */
+    margin-right: 20px; /* Increased space between prescription number and "Détails" */
+}
+
+/* Styling for "Détails" link */
+.details-link {
+    color: #558A8D; /* Prescription color */
+    text-decoration: underline; /* Underline the link */
+    cursor: pointer; /* Make it clickable */
+    font-weight: bold;
+    position: absolute; /* Position it to the right */
+    right: 70px; /* Adjust the distance from the right side */
+    text-align: right;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+/* Prescription List Item Hover Effect */
+.nursing-care-details li:hover {
+    background-color:  #9EBDBF; /* Change color when hovering over the entire list item */
+    cursor: pointer; /* Change cursor to indicate it's clickable */
+    transform: scale(1.02); /* Slight zoom-in effect */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Styling for Back Button */
+.nursing-care-details .back-btn {
+    background-color: #305a66;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.nursing-care-details .back-btn:hover {
+    background-color: #9EBDBF;
+}
+@media (max-width: 320px) {
+    .consultation-list {
+        width: 100px;
+        max-width: 300px;
+    }
+    .consultation-list li {
+        font-size: 8px;
+    }
+    .nursing-care-details {
+        width:76%;
+        margin-left: 2%;
+  
+       
+    }
+   
+    .nursing-care-details .back-btn {
+        width: 120px;
+        font-size: 12px;
+    }
+    
+}
+@media  (min-width: 320px) and (max-width: 376px) {
+    .consultation-list {
+        width: 100px;
+        max-width: 300px;
+    }
+    .consultation-list li {
+        font-size: 8px;
+    }
+    .nursing-care-details {
+        width:78%;
+        margin-left: 2%;
+  
+       
+    }
+   
+    .nursing-care-details .back-btn {
+        width: 120px;
+        font-size: 12px;
+    }
+    
+}
+
+@media (min-width:377px) and (max-width: 426px) {
+    .consultation-list {
+        width: 100px;
+        max-width: 300px;
+    }
+    .consultation-list li {
+        font-size: 8px;
+    }
+    .nursing-care-details {
+        width: 80%;
+        margin-left: 5%; 
+    }
+   
+    .nursing-care-details .back-btn {
+        width: 120px;
+        font-size: 12px;
+    }
+    
+}
+@media (min-width:  427px) and (max-width: 474px) {
+    .consultation-list {
+        width: 100px;
+        max-width: 300px;
+    }
+    .consultation-list li {
+        font-size: 8px;
+    }
+    .nursing-care-details {
+        width: 80%;
+        margin-left: 3%; 
+    }
+   
+    .nursing-care-details .back-btn {
+        width: 120px;
+        font-size: 12px;
+    }
+    
+}
+
+
+@media (min-width: 475px) and (max-width:550px) {
+    .consultation-list {
+        width: 100px;
+        max-width: 300px;
+    }
+    .consultation-list li {
+        font-size: 8px;
+    }
+    .nursing-care-details {
+        width: 80%;
+        margin-left: 20%; 
+    }
+   
+    .nursing-care-details .back-btn {
+        width: 120px;
+        font-size: 12px;
+    }
+    
+}
+
+@media (min-width: 551px) and (max-width: 768px) {
+    .consultation-list {
+        width: 100%;
+        max-width: 500px;
+    }
+    .consultation-list li {
+        font-size: 10px;
+    }
+    .nursing-care-details {
+        margin-left: 20%;
+        width: 90%; 
+       
+    }
+}
+
+
+@media (min-width: 770px)  and (max-width:1024px){
+    .consultation-list {
+        width: 100%;
+        max-width: 700px;
+    }
+    .consultation-list li {
+        font-size: 12px;
+    }
+    .nursing-care-details {
+
+        width: 80%;
+        margin-left: 55%; 
+    }
+}
+@media (min-width: 1025px) and (max-width: 1366px) {
+    .consultation-list {
+        width: 100%;
+        max-width: 700px;
+    }
+    .consultation-list li {
+        font-size: 12px;
+    }
+    .nursing-care-details {
+        margin-left: 90%; 
+      
+    }
+}
+@media (min-width: 1367px) {
+    .consultation-list {
+        width: 100%;
+        max-width: 700px;
+    }
+    .consultation-list li {
+        font-size: 12px;
+    }
+    .nursing-care-details {
+      
+        margin-left: 95%; 
+    }
+}

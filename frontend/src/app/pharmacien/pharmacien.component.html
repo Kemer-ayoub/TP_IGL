@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <!-- Header -->
+    <app-header></app-header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Composant de recherche -->
+
+        <app-search-bar
+            *ngIf="!showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory"
+            (ssnEntered)="onSSNEntered($event)"></app-search-bar>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="error-message">
+            <p>{{ errorMessage }}</p>
+        </div>
+
+        <div class="container"
+            *ngIf="patient && !showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory">
+            <!-- Patient Info -->
+            <app-patient-info [patient]="patient"></app-patient-info>
+
+            <!-- Bouton pour afficher/masquer les prescriptions -->
+            <div class="single-button-container">
+                <div class="single-button" (click)="onViewConsultations()">
+                    <img src="Photo\Vector (17).png" alt="Action Icon" />
+                    <span>{{ showPrescriptionsList ? 'Hide Prescriptions' : 'Show consultations' }}</span>
+                </div>
+            </div>
+
+        </div>
+        <!-- Liste des consultations -->
+        <div class="consultations_container">
+            <app-consultation-list *ngIf="showConsultationsList" [consultations]="patient?.consultations"
+                [selectedConsultation]="selectedConsultation" (consultationSelected)="selectConsultation($event)"
+                (backToPatientInfo)="backToPatientInfoConsultation()">
+            </app-consultation-list>
+        </div>
+
+        <!--Consultation détails -->
+
+        <app-consultation-detail [selectedConsultation]="selectedConsultation"
+            [selectedPrescription]="selectedPrescription" (backToConsultationList)="backToConsultationList()"
+            (selectPrescription)="selectPrescription($event)">
+        </app-consultation-detail>
+
+
+
+        <!--- Prescription Detail  -->
+        <app-prescription-detail-pharmacien [patient]="patient" [selectedPrescription]="selectedPrescription"
+            (backToConsultationList)="backToConsultationList()">
+        </app-prescription-detail-pharmacien>
+
+    </div>
+
+
+</body>
+
+</html>

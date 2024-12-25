@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <div class="green-container">
+      <div class="login-container">
+        <div class="logo">
+          <img src="Photo/doctor-consultation 2.png" alt="Logo" class="logo-image">
+        </div>
+        <h2>Login</h2>
+        <form (ngSubmit)="authentication()">
+          <div class="input-container">
+            <img src="Photo\Vector (6).png" alt="User Icon" class="input-icon">
+            <input
+              type="text"
+              placeholder="Username"
+              [(ngModel)]="username"
+              name="username"
+              [style.color]="'#558A8D'"
+              required
+            />
+            <p *ngIf="isSubmitted && !username" class="error-text">This field is required.</p>
+          </div>
+          <div class="input-container">
+            <img src="Photo\Vector (7).png" alt="Password Icon" class="input-icon">
+            <input
+              type="password"
+              placeholder="Password"
+              [(ngModel)]="password"
+              name="password"
+              [style.color]="'#558A8D'"
+              required
+            />
+            <p *ngIf="isSubmitted && !password" class="error-text">This field is required.</p>
+          </div>
+          <button type="submit" class="login-button">Login</button>
+        </form>
+        <a href="#" class="forgot-password">Forgot Password?</a>
+      </div>
+    </div>
+  </body>
+</html>

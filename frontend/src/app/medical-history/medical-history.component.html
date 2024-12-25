@@ -1,0 +1,42 @@
+<!-- Liste de l'historique médical -->
+<div *ngIf="showMedicalHistory" class="medical-history-container">
+    <h3>Medical History</h3>
+    <div class="medical-history-section">
+      <h4>Chronic Illnesses</h4>
+      <ul>
+        <li *ngFor="let illness of patient?.medicalHistory?.chronicIllnesses">
+          {{ illness.name }} (since {{ illness.date }})
+        </li>
+      </ul>
+    </div>
+  
+    <div class="medical-history-section">
+      <h4>Surgeries</h4>
+      <ul>
+        <li *ngFor="let surgery of patient?.medicalHistory?.surgeries">
+          {{ surgery.name }} (on {{ surgery.date }})
+        </li>
+      </ul>
+    </div>
+  
+    <div class="medical-history-section">
+      <h4>Allergies</h4>
+      <ul>
+        <li *ngFor="let allergy of patient?.medicalHistory?.allergies">
+          {{ allergy.name }} (since {{ allergy.date }})
+        </li>
+      </ul>
+    </div>
+  
+    <div class="medical-history-section">
+      <h4>Medications</h4>
+      <ul>
+        <li *ngFor="let medication of patient?.medicalHistory?.medications">
+          {{ medication.name }} (since {{ medication.date }})
+        </li>
+      </ul>
+    </div>
+  
+    <button class="back-button" (click)="onBackToPatientInfoMedicalHistory()">Back to Patient Info</button>
+  </div>
+  
