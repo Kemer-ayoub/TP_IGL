@@ -1,0 +1,39 @@
+.consultation-details {
+    background-color: #558A8D; /* Set background color */
+    color: #DFDFDF; /* Set text color */
+    font-family: 'Geologica', sans-serif; /* Set font family */
+    padding: 60px;
+    border-radius: 15px;
+    width: 100%;
+    width: 500px; /* Adjust the width as needed */
+    margin-top: 80px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+    margin-bottom: 0px;
+  }
+  .consultation-details h3 {
+    font-size: 24px;
+    color: #DFDFDF;
+    text-align: center;
+  }
+  
+  /* Styling for Consultation Details Text */
+  .consultation-details p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .consultation-details .back-btn {
+    background-color: #305a66;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+  }
+  
+  .consultation-details .back-btn:hover {
+    background-color: #9EBDBF;
+  }
+     
