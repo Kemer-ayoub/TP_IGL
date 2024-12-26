@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <!-- Header -->
+    <app-header></app-header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Composant de recherche -->
+
+        <app-search-bar
+            *ngIf="!showAddConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory"
+            (ssnEntered)="onSSNEntered($event)"></app-search-bar>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="error-message">
+            <p>{{ errorMessage }}</p>
+        </div>
+
+        <div class="container"
+            *ngIf="patient && !showAddConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory">
+            <!-- Patient Info -->
+            <app-patient-info [patient]="patient"></app-patient-info>
+
+            <!-- Bouton pour afficher/masquer les prescriptions -->
+            <div class="single-button-container">
+                <div class="single-button" (click)="onViewAddConsultations()">
+                    <img src="Photo\Vector_consultation.png" alt="Action Icon" />
+                    <span>{{ 'Add new consultation' }}</span>
+                </div>
+            </div>
+
+        </div>
+        <!-- Add new consultation -->
+        <div class="consultations_container">
+            <app-medecin-add-new-consultation *ngIf="showAddConsultationsList"
+                (backToPatientInfo)="backToPatientInfoConsultation()">
+            </app-medecin-add-new-consultation>
+        </div>
+
+        <!--Consultation détails -->
+
+        <app-consultation-detail [selectedConsultation]="selectedConsultation"
+            [selectedPrescription]="selectedPrescription" (backToConsultationList)="backToConsultationList()"
+            (selectPrescription)="selectPrescription($event)">
+        </app-consultation-detail>
+
+
+
+        <!--- Prescription Detail  -->
+        <app-prescription-detail-pharmacien [patient]="patient" [selectedPrescription]="selectedPrescription"
+            (backToConsultationList)="backToConsultationList()">
+        </app-prescription-detail-pharmacien>
+
+    </div>
+
+
+</body>
+
+</html>

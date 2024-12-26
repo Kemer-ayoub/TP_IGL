@@ -7,10 +7,11 @@ import { PatientComponent } from './patient/patient.component';
 import { PharmacienComponent } from './pharmacien/pharmacien.component';
 import { InfirmierComponent } from './infirmier/infirmier.component';
 import { RadiologueComponent } from './radiologue/radiologue.component';
+import { MedecinConsulterDpiComponent } from './medecin-consulter-dpi/medecin-consulter-dpi.component';
 
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirect root to /home
+    { path: '', redirectTo: '/medecin', pathMatch: 'full' }, // Redirect root to /home
     { path: 'home', component: HomePageComponent }, // Home route
     { path: 'login', component: LoginScreenComponent},
     {path:'user', component:NewUserComponent} , 
@@ -18,5 +19,6 @@ export const routes: Routes = [
     {path:'patient',component:PatientComponent},
     {path:'pharmacien',component:PharmacienComponent},
     {path:'infirmier',component:InfirmierComponent},
+    {path: 'medecin', component: MedecinConsulterDpiComponent },
     {path:'radiologue',component:RadiologueComponent},
 ];
