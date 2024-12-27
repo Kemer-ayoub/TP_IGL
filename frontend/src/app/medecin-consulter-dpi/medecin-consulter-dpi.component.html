@@ -23,7 +23,7 @@
             <!-- Patient Info -->
             <app-patient-info [patient]="patient"></app-patient-info>
 
-            <!-- Bouton pour afficher/masquer les prescriptions -->
+            <!-- Bouton pour afficher la page d'ajout d'une nouvelle consultation -->
             <div class="single-button-container">
                 <div class="single-button" (click)="onViewAddConsultations()">
                     <img src="Photo\Vector_consultation.png" alt="Action Icon" />
@@ -38,20 +38,6 @@
                 (backToPatientInfo)="backToPatientInfoConsultation()">
             </app-medecin-add-new-consultation>
         </div>
-
-        <!--Consultation détails -->
-
-        <app-consultation-detail [selectedConsultation]="selectedConsultation"
-            [selectedPrescription]="selectedPrescription" (backToConsultationList)="backToConsultationList()"
-            (selectPrescription)="selectPrescription($event)">
-        </app-consultation-detail>
-
-
-
-        <!--- Prescription Detail  -->
-        <app-prescription-detail-pharmacien [patient]="patient" [selectedPrescription]="selectedPrescription"
-            (backToConsultationList)="backToConsultationList()">
-        </app-prescription-detail-pharmacien>
 
     </div>
 

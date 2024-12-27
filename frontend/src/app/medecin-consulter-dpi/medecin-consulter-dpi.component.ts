@@ -4,21 +4,12 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { PatientInfoComponent } from '../patient-info/patient-info.component';
-import { PrescriptionsListComponent } from '../prescriptions-list/prescriptions-list.component';
-import { PrescriptionsDetailComponent } from '../prescriptions-detail/prescriptions-detail.component';
-import { ConsultationListComponent } from '../consultation-list/consultation-list.component';
-import { ConsultationDetailComponent } from '../consultation-detail/consultation-detail.component';
-import { RouterLink } from '@angular/router';
-import { ButtonsPatientComponent } from '../buttons-patient/buttons-patient.component';
-import { NursingComponent } from '../nursing/nursing.component';
-import { MedicalHistoryComponent } from '../medical-history/medical-history.component';
-import { PrescriptionDetailPharmacienComponent } from '../prescription-detail-pharmacien/prescription-detail-pharmacien.component';
 import {MedecinAddNewConsultationComponent } from '../medecin-add-new-consultation/medecin-add-new-consultation.component'
 
 
 @Component({
-  selector: 'app-pharmacien',
-  imports: [FormsModule,MedecinAddNewConsultationComponent,PrescriptionDetailPharmacienComponent, MedicalHistoryComponent,NursingComponent, ButtonsPatientComponent,RouterLink, ConsultationDetailComponent, CommonModule, ConsultationListComponent, HeaderComponent, SearchBarComponent, PatientInfoComponent, PrescriptionsDetailComponent, PrescriptionsListComponent,],
+  selector: 'app-medecin-consulter-dpi',
+  imports: [FormsModule,MedecinAddNewConsultationComponent, CommonModule, HeaderComponent, SearchBarComponent, PatientInfoComponent,],
   templateUrl: './medecin-consulter-dpi.component.html',
   styleUrl: './medecin-consulter-dpi.component.css'
 })

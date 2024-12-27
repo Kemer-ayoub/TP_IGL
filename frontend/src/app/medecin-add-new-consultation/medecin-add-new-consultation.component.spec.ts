@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { CommonModule } from '@angular/common'; 
 import { MedecinAddNewConsultationComponent } from './medecin-add-new-consultation.component';
+
 
 describe('MedecinAddNewConsultationComponent', () => {
   let component: MedecinAddNewConsultationComponent;
