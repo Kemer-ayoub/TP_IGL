@@ -1,4 +1,3 @@
-<!-- src/app/medecin-add-new-consultation/medecin-add-new-consultation.component.html -->
 <h1 class="page-title" *ngIf="!showAddPrescription">Add new consultation</h1>
 <div class="Card" *ngIf="!showAddPrescription">
     <div class="cardtext">
@@ -21,9 +20,12 @@
           <img src="Photo\Group 39.png" alt=""> Add Prescriptions
         </button>
     </div>
-    <button class="create-btn">Submit</button>
+    <div class="buttons">
+        <button class="cancel-btn" (click)="cancel()"> Cancel</button>
+        <button class="create-btn">Submit</button>
+    </div>
 </div>
 <div class="consultations_container">
-    <app-medecin-add-new-prescription *ngIf="showAddPrescription">
+    <app-medecin-add-new-prescription *ngIf="showAddPrescription" (togglePrescriptionVisibility)="togglePrescriptionVisibility()">
     </app-medecin-add-new-prescription>
 </div>

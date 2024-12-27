@@ -1,1 +1,46 @@
-<h1>Add prescriptions</h1>
+<h1 class="page-title">Add new prescription</h1>
+<div class="Card">
+  <div class="cardtext">
+    <span>Prescription</span>
+  </div>
+  <div class="careproprities">
+    <div class="input-Time">
+        <input type="text" id="time-input" placeholder="Patient full name">
+    </div>
+    <div class="input-type">
+        <input type="text" id="type-input" placeholder="Patient Age">
+    </div>
+    <div class="input-type">
+        <input type="text" id="type-input" placeholder="Doctor name">
+    </div>
+    <p>Medications List</p>
+    <div class="medication-inputs">
+      <input
+        type="text"
+        id="med-input"
+        [(ngModel)]="medicationName"
+        placeholder="Medication name"
+      />
+      <input type="text" id="med-input" [(ngModel)]="medicationDose" placeholder="Dose" />
+      <input
+        type="text"
+        id="med-input"
+        [(ngModel)]="medicationDuration"
+        placeholder="Duration"
+      />
+      <button class="plus" (click)="addMedication()">
+        <img src="Photo/plus.png" alt="" />
+      </button>
+    </div>
+    <ul>
+      <li class="med-item" *ngFor="let medication of medications; index as i">
+        {{ medication.name }} - {{ medication.dose }} - {{ medication.duration }}
+        <button (click)="deleteMedication(i)"><img src="Photo\delete.png" alt=""></button>
+      </li>
+    </ul>
+  </div>
+  <div class="buttons">
+    <button class="cancel-btn" (click)="goBack()">Cancel</button>
+    <button class="create-btn">Create</button>
+  </div>
+</div>

@@ -148,7 +148,7 @@
         line-height: 20px;
         color: #558A8D;
         border: none;
-        margin-top: 30px;
+        margin-top: 64px;
         cursor: pointer;
         }
         .page-title{
@@ -178,4 +178,24 @@
     }
     .add-btn img{
         padding: 16px;
+    }
+    .cancel-btn
+    {
+        width: 131px;
+        height: 25px;
+        background: #558A8D;
+        border-radius: 8px;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 20px;
+        color: #dfdfdf;
+        border: solid 1px #dfdfdf;
+        margin-top: 64px;
+        cursor: pointer;
+        margin-right: 8px;
+    }
+    .buttons{
+        display: flex;
+        flex-direction: row;
     }
