@@ -5,11 +5,12 @@ import { HeaderComponent } from '../header/header.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { PatientInfoComponent } from '../patient-info/patient-info.component';
 import {MedecinAddNewConsultationComponent } from '../medecin-add-new-consultation/medecin-add-new-consultation.component'
+import { MedicalHistoryComponent } from '../medical-history/medical-history.component';
 
 
 @Component({
   selector: 'app-medecin-consulter-dpi',
-  imports: [FormsModule,MedecinAddNewConsultationComponent, CommonModule, HeaderComponent, SearchBarComponent, PatientInfoComponent,],
+  imports: [FormsModule,MedecinAddNewConsultationComponent,MedicalHistoryComponent, CommonModule, HeaderComponent, SearchBarComponent, PatientInfoComponent,],
   templateUrl: './medecin-consulter-dpi.component.html',
   styleUrl: './medecin-consulter-dpi.component.css'
 })
@@ -175,6 +176,7 @@ export class MedecinConsulterDpiComponent {
 
   backToPatientInfoConsultation() {
     this.showAddConsultationsList = false;
+    this.showMedicalHistory = false;
     this.selectedConsultation = null;
     this.selectedPrescription = null;
   }
@@ -214,6 +216,16 @@ export class MedecinConsulterDpiComponent {
   backToPatientInfo() {
     this.showPrescriptionsList = false;
     this.selectedPrescription = null;
+  }
+  toggleMedicalHistory() {
+    if (this.patient?.medicalHistory) {
+      this.showMedicalHistory = !this.showMedicalHistory;
+    } else {
+      this.errorMessage = 'Medical history not available for this patient!';
+    }
+  }
+  backToPatientInfoMedicalHistory() {
+    this.showMedicalHistory = false;
   }
 
 }

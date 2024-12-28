@@ -30,6 +30,12 @@
                     <span>{{ 'Add new consultation' }}</span>
                 </div>
             </div>
+            <div class="single-button-container">
+                <div class="single-button" (click)="toggleMedicalHistory()">
+                    <img src="Photo\history.png" alt="Action Icon" />
+                    <span>{{ 'Medical History' }}</span>
+                </div>
+            </div>
 
         </div>
         <!-- Add new consultation -->
@@ -38,6 +44,25 @@
                 (backToPatientInfo)="backToPatientInfoConsultation()">
             </app-medecin-add-new-consultation>
         </div>
+        <!-- Medical History -->
+        <div class="medical-history-container">
+            <app-medical-history [patient]="patient" [showMedicalHistory]="showMedicalHistory" (backToPatientInfoMedicalHistory)="backToPatientInfoMedicalHistory()">
+            </app-medical-history>
+            <div class="history-container" *ngIf="showMedicalHistory">
+                <h2>Add a new history entry</h2>
+                <form action="">
+                    <input type="text" placeholder="Name of record">
+                    <input type="text" placeholder="Type of record">
+                    <input type="date" placeholder="Date of record">
+                    <input type="text" placeholder="Dosage (if it is a medication)">
+                </form>
+                <div class="btns">
+                    <button class="back" *ngIf="showMedicalHistory" (click)="backToPatientInfoMedicalHistory()">Cancel</button>
+                    <button class="add">Add</button>
+                </div>
+            </div>
+        </div>
+        
 
     </div>
 

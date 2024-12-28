@@ -21,5 +21,8 @@ export class MedicalHistoryComponent {
   onBackToPatientInfoMedicalHistory() {
     this.backToPatientInfoMedicalHistory.emit();
   }
+  verify(){
+    console.log(this.patient);
+  }
 
 }

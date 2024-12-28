@@ -12,6 +12,7 @@ import { RadiologueComponent } from './radiologue/radiologue.component';
 import { MedecinConsulterDpiComponent } from './medecin-consulter-dpi/medecin-consulter-dpi.component';
 import { MedecinAddNewConsultationComponent } from './medecin-add-new-consultation/medecin-add-new-consultation.component';
 import { MedecinAddNewPrescriptionComponent } from './medecin-add-new-prescription/medecin-add-new-prescription.component';
+import {MedicalHistoryComponent} from './medical-history/medical-history.component';
 
 
 export const routes: Routes = [
@@ -27,4 +28,5 @@ export const routes: Routes = [
     {path:'radiologue',component:RadiologueComponent},
     { path: 'add-consultation',component: MedecinAddNewConsultationComponent },
   { path: 'add-prescription', component: MedecinAddNewPrescriptionComponent },
+  {path: 'medical-history', component: MedicalHistoryComponent}
 ];

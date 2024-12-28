@@ -40,7 +40,7 @@ export class PatientComponent implements OnInit {
   
   patients = [
     {
-      ssn: '11111',
+      ssn: '111',
       firstName: 'Oussama',
       lastName: 'Benhebbadj',
       address: 'Algiers',
@@ -94,14 +94,18 @@ export class PatientComponent implements OnInit {
         chronicIllnesses: [
           { name: 'Diabetes', date: '2018-05-01' },
           { name: 'Hypertension', date: '2020-03-10' },
+          { name: 'Hypertension', date: '2020-03-10' },
         ],
         surgeries: [
+          { name: 'Appendectomy', date: '2015-07-20' },
           { name: 'Appendectomy', date: '2015-07-20' },
         ],
         allergies: [
           { name: 'Penicillin', date: '2012-08-15' },
+          { name: 'Penicillin', date: '2012-08-15' },
         ],
         medications: [
+          { name: 'Metformin', date: '2023-06-01' },
           { name: 'Metformin', date: '2023-06-01' },
         ],
       },
@@ -117,6 +121,21 @@ export class PatientComponent implements OnInit {
       dob: '15/09/1990',
       emergencyContact: '0668333777',
       carePhysician: 'doctorY',
+      medicalHistory: {
+        chronicIllnesses: [
+          { name: 'Diabetes', date: '2018-05-01' },
+          { name: 'Hypertension', date: '2020-03-10' },
+        ],
+        surgeries: [
+          { name: 'Appendectomy', date: '2015-07-20' },
+        ],
+        allergies: [
+          { name: 'Penicillin', date: '2012-08-15' },
+        ],
+        medications: [
+          { name: 'Metformin', date: '2023-06-01' },
+        ],
+      },
       consultations: [
         {
           date: '2024-02-10',
