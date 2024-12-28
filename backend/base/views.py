@@ -9,6 +9,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.exceptions import AuthenticationFailed
 
 from .models import *
 from .serializers import (
@@ -17,6 +19,7 @@ from .serializers import (
     ExamRequestSerializer,
     OrdonnanceSerializer,
     ReportRequestSerializer,
+    UserSerializer
 )
 
 
@@ -52,7 +55,7 @@ def dpi_list(request, pk=None, format=None):
     if request.method == "GET":
         if pk is not None:
             # Retrieve a specific DPI by ID
-            dpi = get_object_or_404(DPI, pk=pk)
+            dpi = get_object_or_404(DPI, patient=pk)
             serializer = DPISerializer(dpi)
             return Response(serializer.data)
 
@@ -384,3 +387,26 @@ def add_consultation_resume(request, consultation_id):
             return JsonResponse({"error": str(e)}, status=500)
     else:
         return JsonResponse({"error": "Invalid HTTP method. Use POST."}, status=405)
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_info(request):
+    # Authenticate user
+    auth = JWTAuthentication()
+    try:
+        user, _ = auth.authenticate(request)
+    except AuthenticationFailed as e:
+        return Response({'detail': str(e)}, status=401)
+
+    if not user:
+        return Response({'detail': 'Authentication credentials were not provided.'}, status=401)
+
+    # Prepare user data
+    user_data = {
+        'id': user.id,
+        'username': user.username,
+        'role': user.role,
+        # Add any other fields you want to expose
+    }
+
+    return Response(user_data)

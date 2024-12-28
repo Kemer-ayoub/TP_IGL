@@ -7,13 +7,14 @@ import { PatientComponent } from './patient/patient.component';
 import { PharmacienComponent } from './pharmacien/pharmacien.component';
 import { InfirmierComponent } from './infirmier/infirmier.component';
 import { RadiologueComponent } from './radiologue/radiologue.component';
+import { authGuard } from './auth.guard';
 
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirect root to /home
     { path: 'home', component: HomePageComponent }, // Home route
     { path: 'login', component: LoginScreenComponent},
-    {path:'user', component:NewUserComponent} , 
+    {path:'user', component:NewUserComponent, canActivate: [authGuard]} , 
     {path:'createDPI' , component:CreateDPIComponent} ,
     {path:'patient',component:PatientComponent},
     {path:'pharmacien',component:PharmacienComponent},

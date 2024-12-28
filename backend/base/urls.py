@@ -9,6 +9,7 @@ urlpatterns = [
     path("", views.getRoutes),
     path("token/", MyTokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("dpi", views.dpi_list, name="dpi-create"),  # GET specific DPI
     path("dpi/<int:pk>/", views.dpi_list, name="dpi-detail"),  # GET specific DPI
     path("antecedants/", views.antecedant_list, name="antecedant-list"),
     path("examrequests/", views.examrequests_list, name="exam-requests"),
@@ -58,4 +59,5 @@ urlpatterns = [
         views.add_consultation_resume,
         name="add_consultation_resume",
     ),
+    path('user_info/', views.user_info, name='user_info'),
 ]

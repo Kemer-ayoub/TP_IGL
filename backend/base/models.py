@@ -3,6 +3,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.hashers import make_password  
 
 
 # Users Models:
@@ -40,6 +41,12 @@ class Patient(User):
 
     class Meta:
         proxy = True
+
+    def save(self, *args, **kwargs):  
+        """Override the save method to hash password before saving."""  
+        if self.password:  # Only hash if there is a password  
+            self.password = make_password(self.password)  # Hash the password  
+        super().save(*args, **kwargs)  # Call the parent's save method 
 
     def welcome(self):
         return "Only for patients"
@@ -105,6 +112,12 @@ class Pharmacien(User):
     class Meta:
         proxy = True
 
+    def save(self, *args, **kwargs):  
+        """Override the save method to hash password before saving."""  
+        if self.password:  # Only hash if there is a password  
+            self.password = make_password(self.password)  # Hash the password  
+        super().save(*args, **kwargs)  # Call the parent's save method 
+
     def welcome(self):
         return "Only for pharmacien"
 
@@ -136,6 +149,12 @@ class Medecin(User):
 
     class Meta:
         proxy = True
+
+    def save(self, *args, **kwargs):  
+        """Override the save method to hash password before saving."""  
+        if self.password:  # Only hash if there is a password  
+            self.password = make_password(self.password)  # Hash the password  
+        super().save(*args, **kwargs)  # Call the parent's save method 
 
     def welcome(self):
         return "Only for medecins"
@@ -169,6 +188,12 @@ class Laborantin(User):
     class Meta:
         proxy = True
 
+    def save(self, *args, **kwargs):  
+        """Override the save method to hash password before saving."""  
+        if self.password:  # Only hash if there is a password  
+            self.password = make_password(self.password)  # Hash the password  
+        super().save(*args, **kwargs)  # Call the parent's save method 
+
     def welcome(self):
         return "Only for Laborantins"
 
@@ -200,6 +225,12 @@ class Infirmier(User):
 
     class Meta:
         proxy = True
+
+    def save(self, *args, **kwargs):  
+        """Override the save method to hash password before saving."""  
+        if self.password:  # Only hash if there is a password  
+            self.password = make_password(self.password)  # Hash the password  
+        super().save(*args, **kwargs)  # Call the parent's save method 
 
     def welcome(self):
         return "Only for Infirmiers"
@@ -233,6 +264,12 @@ class Radiologue(User):
     class Meta:
         proxy = True
 
+    def save(self, *args, **kwargs):  
+        """Override the save method to hash password before saving."""  
+        if self.password:  # Only hash if there is a password  
+            self.password = make_password(self.password)  # Hash the password  
+        super().save(*args, **kwargs)  # Call the parent's save method 
+
     def welcome(self):
         return "Only for RadiologueS"
 
@@ -255,7 +292,7 @@ class DPI(models.Model):
     # Est que ndir dpi_id??
     nom = models.CharField(max_length=100)
     prenom = models.CharField(max_length=100)
-    mot_passe = models.CharField(max_length=255)
+    mot_passe = models.CharField(max_length=255, null=True, blank=True)
     date_naissance = models.DateField()
     adresse = models.TextField(null=True, blank=True)
     telephone = models.CharField(max_length=20, null=True)
