@@ -27,6 +27,10 @@ html, body {
     border: 1px solid #558A8D;
     margin-right: 10px;
 }
+.cards-container{
+    display: flex;
+    flex-direction: row;
+}
 
 .main-container { 
     scroll-behavior: smooth;
@@ -65,22 +69,22 @@ button:hover {
 }
 
 .single-button-container {
-    margin-top: 50px;
+    margin-top: 64px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10px;
+    height: 100px;
     width: 100%;
 }
 
 .single-button {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    width: 30%;
-    height: 45px;
+    width: 60%;
+    height: 100px;
     background-color: #558A8D;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -218,7 +222,7 @@ button:hover {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding-bottom: 24px;
+    padding-bottom: 48px;
 }
 .history-container h2{
     color: #DFDFDF;

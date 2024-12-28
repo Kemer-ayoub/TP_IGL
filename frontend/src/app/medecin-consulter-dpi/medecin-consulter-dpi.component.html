@@ -10,7 +10,7 @@
         <!-- Composant de recherche -->
 
         <app-search-bar
-            *ngIf="!showAddConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory && !showExamRequest"
+            *ngIf="!showAddConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory && !showExamRequest && !showReportRequest"
             (ssnEntered)="onSSNEntered($event)"></app-search-bar>
 
         <!-- Error Message -->
@@ -19,30 +19,38 @@
         </div>
 
         <div class="container"
-            *ngIf="patient && !showAddConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory && !showExamRequest">
+            *ngIf="patient && !showAddConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory && !showExamRequest && !showReportRequest">
             <!-- Patient Info -->
             <app-patient-info [patient]="patient"></app-patient-info>
 
-            <!-- Bouton pour afficher la page d'ajout d'une nouvelle consultation -->
-            <div class="single-button-container">
-                <div class="single-button" (click)="onViewAddConsultations()">
-                    <img src="Photo\Vector_consultation.png" alt="Action Icon" />
-                    <span>{{ 'Add new consultation' }}</span>
+            <div class="cards-container">
+                <div class="single-button-container">
+                    <div class="single-button" (click)="onViewAddConsultations()">
+                        <img src="Photo\Vector_consultation.png" alt="Action Icon" />
+                        <span>{{ 'Add new consultation' }}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="single-button-container">
-                <div class="single-button" (click)="toggleMedicalHistory()">
-                    <img src="Photo\history.png" alt="Action Icon" />
-                    <span>{{ 'Medical History' }}</span>
+                <div class="single-button-container">
+                    <div class="single-button" (click)="toggleMedicalHistory()">
+                        <img src="Photo\history.png" alt="Action Icon" />
+                        <span>{{ 'Medical History' }}</span>
+                    </div>
                 </div>
-            </div>
-            <div class="single-button-container">
-                <div class="single-button" (click)="toggleExamRequest()">
-                    <img src="Photo\exam.png" alt="Action Icon" />
-                    <span>{{ 'Exams requests' }}</span>
+                <div class="single-button-container">
+                    <div class="single-button" (click)="toggleExamRequest()">
+                        <img src="Photo\exam.png" alt="Action Icon" />
+                        <span>{{ 'Exams requests' }}</span>
+                    </div>
                 </div>
+                <div class="single-button-container">
+                    <div class="single-button" (click)="toggleReportRequest()">
+                        <img src="Photo\report.png" alt="Action Icon" />
+                        <span>{{ 'Reports requests' }}</span>
+                    </div>
+                </div>
+    
             </div>
-
+            
         </div>
         <!-- Add new consultation -->
         <div class="consultations_container">
@@ -74,6 +82,12 @@
             <app-medecin-exam-request *ngIf="showExamRequest"
             (toggleExamRequest)="toggleExamRequest()">
             </app-medecin-exam-request>
+        </div>
+        <!-- Reports requests -->
+        <div class="consultations_container">
+            <app-medecin-report-request *ngIf="showReportRequest"
+            (toggleReportRequest)="toggleReportRequest()">
+            </app-medecin-report-request>
         </div>
         
 
