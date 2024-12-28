@@ -1,0 +1,35 @@
+<h1 class="page-title">Exam Request</h1>
+<div class="Card">
+    <div class="cardtext">
+        <span>Add exam request</span>
+    </div>
+    <div class="careproprities">
+        <div class="input-Date">
+            <input type="text" id="date-input" placeholder="Type of test">
+        </div>
+        <div class="input-Time">
+            <input type="text" id="time-input" placeholder="Sub-Type">
+        </div>
+        <div class="dropdown">
+            <label for="fruits">Priority</label>
+            <select id="prioriti" name="priority">
+                <option value="Standard">Standard</option>
+                <option value="High priority">High priority</option>
+                <option value="Urgent">Urgent</option>
+            </select>
+        </div>
+        <div class="input-Date">
+            <input type="text" id="description-input" placeholder="Medical justification">
+        </div>
+        <div class="input-Time">
+            <input type="date" id="observation-input" placeholder="Desired test date">
+        </div>
+        <div class="input-type">
+            <input type="text" id="type-input" placeholder="Doctor name">
+        </div>
+    </div>
+    <div class="btns">
+        <button class="cancel-btn" (click)="cancel()">Cancel</button>
+        <button class="create-btn">Submit</button>
+    </div>
+    </div>

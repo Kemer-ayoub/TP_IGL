@@ -218,7 +218,7 @@ button:hover {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding-bottom: 8px;
+    padding-bottom: 24px;
 }
 .history-container h2{
     color: #DFDFDF;

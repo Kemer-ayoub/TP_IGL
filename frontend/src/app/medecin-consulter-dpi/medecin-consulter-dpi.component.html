@@ -10,7 +10,7 @@
         <!-- Composant de recherche -->
 
         <app-search-bar
-            *ngIf="!showAddConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory"
+            *ngIf="!showAddConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory && !showExamRequest"
             (ssnEntered)="onSSNEntered($event)"></app-search-bar>
 
         <!-- Error Message -->
@@ -19,7 +19,7 @@
         </div>
 
         <div class="container"
-            *ngIf="patient && !showAddConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory">
+            *ngIf="patient && !showAddConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory && !showExamRequest">
             <!-- Patient Info -->
             <app-patient-info [patient]="patient"></app-patient-info>
 
@@ -34,6 +34,12 @@
                 <div class="single-button" (click)="toggleMedicalHistory()">
                     <img src="Photo\history.png" alt="Action Icon" />
                     <span>{{ 'Medical History' }}</span>
+                </div>
+            </div>
+            <div class="single-button-container">
+                <div class="single-button" (click)="toggleExamRequest()">
+                    <img src="Photo\exam.png" alt="Action Icon" />
+                    <span>{{ 'Exams requests' }}</span>
                 </div>
             </div>
 
@@ -61,6 +67,13 @@
                     <button class="add">Add</button>
                 </div>
             </div>
+        </div>
+
+        <!-- Exams requests -->
+        <div class="consultations_container">
+            <app-medecin-exam-request *ngIf="showExamRequest"
+            (toggleExamRequest)="toggleExamRequest()">
+            </app-medecin-exam-request>
         </div>
         
 
