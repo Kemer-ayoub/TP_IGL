@@ -290,3 +290,46 @@
     outline: none;
     color: #558A8D;
    }
+
+   @media (max-width: 600px) {
+    .Card {
+        width: 100%;
+        margin:auto;
+        padding: 24px;
+    }
+    span{
+        font-size: 24px;
+    }
+
+    .page-title {
+        font-size: 24px;
+    }
+
+    .careproprities {
+        gap: 16px;
+    }
+
+    .buttons {
+        gap: 8px;
+    }
+
+    .cancel-btn, .create-btn {
+        width: 100%;
+        margin-top: 16px;
+    }
+    input{
+        width: 20px;
+    }
+}
+
+/* Media Queries pour les écrans moyens */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .Card {
+        width: 80%;
+        margin: 32px auto;
+    }
+
+    .buttons {
+        justify-content: space-between;
+    }
+}

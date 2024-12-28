@@ -271,3 +271,43 @@ ul {
     max-height: 200px; /* Limite la hauteur des médicaments affichés */
     overflow-y: auto; /* Permet de faire défiler la liste si elle est trop longue */
   }
+
+  @media (max-width: 600px) {
+    .Card {
+        width: 80%;
+        margin:auto;
+        padding: 24px;
+    }
+
+    .page-title {
+        font-size: 24px;
+    }
+
+    .careproprities {
+        gap: 16px;
+    }
+
+    .buttons {
+        gap: 8px;
+    }
+
+    .cancel-btn, .create-btn {
+        width: 100%;
+        margin-top: 16px;
+    }
+    input{
+        width: 20px;
+    }
+}
+
+/* Media Queries pour les écrans moyens */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .Card {
+        width: 80%;
+        margin: 32px auto;
+    }
+
+    .buttons {
+        justify-content: space-between;
+    }
+}

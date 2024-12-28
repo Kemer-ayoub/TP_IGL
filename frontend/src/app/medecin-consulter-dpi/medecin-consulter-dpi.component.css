@@ -95,8 +95,8 @@ button:hover {
 }
 
 .single-button img {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
 }
 
 .single-button span {
@@ -161,9 +161,9 @@ button:hover {
 @media (max-width: 480px) {
    
     .single-button {
-        width: 80%; 
-        height: 40px; 
-        gap: 5px; 
+        width: 90%;
+        height: 120px; 
+        gap: 6px; 
     }
 
     .single-button img {
@@ -179,14 +179,14 @@ button:hover {
 
 @media (min-width: 481px) and (max-width: 768px) {
     .single-button {
-        width: 70%;
-        height: 45px; 
+        width: 90%;
+        height: 120px; 
         gap: 6px; 
     }
 
     .single-button img {
-        width: 18px; 
-        height: 18px;
+        width: 25px; 
+        height: 25px;
         margin-left: 2px;
     }
 
@@ -199,14 +199,14 @@ button:hover {
 
 @media (min-width: 769px) and (max-width: 1024px) {
     .single-button {
-        width: 50%; 
-        height: 50px;
-        gap: 10px;
+        width: 90%;
+        height: 120px; 
+        gap: 6px; 
     }
 
     .single-button img {
-        width: 20px; 
-        height: 20px;
+        width: 25px; 
+        height: 25px;
     }
 
     .single-button span {
