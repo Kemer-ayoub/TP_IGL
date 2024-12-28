@@ -36,7 +36,6 @@ def getRoutes(request):
 
     return Response(routes)
 
-
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def dpi_list(request, pk=None, format=None):
@@ -128,7 +127,6 @@ def valider_ordonnance(request, pk):
         return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
-
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def add_soin(request):
@@ -137,7 +135,6 @@ def add_soin(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -150,7 +147,6 @@ def list_soin(request, pk=None):
     serializer = SoinSerializer(soins, many=True)
     return Response(serializer.data)
 
-
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def add_bilan_biologique(request):
@@ -159,7 +155,6 @@ def add_bilan_biologique(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -172,7 +167,6 @@ def list_bilan_biologique(request, pk=None):
     serializer = BilanBiologiqueSerializer(bilans, many=True)
     return Response(serializer.data)
 
-
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def add_bilan_radiologique(request):
@@ -181,7 +175,6 @@ def add_bilan_radiologique(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
