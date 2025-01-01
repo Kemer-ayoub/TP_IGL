@@ -30,6 +30,17 @@ urlpatterns = [
         views.valider_ordonnance,
         name="ordonnance-valider",
     ),  # GET specific report request
+    path('soins/', views.list_soin, name='list_soin'),  
+    path('soins/<int:pk>/', views.list_soin, name='detail_soin'),  # GET a single soin by pk.
+    path("add-bilan-biologique/", views.add_bilan_biologique, name="add-bilan-biologique"),
+    path("add-bilan-radiologique/", views.add_bilan_radiologique, name="add-bilan-radiologique"),
+    path("add-soin/", views.add_soin, name="add-soin"),
+
+    path('bilan_biologiques/', views.list_bilan_biologique, name='list_bilan_biologique'),  
+    path('bilan_biologiques/<int:pk>/', views.list_bilan_biologique, name='detail_bilan_biologique'),  # GET a single bilan biologique by pk
+
+    path('bilan_radiologiques/', views.list_bilan_radiologique, name='list_bilan_radiologique'),  
+    path('bilan_radiologiques/<int:pk>/', views.list_bilan_radiologique, name='detail_bilan_radiologique'),  # GET a single bilan radiologique by pk
     path(
         "search-patient-nss/",
         views.get_patient_by_social_security_number,
@@ -64,3 +75,6 @@ urlpatterns = [
     ),
     path('user_info/', views.user_info, name='user_info'),
 ]
+
+
+

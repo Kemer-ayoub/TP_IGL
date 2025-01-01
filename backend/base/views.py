@@ -1,3 +1,4 @@
+
 import json
 
 from django.http import HttpResponseNotFound, JsonResponse
@@ -14,14 +15,7 @@ from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import get_user_model
 
 from .models import *
-from .serializers import (
-    AntecedantMedSerializer,
-    DPISerializer,
-    ExamRequestSerializer,
-    OrdonnanceSerializer,
-    ReportRequestSerializer,
-    UserSerializer
-)
+from .serializers import DPISerializer, AntecedantMedSerializer, ExamRequestSerializer, ReportRequestSerializer, OrdonnanceSerializer,BilanBiologiqueSerializer,BilanRadiologiqueSerializer,SoinSerializer, UserSerializer
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -196,8 +190,67 @@ def valider_ordonnance(request, pk):
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_soin(request):
+    serializer = SoinSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def list_soin(request, pk=None):
+    if pk is not None:
+        soin = get_object_or_404(Soin, pk=pk)
+        serializer = SoinSerializer(soin)
+        return Response(serializer.data)
+    soins = Soin.objects.all()
+    serializer = SoinSerializer(soins, many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_bilan_biologique(request):
+    serializer = BilanBiologiqueSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def list_bilan_biologique(request, pk=None):
+    if pk is not None:
+        bilan = get_object_or_404(BilanBiologique, pk=pk)
+        serializer = BilanBiologiqueSerializer(bilan)
+        return Response(serializer.data)
+    bilans = BilanBiologique.objects.all()
+    serializer = BilanBiologiqueSerializer(bilans, many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_bilan_radiologique(request):
+    serializer = BilanRadiologiqueSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def list_bilan_radiologique(request, pk=None):
+    if pk is not None:
+        bilan = get_object_or_404(BilanRadiologique, pk=pk)
+        serializer = BilanRadiologiqueSerializer(bilan)
+        return Response(serializer.data)
+    bilans = BilanRadiologique.objects.all()
+    serializer = BilanRadiologiqueSerializer(bilans, many=True)
+    return Response(serializer.data)
 
 @csrf_exempt
 def get_patient_by_social_security_number(request):
