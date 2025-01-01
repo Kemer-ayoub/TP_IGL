@@ -8,17 +8,17 @@
    
         <app-search-bar
         *ngIf="!showCaresList && !selectedCare && !showNursing " 
-        (ssnEntered)="onSSNEntered($event)"></app-search-bar>
+        (ssnEntered)="onnssEntered($event)"></app-search-bar>
 
 
-        <div *ngIf="errorMessage" class="error-message">
+        <!-- <div *ngIf="errorMessage" class="error-message">
             <p>{{ errorMessage }}</p>
-        </div>
+        </div> -->
 
         <div class="container"
         *ngIf="patient && !showCaresList && !selectedCare && !showNursing ">
         <!-- Patient Info -->
-        <app-patient-info-infirmier [patient]="patient"></app-patient-info-infirmier>
+        <app-patient-info [patient]="patient"></app-patient-info>
     
         <!-- Buttons -->
         <app-button-patient-infirmier 

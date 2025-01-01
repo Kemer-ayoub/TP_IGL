@@ -16,6 +16,7 @@ import { AuthService } from '../auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, switchMap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { MedHistoryService } from '../medHistory.service';
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
 @Component({
@@ -26,6 +27,7 @@ import { throwError } from 'rxjs';
 })
 export class PatientComponent implements OnInit {
   authService = inject(AuthService);
+  medHistoryService = inject(MedHistoryService);
   user?: any;
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly API_URL = 'http://127.0.0.1:8000/api/';
@@ -109,7 +111,14 @@ export class PatientComponent implements OnInit {
           this.dpi = response;
           this.ssn = this.dpi.ssn;
           console.log('DPI:', this.dpi);
-          this.patient = this.dpi;
+          this.authService.getNom(this.dpi.medecin_traitant).subscribe({
+            next: (innerData) => {
+              this.dpi.medecin_traitant = innerData;
+              this.patient = this.dpi;
+
+            },
+            error: (error) => console.error('Error fetching DPI:', error)
+          })
         },
         error: (error) => {
           this.error = error.message;
@@ -408,11 +417,46 @@ export class PatientComponent implements OnInit {
 
   // Méthode pour afficher ou masquer l'historique médical
   toggleMedicalHistory() {
-    if (this.patient?.medicalHistory) {
-      this.showMedicalHistory = !this.showMedicalHistory;
-    } else {
-      this.errorMessage = 'Medical history not available for this patient!';
-    }
+    this.medHistoryService.getAntecedants(this.dpi.id).subscribe({
+      next: (response) => {
+        console.log("the reda response:", response)
+        // Define a mapping for `type_record` values to the desired categories
+        const typeMapping: { [key: string]: string } = {
+          "allergie": "allergies",
+          "vaccination": "vaccination",
+          "medication": "medications",
+          "personal medical": "chronicIllnesses" // Map 'personal medical' to 'chronicIllnesses'
+        };
+
+        const medicalHistory = response.reduce((acc: any, item: any) => {
+          const type = typeMapping[item.type_record];
+          if (!type) return acc; // Skip if the type is not mapped
+          if (!acc[type]) {
+            acc[type] = [];
+          }
+          acc[type].push({ name: item.name_record, date: item.antec_date });
+          return acc;
+        }, {});
+
+        const formattedHistory = {
+          medicalHistory: {
+            chronicIllnesses: medicalHistory.chronicIllnesses || [],
+            surgeries: medicalHistory.vaccination || [],
+            allergies: medicalHistory.allergies || [],
+            medications: medicalHistory.medications || [],
+          },
+        };
+        console.log("formatted baby",formattedHistory);
+        this.patient = { ...this.patient, ...formattedHistory };
+        console.log("the patient",this.patient)
+        if (this.patient?.medicalHistory) {
+          this.showMedicalHistory = !this.showMedicalHistory;
+        } else {
+          this.errorMessage = 'Medical history not available for this patient!';
+        }
+      },
+      error: (error) => console.error('Error fetching DPI:', error)
+    })
   }
 
   backToPatientInfoMedicalHistory() {

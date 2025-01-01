@@ -4,8 +4,7 @@ from .models import  User, Patient, PatientProfile, Pharmacien, PharmacienProfil
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'password', 'first_name', 'last_name', 'role']
-        read_only_fields = ['id']  # The ID cannot be manually set
+        fields = '__all__'
 
 class PatientProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True) #To get the other(principal) informations
@@ -57,8 +56,8 @@ class RadiologueProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class DPISerializer(serializers.ModelSerializer):
-    patient = UserSerializer(read_only=True)
-    medecin_traitant = UserSerializer(read_only=True)
+    patient = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    medecin_traitant = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
     class Meta:
         model = DPI

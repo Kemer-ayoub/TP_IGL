@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import DPI, Consultation, User, Patient, PatientProfile,  Infirmier, InfirmierProfile, Radiologue, RadiologueProfile, Pharmacien, PharmacienProfile, Medecin, MedecinProfile, Laborantin, LaborantinProfile
+from .models import DPI, Consultation, User, Patient, PatientProfile,  Infirmier, InfirmierProfile, Radiologue, RadiologueProfile, Pharmacien, PharmacienProfile, Medecin, MedecinProfile, Laborantin, LaborantinProfile, AntecedantMed
 
 admin.site.register(DPI)
 admin.site.register(Consultation)
@@ -18,3 +18,4 @@ admin.site.register(Medecin)
 admin.site.register(MedecinProfile)
 admin.site.register(Laborantin)
 admin.site.register(LaborantinProfile)
+admin.site.register(AntecedantMed)

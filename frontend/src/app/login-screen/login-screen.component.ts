@@ -25,7 +25,7 @@ export class LoginScreenComponent {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly API_URL = 'http://127.0.0.1:8000/api/';
   private readonly REFRESH_URL = `${this.API_URL}token/refresh/`;
-    private http = inject(HttpClient);
+  private http = inject(HttpClient);
   
 
   /*constructor() {
@@ -79,7 +79,6 @@ export class LoginScreenComponent {
     const accessToken = parsedTokenData.access;
     const refreshToken = parsedTokenData.refresh;
     
-    console.log("kdmh", accessToken);
   
     if (this.isTokenExpired(accessToken) && refreshToken) {
       // Token is expired, try to refresh
@@ -116,7 +115,6 @@ export class LoginScreenComponent {
         this.navigateBasedOnRole(this.user.role);
       },
       error: (error) => {
-        console.error('Failed to get user:', error);
         this.router.navigate(['/login']);
       }
     });
@@ -143,17 +141,13 @@ export class LoginScreenComponent {
 
   isTokenExpired(token: string): boolean {
     try {
-      console.log("fff", token)
       // Check if token is undefined or empty
       if (!token) {
         console.log("Token is empty or undefined");
         return true;
       }
-      console.log('Hello')
       const decoded = jwtDecode(token);
-      console.log('Decoded token:', decoded);
       if (!decoded.exp) return true;
-      console.log('final syage')
       // exp is in seconds, multiply by 1000 to convert to milliseconds
       const expirationDate = new Date(decoded.exp * 1000);
       console.log(expirationDate)

@@ -307,7 +307,7 @@ class DPI(models.Model):
         null=True,
         related_name="dpi_assigned",
     )  # Optional: Limit to only Medecin users #Se change par le temps
-    patient = models.OneToOneField(User, on_delete=models.CASCADE)
+    patient = models.OneToOneField(User, on_delete=models.CASCADE, limit_choices_to={"role": User.Role.PATIENT}, related_name="dpi_patient")
     # le QR code
     objects = models.Manager()
 

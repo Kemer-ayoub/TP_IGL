@@ -14,8 +14,8 @@ export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' }, // Redirect root to /home
     { path: 'home', component: HomePageComponent }, // Home route
     { path: 'login', component: LoginScreenComponent},
-    {path:'user', component:NewUserComponent, canActivate: [authGuard]} , 
-    {path:'createDPI' , component:CreateDPIComponent} ,
+    {path:'user', component:NewUserComponent, canActivate: [authGuard]}, 
+    {path:'createDPI' , component:CreateDPIComponent},
     {path:'patient',component:PatientComponent},
     {path:'pharmacien',component:PharmacienComponent},
     {path:'infirmier',component:InfirmierComponent},
