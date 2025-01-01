@@ -11,12 +11,12 @@
 
         <app-search-bar
             *ngIf="!showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory"
-            (ssnEntered)="onSSNEntered($event)"></app-search-bar>
+            (ssnEntered)="onnssEntered($event)"></app-search-bar>
 
-        <!-- Error Message -->
+        <!-- Error Message 
         <div *ngIf="errorMessage" class="error-message">
             <p>{{ errorMessage }}</p>
-        </div>
+        </div> -->
 
         <div class="container"
             *ngIf="patient && !showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory">
@@ -33,10 +33,12 @@
 
         </div>
         <!-- Liste des consultations -->
-        <app-consultation-list *ngIf="showConsultationsList" [consultations]="patient?.consultations"
-            [selectedConsultation]="selectedConsultation" (consultationSelected)="selectConsultation($event)"
-            (backToPatientInfo)="backToPatientInfoConsultation()">
-        </app-consultation-list>
+        <div class="consultations_container">
+            <app-consultation-list *ngIf="showConsultationsList" [consultations]="patient?.consultations"
+                [selectedConsultation]="selectedConsultation" (consultationSelected)="selectConsultation($event)"
+                (backToPatientInfo)="backToPatientInfoConsultation()">
+            </app-consultation-list>
+        </div>
 
         <!--Consultation détails -->
 

@@ -1,4 +1,3 @@
-import { Component } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
 import { SearchBarComponent } from "../search-bar/search-bar.component";
 import { FormsModule } from '@angular/forms';
@@ -10,17 +9,35 @@ import { ButtonPatientInfirmierComponent } from "../button-patient-infirmier/but
 import { CareListInfirmierComponent } from "../care-list-infirmier/care-list-infirmier.component";
 import { CareDetailInfirmierComponent } from "../care-detail-infirmier/care-detail-infirmier.component";
 import { AddCareInfirmierComponent } from "../add-care-infirmier/add-care-infirmier.component";
+import { Component,HostListener, inject, OnInit  } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, switchMap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { DpiService } from '../dpi.service';
 
 @Component({
   selector: 'app-infirmier',
-  imports: [HeaderComponent, SearchBarComponent, PatientInfoInfirmierComponent, ButtonPatientInfirmierComponent, CareListInfirmierComponent, CareDetailInfirmierComponent, CommonModule, AddCareInfirmierComponent],
+  imports: [HeaderComponent, SearchBarComponent, PatientInfoInfirmierComponent, PatientInfoComponent, ButtonPatientInfirmierComponent, CareListInfirmierComponent, CareDetailInfirmierComponent, CommonModule, AddCareInfirmierComponent],
   templateUrl: './infirmier.component.html',
   styleUrl: './infirmier.component.css'
 })
 export class InfirmierComponent {
+  authService = inject(AuthService);
+  dpiService = inject(DpiService);
+  user?: any;
+  private readonly JWT_TOKEN = 'JWT_TOKEN';
+  private readonly API_URL = 'http://127.0.0.1:8000/api/';
+  private readonly REFRESH_URL = `${this.API_URL}token/refresh/`;
+  private DPI_URL!: string;
+  private http = inject(HttpClient);
+  error: string | null = null;
+  dpi: any = null;
+  theid: any = null;
+
   patients = [
     {
-     ssn: '11111',
+     nss: '11111',
       firstName: 'Oussama',
       lastName: 'Benhebbadj',
       address: 'Algiers',
@@ -50,7 +67,7 @@ export class InfirmierComponent {
       ,
         
     {
-      ssn: '22222',
+      nss: '22222',
       firstName: 'John',
       lastName: 'Doe',
       address: 'Oran',
@@ -79,7 +96,7 @@ export class InfirmierComponent {
         }]
     },
     {
-      ssn: '33333',
+      nss: '33333',
       firstName: 'Jane',
       lastName: 'Smith',
       address: 'Tlemcen',
@@ -109,23 +126,37 @@ export class InfirmierComponent {
     }
   ];
 
-  ssn: string = '';
+  nss: string = '';
   patient: any = null;
   errorMessage: string='';
   selectedCare: any = null;
   showCaresList: boolean = false;
   showNursing: boolean = false;
   searchPatient() {
-    this.errorMessage = '';
-    this.patient = this.patients.find(patient => patient.ssn === this.ssn);
+    this.fetchDpi(this.nss);
     if (!this.patient) {
-      this.errorMessage = 'Patient not found!';
     }
   }
-  onSSNEntered(ssn: string) {
-    this.ssn=ssn; 
+  onnssEntered(nss: string) {
+    this.nss = nss;
     this.searchPatient();
-    }
+  }
+
+  fetchDpi(nss: any) {
+    this.dpiService.getDpi(nss).subscribe({
+      next: (outerData) => {
+        this.authService.getNom(outerData.medecin_traitant).subscribe({
+          next: (innerData) => {
+            outerData.medecin_traitant = innerData;
+            this.patient = outerData
+          },
+          error: (error) => console.error('Error fetching DPI:', error)
+        })
+        // Add more lines of code here
+    },
+      error: (error) => console.error('Error fetching DPI:', error)
+    });
+  }
  
   onViewCares() {
     console.log("the view get called")

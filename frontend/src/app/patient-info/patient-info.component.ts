@@ -12,4 +12,7 @@ import { FormsModule } from '@angular/forms';
 export class PatientInfoComponent {
 
   @Input() patient: any;
+  ngOnInit(): void {
+    console.log('Patient data on init:', this.patient);
+  }
 }
