@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+}
+
+ body {
+    background-color: #DFDFDF;
+    height: 100vh;
+    margin: 0;
+}
+.error-message {
+    color: #305a66;
+    font-size: 18px;
+    font-weight: bold;
+}
+/* General styles for the patient information section */
+.container {
+    background-color: #DFDFDF;
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    width: 1100px;
+    max-width: 100%;
+    font-family: 'Geologica', sans-serif;
+    border: 1px solid #558A8D;
+}
+
+/* Main container for the content */
+.main-container {
+    scroll-behavior: smooth;
+    display: flex;
+    
+    align-items: center;
+    min-height: 100%;
+    padding-top: 2px;
+    flex-direction: column;
+    background-color:#DFDFDF;
+
+}
+button {
+    background-color: #305a66;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #9EBDBF;
+}

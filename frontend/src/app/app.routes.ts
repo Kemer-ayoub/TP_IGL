@@ -7,6 +7,7 @@ import { PatientComponent } from './patient/patient.component';
 import { PharmacienComponent } from './pharmacien/pharmacien.component';
 import { InfirmierComponent } from './infirmier/infirmier.component';
 import { RadiologueComponent } from './radiologue/radiologue.component';
+import { LaborantinComponent } from './laborantin/laborantin.component';
 import { authGuard } from './auth.guard';
 
 
@@ -20,4 +21,5 @@ export const routes: Routes = [
     {path:'pharmacien',component:PharmacienComponent},
     {path:'infirmier',component:InfirmierComponent},
     {path:'radiologue',component:RadiologueComponent},
+    {path:'laborantin',component:LaborantinComponent},
 ];
