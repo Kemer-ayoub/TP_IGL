@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-prescriptions-list',
-  imports: [PatientComponent,CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './prescriptions-list.component.html',
   styleUrl: './prescriptions-list.component.css'
 })

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <!-- Header -->
+    <app-header></app-header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Composant de recherche -->
+
+        <app-search-bar
+            *ngIf="!showAddConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory && !showExamRequest && !showReportRequest"
+            (ssnEntered)="onSSNEntered($event)"></app-search-bar>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="error-message">
+            <p>{{ errorMessage }}</p>
+        </div>
+
+        <div class="container"
+            *ngIf="patient && !showAddConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory && !showExamRequest && !showReportRequest">
+            <!-- Patient Info -->
+            <app-patient-info [patient]="patient"></app-patient-info>
+
+            <div class="cards-container">
+                <div class="single-button-container">
+                    <div class="single-button" (click)="onViewAddConsultations()">
+                        <img src="Photo\Vector_consultation.png" alt="Action Icon" />
+                        <span>{{ 'Add new consultation' }}</span>
+                    </div>
+                </div>
+                <div class="single-button-container">
+                    <div class="single-button" (click)="toggleMedicalHistory()">
+                        <img src="Photo\history.png" alt="Action Icon" />
+                        <span>{{ 'Medical History' }}</span>
+                    </div>
+                </div>
+                <div class="single-button-container">
+                    <div class="single-button" (click)="toggleExamRequest()">
+                        <img src="Photo\exam.png" alt="Action Icon" />
+                        <span>{{ 'Exams requests' }}</span>
+                    </div>
+                </div>
+                <div class="single-button-container">
+                    <div class="single-button" (click)="toggleReportRequest()">
+                        <img src="Photo\report.png" alt="Action Icon" />
+                        <span>{{ 'Reports requests' }}</span>
+                    </div>
+                </div>
+    
+            </div>
+            
+        </div>
+        <!-- Add new consultation -->
+        <div class="consultations_container">
+            <app-medecin-add-new-consultation *ngIf="showAddConsultationsList"
+                (backToPatientInfo)="backToPatientInfoConsultation()">
+            </app-medecin-add-new-consultation>
+        </div>
+        <!-- Medical History -->
+        <div class="medical-history-container">
+            <app-medical-history [patient]="patient" [showMedicalHistory]="showMedicalHistory" (backToPatientInfoMedicalHistory)="backToPatientInfoMedicalHistory()">
+            </app-medical-history>
+            <div class="history-container" *ngIf="showMedicalHistory">
+                <h2>Add a new history entry</h2>
+                <form action="">
+                    <input type="text" placeholder="Name of record">
+                    <input type="text" placeholder="Type of record">
+                    <input type="date" placeholder="Date of record">
+                    <input type="text" placeholder="Dosage (if it is a medication)">
+                </form>
+                <div class="btns">
+                    <button class="back" *ngIf="showMedicalHistory" (click)="backToPatientInfoMedicalHistory()">Cancel</button>
+                    <button class="add">Add</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exams requests -->
+        <div class="consultations_container">
+            <app-medecin-exam-request *ngIf="showExamRequest"
+            (toggleExamRequest)="toggleExamRequest()">
+            </app-medecin-exam-request>
+        </div>
+        <!-- Reports requests -->
+        <div class="consultations_container">
+            <app-medecin-report-request *ngIf="showReportRequest"
+            (toggleReportRequest)="toggleReportRequest()">
+            </app-medecin-report-request>
+        </div>
+        
+
+    </div>
+
+
+</body>
+
+</html>

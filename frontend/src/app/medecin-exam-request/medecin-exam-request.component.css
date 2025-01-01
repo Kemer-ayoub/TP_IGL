@@ -1,0 +1,334 @@
+.Card{
+    position: relative;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: auto;
+    align-items: center;
+    width: 520px;
+    background: #558A8D;
+    border-radius: 15px;
+    padding: 48px;
+    margin-top: 64px;
+    margin-left: 400px;
+      }
+  .cardtext{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 40px;
+      font-family: 'Geologica',sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 40px;
+      color: #DFDFDF;
+      }
+  .careproprities{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 100%;
+          gap: 8px;
+          margin-top: 64px;
+      }
+  input[type="text"]::placeholder {
+          width: 100%;
+          height: 20px;
+          font-family: 'Geologica';
+          font-style: normal;
+          font-weight: 300;
+          font-size: 16px;
+          line-height: 20px;
+          color: #558A8D;
+      }
+  input[type="text"]{
+          padding-left: 15px;
+          padding-right: 15px;
+      }
+  input[type="date"]{
+          padding-left: 15px;
+          padding-right: 15px;
+          width: 100%;
+          color: #558A8D;
+      }
+  textarea{
+          padding-left: 15px;
+          padding-right: 15px;
+          padding-top: 5px;
+      }
+  textarea::placeholder{
+          width: 36px;
+          height: 20px;
+          font-family: 'Geologica';
+          font-style: normal;
+          font-weight: 300;
+          font-size: 16px;
+          line-height: 20px;
+          color: #558A8D;
+          white-space: nowrap; 
+      }
+  .input-Date{
+          width: 100%;
+          height: 32px;
+          background: #DFDFDF;
+          border-radius: 8px;
+      }
+  #date-input{
+          width: 100%;
+          height: 100%;
+          background: #DFDFDF;
+          border-radius: 8px;
+          border: none;
+          outline: none;
+      }
+  .input-Time{
+          width: 100%;
+          height: 32px;
+          background: #DFDFDF;
+          border-radius: 8px;
+      }
+  #time-input{
+          width: 100%;
+          height: 100%;
+          background: #DFDFDF;
+          border-radius: 8px;
+          border: none;
+          outline: none;
+      }
+      #med-input{
+          width: 25%;
+          height: 32px;
+          background: #DFDFDF;
+          border-radius: 8px;
+          border: none;
+          margin: 8px;
+          outline: none;
+      }
+      .plus{
+          height: 32px;
+          background-color: #DFDFDF;
+          border-radius: 8px;
+          border: none;
+          margin-top: 8px;
+          cursor: pointer;
+          padding-top: 4px;
+      }
+      .input-type{
+          width: 100%;
+          height: 32px;
+          background: #DFDFDF;
+          border-radius: 8px;
+      }
+      #type-input{
+          width: 100%;
+          height: 100%;
+          background: #DFDFDF;
+          border-radius: 8px;
+          border: none;
+          outline: none;
+      }
+      .input-description{
+      width: 100%;
+      height: 87px;
+      background: #DFDFDF;
+      border-radius: 8px;
+      }
+      #description-input{
+          width: 100%;
+          height: 100%;
+          background: #DFDFDF;
+          border-radius: 8px;
+          border: none;
+          outline: none;
+      }
+      .input-observation{
+          width: 100%;
+          height: 87px;
+          background: #DFDFDF;
+          border-radius: 8px;
+      }
+      #observation-input{
+          width: 100%;
+          height: 100%;
+          background: #DFDFDF;
+          border-radius: 8px;
+          border: none;
+          outline: none;
+      }
+      .create-btn{
+      width: 131px;
+      height: 25px;
+      background: #D9D9D9;
+      border-radius: 8px;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 20px;
+      color: #558A8D;
+      border: none;
+      margin-top: 64px;
+      cursor: pointer;
+      }
+      .page-title{
+          font-family: 'Geologica',sans-serif;
+          font-weight: 500;
+          font-size: 32px;
+          line-height: 40px;
+          color: #558A8D;
+          margin-top: 64px;
+      }
+  .add-btn{
+      width: 106%;
+      height: 32px;
+      background: #558A8D;
+      color: #DFDFDF;
+      border: 1px solid #dfdfdf;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 8px;
+      cursor: pointer;
+  }
+  .add-btn:hover{
+      scale: 0.95;
+  
+  }
+  .add-btn img{
+      padding: 16px;
+  }
+  .cancel-btn
+  {
+      width: 131px;
+      height: 25px;
+      background: #558A8D;
+      border-radius: 8px;
+      font-style: normal;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 20px;
+      color: #dfdfdf;
+      border: solid 1px #dfdfdf;
+      margin-top: 64px;
+      cursor: pointer;
+      margin-right: 8px;
+  }
+  .buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+  }
+  p {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: #dfdfdf;
+      display: flex;
+      justify-content: center;
+  }
+  .medication-inputs
+  {
+      display: flex;
+      flex-direction: row;
+      grid: 8px;
+  }
+  .med-item
+  {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 20px;
+      list-style: none;
+      background-color: #D9D9D9;
+      color: #558A8D;
+      border-radius: 8px;
+      padding: 8px;
+      margin-top: 8px;
+  }
+  .med-item button
+  {
+      padding-top: 4px;
+      margin-left: 180px;
+      background-color: #D9D9D9;
+      border-radius: 8px;
+      border: 1px solid #558A8D;
+      cursor: pointer;
+  }
+  .med-item span {
+      flex-grow: 1;
+      padding-right: 10px; /* Ajoute de l'espace entre le texte et le bouton */
+    }
+  ul {
+      padding: 0;
+      list-style: none;
+      margin: 15px 0;
+      max-height: 200px; /* Limite la hauteur des médicaments affichés */
+      overflow-y: auto; /* Permet de faire défiler la liste si elle est trop longue */
+    }
+   .dropdown{
+    display: flex;
+    flex-direction: column;
+   }
+   .dropdown label
+   {
+    font-size: 16px;
+    color: #dfdfdf;
+   }
+   .dropdown select
+   {
+    width: 106%;
+    height: 32px;
+    background: #DFDFDF;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    color: #558A8D;
+   }
+   @media (max-width: 600px) {
+    .Card {
+        width: 100%;
+        margin:auto;
+        padding: 24px;
+    }
+    span{
+        font-size: 24px;
+    }
+
+    .page-title {
+        font-size: 24px;
+    }
+
+    .careproprities {
+        gap: 16px;
+    }
+
+    .buttons {
+        gap: 8px;
+    }
+
+    .cancel-btn, .create-btn {
+        width: 100%;
+        margin-top: 16px;
+    }
+    input{
+        width: 20px;
+    }
+}
+
+/* Media Queries pour les écrans moyens */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .Card {
+        width: 80%;
+        margin: 32px auto;
+    }
+
+    .buttons {
+        justify-content: space-between;
+    }
+}
