@@ -1,0 +1,109 @@
+
+.prescription-list {
+    background-color: #DFDFDF; /* Couleur de fond */
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 700px;
+    font-family: 'Geologica', sans-serif;
+    margin-top: -190px; /* Réduire ou supprimer la marge supérieure */
+    margin-left: -570px;
+  height: 100%;
+
+
+}
+
+/* Prescription List Styling */
+.prescription-list h3 {
+    font-size: 24px;
+    color: #558A8D;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Prescription List */
+.prescription-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+   
+}
+
+/* Prescription List Items */
+.prescription-list li {
+    display: flex; /* Aligne l'image et le texte horizontalement */
+    align-items: center; /* Centre verticalement l'image et le texte */
+    gap: 10px; /* Espace entre l'image et le texte */
+    padding: 10px;
+    background-color: #DFDFDF;
+    font-size: 12px;
+    color: #0B2025;
+    cursor: pointer;
+    transition: background-color 0.3s, border-left 0.3s;
+    width: 100%; /* S'assure que l'élément occupe toute la largeur du parent */
+    position: relative;
+}
+
+.h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #DFDFDF; /* Set color for heading */
+    white-space: nowrap;
+}
+
+
+/* Hover Effect pour Prescription List Items */
+.prescription-list li:hover {
+    background-color: #9EBDBF;
+    border-left: 5px solid #558A8D;
+   
+}
+.prescription-icon{
+    width: 40px; /* Taille de l'image */
+    height: 20px;
+    object-fit: contain; /* Ajustement de l'image */
+    margin-left: -10px;
+}
+
+
+/* Texte des prescriptions */
+.prescription-list li span {
+    font-family: 'Geologica', sans-serif;
+    font-weight: bold; /* Texte en gras */
+    color: #305a66; /* Couleur du texte */
+    font-size: 15px; /* Ajustez la taille du texte */
+    text-transform: capitalize; /* Capitalise chaque mot */
+    white-space: nowrap;
+    
+
+}
+
+/* Selected Prescription Item Styling */
+.prescription-list li.selected {
+    background-color: #9EBDBF;
+    border-left: 17px solid #558A8D;
+}
+
+/* Style pour le bouton Back */
+
+
+.back-btn {
+    background-color: #558A8D;
+    color: #DFDFDF;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    width: 200px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+  
+.back-btn:hover {
+    background-color: #305a66;
+  }
+
+
+

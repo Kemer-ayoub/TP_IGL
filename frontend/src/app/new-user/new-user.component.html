@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <div class="main-container"> 
+    <div class="container1">
+      <header class="header1">
+          <div class="logo-container1">
+            <img src="Photo/doctor-consultation 2.png" class="logo1" />
+            <span class="company-name">Sehhatna</span>
+          </div>
+          <div class="link">
+            <span class="dpi">DPI</span>
+            <a href="" class="usres">Useres</a>
+          </div>
+          <div class="logout-container">
+            <button class="logout-btn" routerLink="/home">Logout</button>
+          </div>
+      </header>
+
+      <div class="user-form">
+        <div class="icon">
+          <img src="Photo/Group (1).png" alt="Add User Icon" />
+        </div>
+        <h2>Add New User</h2>
+        <form class="F1" (ngSubmit)="onSubmit()">
+          <!-- Username Field -->
+          <input
+            type="text"
+            id="username"
+            [(ngModel)]="user.username"
+            name="username"
+            placeholder="Username"
+          />
+          <p *ngIf="isSubmitted && !user.username" class="error-text">This field is required.</p>
+    
+          <!-- Password Field -->
+          <input
+            type="password"
+            id="password"
+            [(ngModel)]="user.password"
+            name="password"
+            placeholder="Password"
+          />
+          <p *ngIf="isSubmitted && !user.password" class="error-text">This field is required.</p>
+    
+          <!-- Role Field -->
+          <input
+            type="text"
+            id="role"
+            [(ngModel)]="user.role"
+            name="role"
+            placeholder="Role"
+          />
+          <p *ngIf="isSubmitted && !user.role" class="error-text">This field is required.</p>
+    
+          <button type="submit">Add</button>
+        </form>
+      </div>
+
+  </div>
+  </div>
+    
+</html>

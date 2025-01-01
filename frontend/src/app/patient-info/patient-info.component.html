@@ -1,0 +1,42 @@
+<div class="patient-info-container">
+    <div class="patient-info-row name-group">
+      <div class="info-group">
+        <label>First Name:</label>
+        <span>{{ patient.nom }}</span>
+      </div>
+      <div class="info-group">
+        <label>Family Name:</label>
+        <span>{{ patient.prenom }}</span>
+      </div>
+    </div>
+    <div class="patient-info-row">
+      <div class="info-group">
+        <label>Address:</label>
+        <span>{{ patient.adresse }}</span>
+      </div>
+      <div class="info-group">
+        <label>Phone Number:</label>
+        <span>{{ patient.telephone }}</span>
+      </div>
+    </div>
+    <div class="patient-info-row">
+      <div class="info-group">
+        <label>Date of Birth:</label>
+        <span>{{ patient.date_naissance }}</span>
+      </div>
+      <div class="info-group">
+        <label>Emergency Contact:</label>
+        <span>{{ patient.num_pers_contact }}</span>
+      </div>
+    </div>
+    <div class="patient-info-row">
+      <div class="info-group">
+        <label>Social Security Number:</label>
+        <span>{{ patient.nss }}</span>
+      </div>
+      <div class="info-group">
+        <label>Care Physician:</label>
+        <span>{{ patient.medecin_traitant.username }}</span>
+      </div>
+    </div>
+</div>
