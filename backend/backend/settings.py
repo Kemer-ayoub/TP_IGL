@@ -55,7 +55,7 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=10),
     "ROTATE_REFRESH_TOKENS": True,  # When we use the refresh token to get a new access token we would get also a new refresh token cuz if the user is active that means that always get a new access token but when the 10 days end the refresh token is no longer valid even that he was always aceeding to the application
     "BLACKLIST_AFTER_ROTATION": True,  # The default (that we at first get) == False
@@ -131,13 +131,13 @@ WSGI_APPLICATION = "backend.wsgi.application"
 }"""
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "sample",
-        "USER": "root",
-        "PASSWORD": "root",
-        "HOST": "localhost",  # or the hostname where your MySQL server is running
-        "PORT": "3306",  # or the port on which your MySQL server is listening
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sample',
+        'USER': 'root',
+        'PASSWORD': 'kemerAyoub2005$',
+        'HOST': 'localhost',  # or the hostname where your MySQL server is running
+        'PORT': '3306',      # or the port on which your MySQL server is listening
     }
 }
 

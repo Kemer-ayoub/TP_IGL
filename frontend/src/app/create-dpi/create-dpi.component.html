@@ -9,7 +9,7 @@
                 <span class="company-name">Sehhatna</span>
             </div>
             <div class="link">
-                <a href="" class="dpi">DPI</a>
+                <a class="dpi">DPI</a>
                 <span class="usres">Useres</span>
 
             </div>
@@ -25,56 +25,56 @@
             <h2>Create New DPI</h2>
             <form class="F1" (ngSubmit)="onSubmit()">
                 <!-- Username Field -->
-                <input type="text" id="firstName" [(ngModel)]="user.firstName" name="firstName"
+                <input type="text" id="nom" [(ngModel)]="user.nom" name="nom"
                     placeholder="First Name" />
-                <p *ngIf="isSubmitted && !user.firstName" class="error-text">This field is required.</p>
+                <p *ngIf="isSubmitted && !user.nom" class="error-text">This field is required.</p>
 
                 <!-- Family Name Field -->
-                <input type="text" id="familyName" [(ngModel)]="user.familyName" name="familyName"
+                <input type="text" id="prenom" [(ngModel)]="user.prenom" name="prenom"
                     placeholder="Family Name" />
-                <p *ngIf="isSubmitted && !user.familyName" class="error-text">This field is required.</p>
+                <p *ngIf="isSubmitted && !user.prenom" class="error-text">This field is required.</p>
 
 
                 <!-- Date of Birth Field -->
-                <input type="date" id="dob" [(ngModel)]="user.dob" name="dob" placeholder="Date of Birth" />
-                <p *ngIf="isSubmitted && !user.dob" class="error-text">This field is required.</p>
+                <input type="date" id="date_naissance" [(ngModel)]="user.date_naissance" name="date_naissance" placeholder="Date of Birth" />
+                <p *ngIf="isSubmitted && !user.date_naissance" class="error-text">This field is required.</p>
 
                 <!-- Social Security Number Field -->
-                <input type="text" id="ssn" [(ngModel)]="user.ssn" name="ssn" placeholder="Social Security Number" />
-                <p *ngIf="isSubmitted && !user.ssn" class="error-text">This field is required.</p>
-                <p *ngIf="isSubmitted && user.ssn && !ssnRegex.test(user.ssn)" class="error-text">
+                <input type="text" id="nss" [(ngModel)]="user.nss" name="nss" placeholder="Social Security Number" />
+                <p *ngIf="isSubmitted && !user.nss" class="error-text">This field is required.</p>
+                <p *ngIf="isSubmitted && user.nss && !nssRegex.test(user.nss)" class="error-text">
                     Please enter a valid 15-digit Social Security Number.
                 </p>
                 <!-- Phone Number Field -->
-                <input type="tel" id="phoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber"
+                <input type="tel" id="telephone" [(ngModel)]="user.telephone" name="telephone"
                     placeholder="Phone Number" pattern="^\+?[1-9]\d{1,14}$" />
-                <p *ngIf="isSubmitted && !user.phoneNumber" class="error-text">This field is required.</p>
-                <p *ngIf="isSubmitted && user.phoneNumber && !phoneRegex.test(user.phoneNumber)" class="error-text">
+                <p *ngIf="isSubmitted && !user.telephone" class="error-text">This field is required.</p>
+                <p *ngIf="isSubmitted && user.telephone && !phoneRegex.test(user.telephone)" class="error-text">
                     Please enter a valid Algerian phone number.
                 </p>
 
                 <!-- Address Field -->
-                <input type="text" id="address" [(ngModel)]="user.address" name="address" placeholder="Address" />
-                <p *ngIf="isSubmitted && !user.address" class="error-text">This field is required.</p>
+                <input type="text" id="adresse" [(ngModel)]="user.adresse" name="adresse" placeholder="adresse" />
+                <p *ngIf="isSubmitted && !user.adresse" class="error-text">This field is required.</p>
 
                 <!-- Emergency Contact Phone Number Field -->
-                <input type="tel" id="emergencyContact" [(ngModel)]="user.emergencyContact" name="emergencyContact"
+                <input type="tel" id="num_pers_contact" [(ngModel)]="user.num_pers_contact" name="num_pers_contact"
                     placeholder="Emergency Contact (Phone Number)" />
-                <p *ngIf="isSubmitted && !user.emergencyContact" class="error-text">This field is required.</p>
-                <p *ngIf="isSubmitted && user.emergencyContact && !phoneRegex.test(user.emergencyContact)"
+                <p *ngIf="isSubmitted && !user.num_pers_contact" class="error-text">This field is required.</p>
+                <p *ngIf="isSubmitted && user.num_pers_contact && !phoneRegex.test(user.num_pers_contact)"
                     class="error-text">
                     Please enter a valid Algerian phone number.
                 </p>
 
 
                 <!-- Care Physician Field -->
-                <input type="text" id="carePhysician" [(ngModel)]="user.carePhysician" name="carePhysician"
+                <input type="text" id="medecin_traitant" [(ngModel)]="user.medecin_traitant" name="medecin_traitant"
                     placeholder="Care Physician" />
-                <p *ngIf="isSubmitted && !user.carePhysician" class="error-text">This field is required.</p>
+                <p *ngIf="isSubmitted && !user.medecin_traitant" class="error-text">This field is required.</p>
 
 
 
-                <button type="submit">Create</button>
+                <button type="submit" >Create</button>
             </form>
         </div>
 

@@ -9,7 +9,11 @@ urlpatterns = [
     path("", views.getRoutes),
     path("token/", MyTokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("dpi/", views.dpi_list, name="dpi-create"),  # GET specific DPI
+    path("dpi-nss/", views.get_patient_nss, name="dpi-get"),  # GET specific DPI
     path("dpi/<int:pk>/", views.dpi_list, name="dpi-detail"),  # GET specific DPI
+    path("user_id/", views.get_user_id, name="user-id"),  # GET specific DPI
+    path("user-nom/", views.get_user_nom, name="user-nom"),  # GET specific DPI
     path("antecedants/", views.antecedant_list, name="antecedant-list"),
     path("examrequests/", views.examrequests_list, name="exam-requests"),
     path(
@@ -22,7 +26,7 @@ urlpatterns = [
         name="report-requests-detail",
     ),  # GET specific report request
     path(
-        "ordonnances/<int:pk>/valider",
+        "ordonnances/<int:pk>/valider/",
         views.valider_ordonnance,
         name="ordonnance-valider",
     ),  # GET specific report request
@@ -58,4 +62,5 @@ urlpatterns = [
         views.add_consultation_resume,
         name="add_consultation_resume",
     ),
+    path('user_info/', views.user_info, name='user_info'),
 ]
