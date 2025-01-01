@@ -1,4 +1,3 @@
-import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
@@ -13,6 +12,12 @@ import { ButtonsPatientComponent } from '../buttons-patient/buttons-patient.comp
 import { NursingComponent } from '../nursing/nursing.component';
 import { MedicalHistoryComponent } from '../medical-history/medical-history.component';
 import { PrescriptionDetailPharmacienComponent } from '../prescription-detail-pharmacien/prescription-detail-pharmacien.component';
+import { Component,HostListener, inject, OnInit  } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, switchMap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { DpiService } from '../dpi.service';
 
 @Component({
   selector: 'app-pharmacien',
@@ -22,9 +27,21 @@ import { PrescriptionDetailPharmacienComponent } from '../prescription-detail-ph
 })
 
 export class PharmacienComponent {
+  authService = inject(AuthService);
+  dpiService = inject(DpiService);
+  user?: any;
+  private readonly JWT_TOKEN = 'JWT_TOKEN';
+  private readonly API_URL = 'http://127.0.0.1:8000/api/';
+  private readonly REFRESH_URL = `${this.API_URL}token/refresh/`;
+  private DPI_URL!: string;
+  private http = inject(HttpClient);
+  error: string | null = null;
+  dpi: any = null;
+  theid: any = null;
+
  patients = [
     {
-      ssn: '111',
+      nss: '111',
       firstName: 'Oussama',
       lastName: 'Benhebbadj',
       address: 'Algiers',
@@ -72,7 +89,7 @@ export class PharmacienComponent {
 
     },
     {
-      ssn: '22222',
+      nss: '22222',
       firstName: 'John',
       lastName: 'Doe',
       address: 'Oran',
@@ -94,7 +111,7 @@ export class PharmacienComponent {
       ]
     },
     {
-      ssn: '33333',
+      nss: '33333',
       firstName: 'Jane',
       lastName: 'Smith',
       address: 'Tlemcen',
@@ -116,9 +133,8 @@ export class PharmacienComponent {
     }
   ];
 
-  ssn: string = '';
+  nss: string = '';
   patient: any = null;
-  errorMessage: string = '';
   showPrescriptionsList: boolean = false;
   selectedPrescription: any = null;
   selectedConsultation: any = null;
@@ -128,16 +144,33 @@ export class PharmacienComponent {
   showMedicalHistory: boolean = false;
 
   searchPatient() {
-    this.errorMessage = '';
-    this.patient = this.patients.find(patient => patient.ssn === this.ssn);
+    this.fetchDpi(this.nss);
     if (!this.patient) {
-      this.errorMessage = 'Patient not found!';
     }
   }
-  onSSNEntered(ssn: string) {
-    this.ssn = ssn;
+  onnssEntered(nss: string) {
+    this.nss = nss;
     this.searchPatient();
   }
+
+  fetchDpi(nss: any) {
+    this.dpiService.getDpi(nss).subscribe({
+      next: (outerData) => {
+        this.authService.getNom(outerData.medecin_traitant).subscribe({
+          next: (innerData) => {
+            console.log("Since i was young",innerData)
+            outerData.medecin_traitant = innerData;
+            console.log('DPI:', outerData);
+            this.patient = outerData
+          },
+          error: (error) => console.error('Error fetching DPI:', error)
+        })
+        // Add more lines of code here
+    },
+      error: (error) => console.error('Error fetching DPI:', error)
+    });
+  }
+
   selectPrescription(prescription: any) {
     if (prescription === null) {
       this.selectedPrescription = null;

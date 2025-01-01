@@ -1,41 +1,21 @@
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
 import { SearchBarComponent } from "../search-bar/search-bar.component";
-import { ButtonRadiologueComponent } from "../button-radiologue/button-radiologue.component";
 import { PatientInfoInfirmierComponent } from "../patient-info-infirmier/patient-info-infirmier.component";
-import { ReportListRadiologueComponent } from "../report-list-radiologue/report-list-radiologue.component";
-import { ReportDetailRadiologueComponent } from "../report-detail-radiologue/report-detail-radiologue.component";
-import { AddReportRadiologueComponent } from "../add-report-radiologue/add-report-radiologue.component";
-import { Component,HostListener, inject, OnInit  } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, switchMap } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { DpiService } from '../dpi.service';
-import { PatientInfoComponent } from '../patient-info/patient-info.component';
-
+import { ButtonsLaboComponent } from "../buttons-labo/buttons-labo.component";
+import { ExamsListLaboComponent } from "../exams-list-labo/exams-list-labo.component";
+import { RequestDetailLaboComponent } from "../request-detail-labo/request-detail-labo.component";
+import { CommonModule } from '@angular/common';
 @Component({
-  selector: 'app-radiologue',
-  imports: [CommonModule, HeaderComponent, SearchBarComponent, ButtonRadiologueComponent, PatientInfoInfirmierComponent, PatientInfoComponent, ReportListRadiologueComponent, ReportDetailRadiologueComponent, AddReportRadiologueComponent],
-  templateUrl: './radiologue.component.html',
-  styleUrl: './radiologue.component.css'
+  selector: 'app-laborantin',
+  imports: [HeaderComponent, SearchBarComponent, PatientInfoInfirmierComponent, ButtonsLaboComponent, ExamsListLaboComponent, RequestDetailLaboComponent,CommonModule],
+  templateUrl: './laborantin.component.html',
+  styleUrl: './laborantin.component.css'
 })
-export class RadiologueComponent {
-  authService = inject(AuthService);
-  dpiService = inject(DpiService);
-  user?: any;
-  private readonly JWT_TOKEN = 'JWT_TOKEN';
-  private readonly API_URL = 'http://127.0.0.1:8000/api/';
-  private readonly REFRESH_URL = `${this.API_URL}token/refresh/`;
-  private DPI_URL!: string;
-  private http = inject(HttpClient);
-  error: string | null = null;
-  dpi: any = null;
-  theid: any = null;
-
+export class LaborantinComponent {
   patients = [
     {
-     nss: '11111',
+     ssn: '11111',
       firstName: 'Oussama',
       lastName: 'Benhebbadj',
       address: 'Algiers',
@@ -68,7 +48,7 @@ export class RadiologueComponent {
       ,
         
     {
-      nss: '22222',
+      ssn: '22222',
       firstName: 'John',
       lastName: 'Doe',
       address: 'Oran',
@@ -100,7 +80,7 @@ export class RadiologueComponent {
         }]
     },
     {
-      nss: '33333',
+      ssn: '33333',
       firstName: 'Jane',
       lastName: 'Smith',
       address: 'Tlemcen',
@@ -133,37 +113,23 @@ export class RadiologueComponent {
     }
   ];
 
-  nss: string = '';
+  ssn: string = '';
   patient: any = null;
   errorMessage: string='';
   selectedCare: any = null;
   showCaresList: boolean = false;
   showNursing: boolean = false;
-   searchPatient() {
-    this.fetchDpi(this.nss);
+  searchPatient() {
+    this.errorMessage = '';
+    this.patient = this.patients.find(patient => patient.ssn === this.ssn);
     if (!this.patient) {
+      this.errorMessage = 'Patient not found!';
     }
   }
-  onnssEntered(nss: string) {
-    this.nss = nss;
+  onSSNEntered(ssn: string) {
+    this.ssn=ssn; 
     this.searchPatient();
-  }
-
-  fetchDpi(nss: any) {
-    this.dpiService.getDpi(nss).subscribe({
-      next: (outerData) => {
-        this.authService.getNom(outerData.medecin_traitant).subscribe({
-          next: (innerData) => {
-            outerData.medecin_traitant = innerData;
-            this.patient = outerData
-          },
-          error: (error) => console.error('Error fetching DPI:', error)
-        })
-        // Add more lines of code here
-    },
-      error: (error) => console.error('Error fetching DPI:', error)
-    });
-  }
+    }
  
   onViewCares() {
     console.log("the view get called")

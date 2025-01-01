@@ -8,34 +8,31 @@
    
         <app-search-bar
         *ngIf="!showCaresList && !selectedCare && !showNursing " 
-        (ssnEntered)="onnssEntered($event)"></app-search-bar>
+        (ssnEntered)="onSSNEntered($event)"></app-search-bar>
 
 
-        <!-- <div *ngIf="errorMessage" class="error-message">
+        <div *ngIf="errorMessage" class="error-message">
             <p>{{ errorMessage }}</p>
-        </div> -->
+        </div>
 
         <div class="container"
         *ngIf="patient && !showCaresList && !selectedCare && !showNursing ">
         <!-- Patient Info -->
-        <app-patient-info [patient]="patient"></app-patient-info>
+        <app-patient-info-infirmier [patient]="patient"></app-patient-info-infirmier>
     
         <!-- Buttons -->
-        <app-button-patient-infirmier 
+        <app-buttons-labo
             (viewCares)="onViewCares()" (Nursing)="AddCare()"> 
-        </app-button-patient-infirmier>
-    
-    
+        </app-buttons-labo >
     </div>
-    <app-care-list-infirmier *ngIf="showCaresList" [cares]="patient?.previousCares"
+    <app-exams-list-labo *ngIf="showCaresList" [cares]="patient?.previousCares"
     [selectedCare]="selectedCare" (consultationSelected)="selectConsultation($event)"
     (backToPatientInfo)="backToPatientInfoConsultation()">
-    </app-care-list-infirmier>
+    </app-exams-list-labo>
 
-    <app-care-detail-infirmier [selectedCare]="selectedCare"
+    <app-request-detail-labo [selectedCare]="selectedCare"
      (backToConsultationList)="backToConsultationList()">
-    </app-care-detail-infirmier>
-    <app-add-care-infirmier   *ngIf="!showCaresList && !selectedCare && showNursing " 
-    ></app-add-care-infirmier>
+    </app-request-detail-labo>
+
     </div>
 </body>

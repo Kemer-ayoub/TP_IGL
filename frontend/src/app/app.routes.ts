@@ -13,20 +13,23 @@ import { MedecinConsulterDpiComponent } from './medecin-consulter-dpi/medecin-co
 import { MedecinAddNewConsultationComponent } from './medecin-add-new-consultation/medecin-add-new-consultation.component';
 import { MedecinAddNewPrescriptionComponent } from './medecin-add-new-prescription/medecin-add-new-prescription.component';
 import {MedicalHistoryComponent} from './medical-history/medical-history.component';
+import { LaborantinComponent } from './laborantin/laborantin.component';
+import { authGuard } from './auth.guard';
 
 
 export const routes: Routes = [
     { path: '', redirectTo: '/medecin', pathMatch: 'full' }, // Redirect root to /home
     { path: 'home', component: HomePageComponent }, // Home route
     { path: 'login', component: LoginScreenComponent},
-    {path:'user', component:NewUserComponent} , 
-    {path:'createDPI' , component:CreateDPIComponent} ,
+    {path:'user', component:NewUserComponent, canActivate: [authGuard]}, 
+    {path:'createDPI' , component:CreateDPIComponent},
     {path:'patient',component:PatientComponent},
     {path:'pharmacien',component:PharmacienComponent},
     {path:'infirmier',component:InfirmierComponent},
     {path: 'medecin', component: MedecinConsulterDpiComponent },
     {path:'radiologue',component:RadiologueComponent},
-    { path: 'add-consultation',component: MedecinAddNewConsultationComponent },
-  { path: 'add-prescription', component: MedecinAddNewPrescriptionComponent },
-  {path: 'medical-history', component: MedicalHistoryComponent}
+    {path: 'add-consultation',component: MedecinAddNewConsultationComponent },
+    {path: 'add-prescription', component: MedecinAddNewPrescriptionComponent },
+    {path: 'medical-history', component: MedicalHistoryComponent},
+    {path:'laborantin',component:LaborantinComponent},
 ];

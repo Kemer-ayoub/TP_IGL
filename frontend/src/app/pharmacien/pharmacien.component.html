@@ -11,12 +11,12 @@
 
         <app-search-bar
             *ngIf="!showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory"
-            (ssnEntered)="onSSNEntered($event)"></app-search-bar>
+            (ssnEntered)="onnssEntered($event)"></app-search-bar>
 
-        <!-- Error Message -->
+        <!-- Error Message 
         <div *ngIf="errorMessage" class="error-message">
             <p>{{ errorMessage }}</p>
-        </div>
+        </div> -->
 
         <div class="container"
             *ngIf="patient && !showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory">

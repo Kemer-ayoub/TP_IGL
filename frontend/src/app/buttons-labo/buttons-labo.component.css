@@ -1,0 +1,31 @@
+.btn{
+    width: 100%;     
+    background-color:#558A8D ;
+    border: none;
+    border-radius: 15px;
+    height: 47px;
+    color: white;
+      align-self: center;
+      justify-content: start;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: background-color 0.3s, transform 0.3s;
+      cursor: pointer;
+      padding-left: 22px;
+      margin-top: 10px;
+  }
+  .btn:hover{
+    background-color: #305a66;
+    transform: scale(1.02);
+  }
+  .txt-btn{
+    width: 75px;
+    height: 25px;
+    font-family: 'Geologica';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    color: #DFDFDF;
+}

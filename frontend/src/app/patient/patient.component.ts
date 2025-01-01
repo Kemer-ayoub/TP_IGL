@@ -1,4 +1,4 @@
-import { Component,HostListener, OnInit  } from '@angular/core';
+import { Component,HostListener, inject, OnInit  } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
@@ -12,7 +12,11 @@ import { RouterLink } from '@angular/router';
 import { ButtonsPatientComponent } from '../buttons-patient/buttons-patient.component';
 import { NursingComponent } from '../nursing/nursing.component';
 import { MedicalHistoryComponent } from '../medical-history/medical-history.component';
-
+import { AuthService } from '../auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, switchMap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { MedHistoryService } from '../medHistory.service';
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
 @Component({
@@ -22,6 +26,115 @@ import { MedicalHistoryComponent } from '../medical-history/medical-history.comp
   styleUrls: ['./patient.component.css']
 })
 export class PatientComponent implements OnInit {
+  authService = inject(AuthService);
+  medHistoryService = inject(MedHistoryService);
+  user?: any;
+  private readonly JWT_TOKEN = 'JWT_TOKEN';
+  private readonly API_URL = 'http://127.0.0.1:8000/api/';
+  private readonly REFRESH_URL = `${this.API_URL}token/refresh/`;
+  private DPI_URL!: string;
+  private http = inject(HttpClient);
+  error: string | null = null;
+  dpi: any = null;
+  ssn: string = '';
+  patient: any = null;
+  errorMessage: string = '';
+  showPrescriptionsList: boolean = false;
+  selectedPrescription: any = null;
+  selectedConsultation: any = null;
+  showConsultationsList: boolean = false;
+  showNursingCareList: boolean = false;
+  selectedNursingCare: any = null;
+  showMedicalHistory: boolean = false;
+  selectedNursingCareIndex: number | null = null;
+
+
+  constructor() {
+    this.authService.getCurrentAuthUser().subscribe((r) => {
+      console.log(r);
+      this.user = r;
+      this.DPI_URL = `${this.API_URL}dpi/${this.user.id}`;
+      this.fetchDpi();
+    });
+  }
+  private fetchDpi() {
+    try {
+      const tokenData = JSON.parse(localStorage.getItem(this.JWT_TOKEN) || '{}');
+      const accessToken = tokenData.access;
+      console.log('Access token:', accessToken);
+  
+      if (!accessToken) {
+        throw new Error('Access token not found.');
+      }
+  
+      const makeRequest = (token: string) => {
+        const headers = new HttpHeaders({
+          Authorization: `Bearer ${token}`
+        });
+  
+        return this.http.get(this.DPI_URL, { headers });
+      };
+  
+      makeRequest(accessToken).pipe(
+        catchError((error) => {
+          if (error.status === 401) {
+            // Get refresh token
+            const refreshToken = tokenData.refresh;
+            
+            if (!refreshToken) {
+              return throwError(() => new Error('Refresh token not found'));
+            }
+  
+            // Call refresh token endpoint
+            return this.http.post<{ access: string, refresh: string }>(
+              this.REFRESH_URL, 
+              { refresh: refreshToken }
+            ).pipe(
+              switchMap(newTokens => {
+                // Save new tokens
+                localStorage.setItem(this.JWT_TOKEN, JSON.stringify(newTokens));
+                
+                // Retry the original request with new token
+                return makeRequest(newTokens.access);
+              }),
+              catchError(refreshError => {
+                // If refresh fails, clear tokens and throw error
+                localStorage.removeItem(this.JWT_TOKEN);
+                return throwError(() => new Error('Token refresh failed'));
+              })
+            );
+          }
+          return throwError(() => new Error('Failed to fetch DPI information'));
+        })
+      ).subscribe({
+        next: (response) => {
+          this.dpi = response;
+          this.ssn = this.dpi.ssn;
+          console.log('DPI:', this.dpi);
+          this.authService.getNom(this.dpi.medecin_traitant).subscribe({
+            next: (innerData) => {
+              this.dpi.medecin_traitant = innerData;
+              this.patient = this.dpi;
+
+            },
+            error: (error) => console.error('Error fetching DPI:', error)
+          })
+        },
+        error: (error) => {
+          this.error = error.message;
+          if (error.message === 'Token refresh failed') {
+            // Handle refresh failure (e.g., redirect to login)
+            // this.router.navigate(['/login']);
+          }
+        }
+      });
+  
+    } catch (error) {
+      this.error = error instanceof Error ? error.message : 'An unknown error occurred';
+    }
+  }
+
+  //----------------------------------------------------
   ngOnInit(): void {
     // Initialisation lors du chargement du composant
     this.updateHeight();
@@ -172,19 +285,21 @@ export class PatientComponent implements OnInit {
     }
   ];
 
-
-
-  ssn: string = '';
-  patient: any = null;
-  errorMessage: string = '';
-  showPrescriptionsList: boolean = false;
-  selectedPrescription: any = null;
-  selectedConsultation: any = null;
-  showConsultationsList: boolean = false;
-  showNursingCareList: boolean = false;
-  selectedNursingCare: any = null;
-  showMedicalHistory: boolean = false;
-  selectedNursingCareIndex: number | null = null;
+   getDPI() {
+      const tokenData = JSON.parse(localStorage.getItem(this.JWT_TOKEN) || '{}'); // Parse stored token JSON
+      const accessToken = tokenData.access; // Extract the access token
+      
+    
+      if (!accessToken) {
+        throw new Error('Access token not found.');
+      }
+    
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${accessToken}`,
+      });
+    
+      return this.http.get(this.DPI_URL, { headers });
+    }
 
   searchPatient() {
     this.errorMessage = '';
@@ -321,17 +436,50 @@ export class PatientComponent implements OnInit {
 
   // Méthode pour afficher ou masquer l'historique médical
   toggleMedicalHistory() {
-    if (this.patient?.medicalHistory) {
-      this.showMedicalHistory = !this.showMedicalHistory;
-    } else {
-      this.errorMessage = 'Medical history not available for this patient!';
-    }
+    this.medHistoryService.getAntecedants(this.dpi.id).subscribe({
+      next: (response) => {
+        console.log("the reda response:", response)
+        // Define a mapping for `type_record` values to the desired categories
+        const typeMapping: { [key: string]: string } = {
+          "allergie": "allergies",
+          "vaccination": "vaccination",
+          "medication": "medications",
+          "personal medical": "chronicIllnesses" // Map 'personal medical' to 'chronicIllnesses'
+        };
+
+        const medicalHistory = response.reduce((acc: any, item: any) => {
+          const type = typeMapping[item.type_record];
+          if (!type) return acc; // Skip if the type is not mapped
+          if (!acc[type]) {
+            acc[type] = [];
+          }
+          acc[type].push({ name: item.name_record, date: item.antec_date });
+          return acc;
+        }, {});
+
+        const formattedHistory = {
+          medicalHistory: {
+            chronicIllnesses: medicalHistory.chronicIllnesses || [],
+            surgeries: medicalHistory.vaccination || [],
+            allergies: medicalHistory.allergies || [],
+            medications: medicalHistory.medications || [],
+          },
+        };
+        console.log("formatted baby",formattedHistory);
+        this.patient = { ...this.patient, ...formattedHistory };
+        console.log("the patient",this.patient)
+        if (this.patient?.medicalHistory) {
+          this.showMedicalHistory = !this.showMedicalHistory;
+        } else {
+          this.errorMessage = 'Medical history not available for this patient!';
+        }
+      },
+      error: (error) => console.error('Error fetching DPI:', error)
+    })
   }
 
   backToPatientInfoMedicalHistory() {
     this.showMedicalHistory = false;
   }
-
-
-
+ 
 }

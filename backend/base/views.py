@@ -9,6 +9,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.exceptions import AuthenticationFailed
+from django.contrib.auth import get_user_model
 
 from .models import *
 from .serializers import (
@@ -17,6 +20,7 @@ from .serializers import (
     ExamRequestSerializer,
     OrdonnanceSerializer,
     ReportRequestSerializer,
+    UserSerializer
 )
 
 
@@ -52,24 +56,77 @@ def dpi_list(request, pk=None, format=None):
     if request.method == "GET":
         if pk is not None:
             # Retrieve a specific DPI by ID
-            dpi = get_object_or_404(DPI, pk=pk)
+            dpi = get_object_or_404(DPI, patient=pk)
             serializer = DPISerializer(dpi)
             return Response(serializer.data)
 
     if request.method == "POST":
-        serializer = DPISerializer(data=request.data)
+        print("Adele Canon Romania",request.data)
+        mapped_data = {
+        "nom": request.data.get("nom", ""),  # Maps 'firstName' to 'prenom'
+        "prenom": request.data.get("prenom", ""),   # Maps 'familyName' to 'nom'
+        "mot_passe": request.data.get("mot_passe"),
+        "date_naissance": request.data.get("date_naissance", "2000-01-01"),  # Maps 'dob' to 'date_naissance'
+        "adresse": request.data.get("adresse", ""),
+        "telephone": request.data.get("telephone", ""),
+        "nss": request.data.get("nss", ""),          # Maps 'ssn' to 'nss'
+        "mutuelle": request.data.get("mutuelle", "adhesion"),          # Maps 'ssn' to 'nss'
+        "num_pers_contact": request.data.get("num_pers_contact", ""),
+        "medecin_traitant": request.data.get("medecin_traitant", None),
+        "patient": request.data.get("patient", None),
+        }
+        print("Adele Canon16",mapped_data)
+        serializer = DPISerializer(data=mapped_data)
+        print("this is the end")
         if serializer.is_valid():
+            print("hold your breath")
+            print('serialier', serializer)
             serializer.save()
+            print("and count to 10")
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_user_id(request):
+    nom = request.GET.get('nom')
+    if request.method == "GET":
+        if nom:
+            # Get specific antecedant
+            user = get_object_or_404(User, first_name=nom)
+            serializer = UserSerializer(user)
+            return Response(serializer.data)
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_user_nom(request, pk=None, format=None):
+    id = request.GET.get('id')
+    if request.method == "GET":
+        if id:
+            # Get specific antecedant
+            user = get_object_or_404(User, id=id)
+            serializer = UserSerializer(user)
+            return Response(serializer.data)
+        
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_patient_nss(request):
+    nss = request.GET.get('nss')
+    if request.method == "GET":
+        if nss:
+            # Get specific antecedant
+            dpi = get_object_or_404(DPI, nss=nss)
+            serializer = DPISerializer(dpi)
+            return Response(serializer.data)
 
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
 def antecedant_list(request):
     if request.method == "GET":
-        # Get all antecedants
-        antecedants = AntecedantMed.objects.all()
+        dpi = request.GET.get('dpi')
+        # Filter antecedants by the specific dpi_id
+        antecedants = AntecedantMed.objects.filter(dpi__id=dpi)
         serializer = AntecedantMedSerializer(antecedants, many=True)
         return Response(serializer.data)
 
@@ -384,3 +441,26 @@ def add_consultation_resume(request, consultation_id):
             return JsonResponse({"error": str(e)}, status=500)
     else:
         return JsonResponse({"error": "Invalid HTTP method. Use POST."}, status=405)
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_info(request):
+    # Authenticate user
+    auth = JWTAuthentication()
+    try:
+        user, _ = auth.authenticate(request)
+    except AuthenticationFailed as e:
+        return Response({'detail': str(e)}, status=401)
+
+    if not user:
+        return Response({'detail': 'Authentication credentials were not provided.'}, status=401)
+
+    # Prepare user data
+    user_data = {
+        'id': user.id,
+        'username': user.username,
+        'role': user.role,
+        # Add any other fields you want to expose
+    }
+
+    return Response(user_data)
