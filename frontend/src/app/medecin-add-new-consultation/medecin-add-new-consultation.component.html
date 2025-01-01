@@ -1,31 +1,65 @@
-<h1 class="page-title" *ngIf="!showAddPrescription">Add new consultation</h1>
+<h1 class="page-title" *ngIf="!showAddPrescription">Add New Consultation</h1>
 <div class="Card" *ngIf="!showAddPrescription">
-    <div class="cardtext">
-        <span>New Consultation</span>
+  <div class="cardtext">
+    <span>New Consultation</span>
+  </div>
+  <div class="careproprities">
+    <div class="input-Date">
+      <input
+        type="date"
+        id="date-input"
+        [(ngModel)]="date_cons"
+        placeholder="Date"
+        required
+      />
     </div>
-    <div class="careproprities">
-        <div class="input-Date">
-            <input type="date" id="date-input" placeholder="Date">
-        </div>
-        <div class="input-Time">
-            <input type="text" id="time-input" placeholder="Doctor name">
-        </div>
-        <div class="input-type">
-            <input type="text" id="type-input" placeholder="Reason">
-        </div>
-        <div class="input-description">
-            <textarea type="text" id="description-input" placeholder="Summary"></textarea>
-        </div>
-        <button class="add-btn" (click)="togglePrescriptionVisibility()">
-          <img src="Photo\Group 39.png" alt=""> Add Prescriptions
-        </button>
+    <div class="input-Time">
+      <input
+        type="number"
+        id="time-input"
+        [(ngModel)]="medecin_id"
+        placeholder="Doctor ID"
+        required
+      />
     </div>
-    <div class="buttons">
-        <button class="cancel-btn" (click)="cancel()"> Cancel</button>
-        <button class="create-btn">Submit</button>
+    <div class="input-type">
+      <input
+        type="number"
+        id="type-input"
+        [(ngModel)]="dpi_id"
+        placeholder="Patient ID (DPI)"
+        required
+      />
     </div>
+    <div class="input-description">
+      <textarea
+        type="text"
+        id="description-input"
+        [(ngModel)]="resume"
+        placeholder="Summary"
+        required
+      ></textarea>
+    </div>
+    <button class="add-btn" (click)="togglePrescriptionVisibility()">
+      <img src="Photo/Group 39.png" alt="" /> Add Prescriptions
+    </button>
+  </div>
+  <div class="buttons">
+    <button class="cancel-btn" (click)="cancel()">Cancel</button>
+    <button class="create-btn" (click)="submitConsultation()">Submit</button>
+  </div>
+</div>
+
+<!-- Add the following section to handle the resume update -->
+<div class="resume-update" *ngIf="consultationId">
+  <h3>Update Consultation Resume</h3>
+  <textarea [(ngModel)]="resume" placeholder="Update Resume"></textarea>
+  <button (click)="submitResume()">Update Resume</button>
 </div>
 <div class="consultations_container">
-    <app-medecin-add-new-prescription *ngIf="showAddPrescription" (togglePrescriptionVisibility)="togglePrescriptionVisibility()">
-    </app-medecin-add-new-prescription>
+  <app-medecin-add-new-prescription
+    *ngIf="showAddPrescription"
+    (togglePrescriptionVisibility)="togglePrescriptionVisibility()"
+  >
+  </app-medecin-add-new-prescription>
 </div>

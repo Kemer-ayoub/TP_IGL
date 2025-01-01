@@ -1,43 +1,84 @@
-// src/app/medecin-add-new-consultation/medecin-add-new-consultation.component.ts
-import { Component,EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; 
-import { Location } from '@angular/common';
-import { MedecinAddNewPrescriptionComponent } from '../medecin-add-new-prescription/medecin-add-new-prescription.component';
-
 
 @Component({
   selector: 'app-medecin-add-new-consultation',
-  imports: [FormsModule, MedecinAddNewPrescriptionComponent, CommonModule],
   templateUrl: './medecin-add-new-consultation.component.html',
-  styleUrls: ['./medecin-add-new-consultation.component.css']
+  styleUrls: ['./medecin-add-new-consultation.component.css'],
 })
 export class MedecinAddNewConsultationComponent {
-  consultation = {
-    date: '',
-    doctorName: '',
-    reason: '',
-    summary: '',
-    prescriptions: [],
-  };
+  // Form fields
+  date_cons: string = '';
+  medecin_id: number = 0; // Replace with actual medecin ID
+  dpi_id: number = 0; // Replace with actual DPI ID
+  diagnostic: string = '';
+  resume: string = '';
 
+  consultationId: number = 0; // Stores the created consultation's ID
   showAddPrescription: boolean = false;
-  @Output() backToPatientInfo = new EventEmitter<void>();
 
-  constructor(private router: Router, private location: Location) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {}
 
-  submitConsultation() {
-    console.log('Consultation créée :', this.consultation);
-    // Logique pour sauvegarder les données dans la base de données
-  }
-
-  // Fonction qui gère l'affichage de la prescription
+  // Toggle the prescription section
   togglePrescriptionVisibility() {
-    console.log('togglePrescriptionVisibility');
     this.showAddPrescription = !this.showAddPrescription;
   }
+
+  // Submit the new consultation
+  submitConsultation() {
+    if (!this.date_cons || !this.medecin_id || !this.dpi_id || !this.resume) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    const consultationData = {
+      date_cons: this.date_cons,
+      medecin_id: this.medecin_id,
+      dpi_id: this.dpi_id,
+      diagnostic: this.diagnostic,
+      resume: this.resume,
+    };
+
+    this.http.post('/api/add-consultation/', consultationData).subscribe(
+      (response: any) => {
+        this.consultationId = response.id; // Save the consultation ID
+        alert('Consultation added successfully!');
+      },
+      (error) => {
+        console.error('Error adding consultation:', error);
+        alert('Failed to add consultation. Please try again.');
+      },
+    );
+  }
+
+  // Submit or update the resume for an existing consultation
+  submitResume() {
+    if (!this.resume || !this.consultationId) {
+      alert('Resume and consultation ID are required.');
+      return;
+    }
+
+    const resumeData = { resume: this.resume };
+
+    this.http
+      .post(`/api/add-consultation-resume/${this.consultationId}/`, resumeData)
+      .subscribe(
+        (response: any) => {
+          alert('Resume updated successfully!');
+        },
+        (error) => {
+          console.error('Error updating resume:', error);
+          alert('Failed to update resume. Please try again.');
+        },
+      );
+  }
+
+  // Cancel the operation
   cancel() {
-    this.backToPatientInfo.emit();
+    this.router.navigate(['/dashboard']); // Navigate to the desired route
   }
 }
