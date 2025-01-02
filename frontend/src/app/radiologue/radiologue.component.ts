@@ -13,6 +13,7 @@ import { catchError, switchMap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { DpiService } from '../dpi.service';
 import { PatientInfoComponent } from '../patient-info/patient-info.component';
+import { ReportrequestService } from '../reportrequest.service';
 
 @Component({
   selector: 'app-radiologue',
@@ -23,6 +24,7 @@ import { PatientInfoComponent } from '../patient-info/patient-info.component';
 export class RadiologueComponent {
   authService = inject(AuthService);
   dpiService = inject(DpiService);
+  reportrequestService = inject(ReportrequestService);
   user?: any;
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly API_URL = 'http://127.0.0.1:8000/api/';
@@ -164,9 +166,30 @@ export class RadiologueComponent {
       error: (error) => console.error('Error fetching DPI:', error)
     });
   }
+
+  getAllReportReq(){
+    this.reportrequestService.getAllReportReq().subscribe({
+      next: (response) => {
+        console.log("ah i love it and i hate it at the same time",response);
+        this.patient.previousCares = response;
+        /*this.patient.previousCares.forEach((element: any) => {
+          console.log("apati apati",element)
+          this.authService.getNom(element.medecin).subscribe({
+            next: (innerData) => {
+              element.medecin = innerData;
+              
+            },
+            error: (error) => console.error('Error fetching medecin data:', error)
+          });
+        });*/
+      },
+      error: (error) => console.error('Error fetching DPI:', error)
+    })
+  }
  
   onViewCares() {
     console.log("the view get called")
+    this.getAllReportReq();
     this.showCaresList = true;  
   }
   AddCare() {

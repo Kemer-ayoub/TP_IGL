@@ -16,15 +16,7 @@ urlpatterns = [
     path("user-nom/", views.get_user_nom, name="user-nom"),  # GET specific DPI
     path("antecedants/", views.antecedant_list, name="antecedant-list"),
     path("examrequests/", views.examrequests_list, name="exam-requests"),
-    path(
-        "examrequests/<int:pk>/", views.examrequests_list, name="exam-requests-detail"
-    ),  # GET specific exam request
-    path("reportrequests/", views.reportrequests_list, name="report-requests"),
-    path(
-        "reportrequests/<int:pk>/",
-        views.reportrequests_list,
-        name="report-requests-detail",
-    ),  # GET specific report request
+    path("reportrequests/", views.reportrequests_list, name="report-requests"), 
     path(
         "ordonnances/<int:pk>/valider/",
         views.valider_ordonnance,

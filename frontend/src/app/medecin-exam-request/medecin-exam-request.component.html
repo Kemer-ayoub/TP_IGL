@@ -5,31 +5,31 @@
     </div>
     <div class="careproprities">
         <div class="input-Date">
-            <input type="text" id="date-input" placeholder="Type of test">
+            <input type="text" id="date-input" placeholder="Type of test" [(ngModel)]="Typeoftest" name="Typeoftest" required>
         </div>
         <div class="input-Time">
-            <input type="text" id="time-input" placeholder="Sub-Type">
+            <input type="text" id="time-input" placeholder="Sub-Type" [(ngModel)]="Subtypeoftest" name="Subtypeoftest" required>
         </div>
         <div class="dropdown">
             <label for="fruits">Priority</label>
-            <select id="prioriti" name="priority">
-                <option value="Standard">Standard</option>
-                <option value="High priority">High priority</option>
-                <option value="Urgent">Urgent</option>
+            <select id="prioriti" name="priority" [(ngModel)]="priority">
+                <option value="standard">Standard</option>
+                <option value="high_priority">High Priority</option>
+                <option value="urgent">Urgent</option>
             </select>
         </div>
         <div class="input-Date">
-            <input type="text" id="description-input" placeholder="Medical justification">
+            <input type="text" id="description-input" placeholder="Medical justification" [(ngModel)]="medicalJustification" name="medicalJustification" required>
         </div>
         <div class="input-Time">
-            <input type="date" id="observation-input" placeholder="Desired test date">
+            <input type="date" id="observation-input" placeholder="Desired test date" [(ngModel)]="testDate" name="testDate" required>
         </div>
         <div class="input-type">
-            <input type="text" id="type-input" placeholder="Doctor name">
+            <input type="text" id="type-input" placeholder="Doctor name" [(ngModel)]="doctorName" name="doctorName" required>
         </div>
     </div>
     <div class="btns">
         <button class="cancel-btn" (click)="cancel()">Cancel</button>
-        <button class="create-btn">Submit</button>
+        <button class="create-btn" (click)="addExamRequest()">Submit</button>
     </div>
     </div>

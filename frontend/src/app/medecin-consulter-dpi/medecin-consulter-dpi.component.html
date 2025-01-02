@@ -11,9 +11,8 @@
 
         <app-search-bar
             *ngIf="!showAddConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory && !showExamRequest && !showReportRequest"
-            (ssnEntered)="onSSNEntered($event)"></app-search-bar>
+            (ssnEntered)="onnssEntered($event)"></app-search-bar>
 
-        <!-- Error Message -->
         <div *ngIf="errorMessage" class="error-message">
             <p>{{ errorMessage }}</p>
         </div>
@@ -64,15 +63,15 @@
             </app-medical-history>
             <div class="history-container" *ngIf="showMedicalHistory">
                 <h2>Add a new history entry</h2>
-                <form action="">
-                    <input type="text" placeholder="Name of record">
-                    <input type="text" placeholder="Type of record">
-                    <input type="date" placeholder="Date of record">
-                    <input type="text" placeholder="Dosage (if it is a medication)">
+                <form>
+                    <input type="text" placeholder="Name of record" [(ngModel)]="Nameofrecord" name="Nameofrecord" required>
+                    <input type="text" placeholder="Type of record" [(ngModel)]="Typeofrecord" name="Typeofrecord" required>
+                    <input type="date" placeholder="Date of record" [(ngModel)]="Dateofrecord" name="Dateofrecord" required>
+                    <input type="text" placeholder="Dosage (if it is a medication)" [(ngModel)]="Dosage" name="Dosage">
                 </form>
                 <div class="btns">
                     <button class="back" *ngIf="showMedicalHistory" (click)="backToPatientInfoMedicalHistory()">Cancel</button>
-                    <button class="add">Add</button>
+                    <button class="add" (click)="addMedicalRecord()">Add</button>
                 </div>
             </div>
         </div>

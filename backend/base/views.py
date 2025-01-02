@@ -136,16 +136,15 @@ def antecedant_list(request):
 @permission_classes([IsAuthenticated])
 def examrequests_list(request, pk=None):
     if request.method == "GET":
-        if pk is not None:
-            # Get specific antecedant
-            exam_request = get_object_or_404(ExamRequest, pk=pk)
+        id = request.GET.get('id')  # Get the 'id' parameter from the request
+        if id:  # If 'id' is present, fetch a specific ExamRequest
+            exam_request = get_object_or_404(ExamRequest, id=id)
             serializer = ExamRequestSerializer(exam_request)
             return Response(serializer.data)
-
-        # Get all antecedants
-        exam_requests = ExamRequest.objects.all()
-        serializer = ExamRequestSerializer(exam_requests, many=True)
-        return Response(serializer.data)
+        else:  # Otherwise, fetch all ExamRequest instances
+            exam_requests = ExamRequest.objects.all()
+            serializer = ExamRequestSerializer(exam_requests, many=True)
+            return Response(serializer.data)
 
     if request.method == "POST":
         serializer = ExamRequestSerializer(data=request.data)
@@ -159,18 +158,18 @@ def examrequests_list(request, pk=None):
 @permission_classes([IsAuthenticated])
 def reportrequests_list(request, pk=None):
     if request.method == "GET":
-        if pk is not None:
-            # Get specific antecedant
-            report_request = get_object_or_404(ReportRequest, pk=pk)
+        id = request.GET.get('id')  # Get the 'id' parameter from the request
+        if id:  # If 'id' is present, fetch a specific ExamRequest
+            report_request = get_object_or_404(ReportRequest, id=id)
             serializer = ReportRequestSerializer(report_request)
             return Response(serializer.data)
-
-        # Get all antecedants
-        report_requests = ReportRequest.objects.all()
-        serializer = ReportRequestSerializer(report_requests, many=True)
-        return Response(serializer.data)
+        else:  # Otherwise, fetch all ReportRequest instances
+            report_requests = ReportRequest.objects.all()
+            serializer = ReportRequestSerializer(report_requests, many=True)
+            return Response(serializer.data)
 
     if request.method == "POST":
+        print("So i'm love every night like it's the last time",request.data)
         serializer = ReportRequestSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

@@ -21,8 +21,8 @@
         <app-patient-info [patient]="patient"></app-patient-info>
     
         <!-- Buttons -->
-        <app-button-radiologue 
-            (viewCares)="onViewCares()" (Nursing)="AddCare()"> 
+        <app-button-radiologue
+            (viewCares)="onViewCares()" (Nursing)="AddCare()">
         </app-button-radiologue >
     </div>
     <app-report-list-radiologue *ngIf="showCaresList" [cares]="patient?.previousCares"

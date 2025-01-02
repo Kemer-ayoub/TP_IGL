@@ -113,16 +113,16 @@ class BilanBiologiqueSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ExamRequestSerializer(serializers.ModelSerializer):
-    medecin = UserSerializer(read_only=True)
-    laborantin = UserSerializer(read_only=True)
+    medecin = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    laborantin = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
     class Meta:
         model = ExamRequest
         fields = '__all__'
 
 class ReportRequestSerializer(serializers.ModelSerializer):
-    medecin = UserSerializer(read_only=True)
-    radiologue = UserSerializer(read_only=True)
+    medecin = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    radiologue = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
     class Meta:
         model = ReportRequest
