@@ -12,7 +12,7 @@ import { ButtonsPatientComponent } from '../buttons-patient/buttons-patient.comp
 import { NursingComponent } from '../nursing/nursing.component';
 import { MedicalHistoryComponent } from '../medical-history/medical-history.component';
 import { PrescriptionDetailPharmacienComponent } from '../prescription-detail-pharmacien/prescription-detail-pharmacien.component';
-import { Component,HostListener, inject, OnInit  } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, switchMap } from 'rxjs/operators';
@@ -21,11 +21,25 @@ import { DpiService } from '../dpi.service';
 
 @Component({
   selector: 'app-pharmacien',
-  imports: [FormsModule,PrescriptionDetailPharmacienComponent, MedicalHistoryComponent,NursingComponent, ButtonsPatientComponent,RouterLink, ConsultationDetailComponent, CommonModule, ConsultationListComponent, HeaderComponent, SearchBarComponent, PatientInfoComponent, PrescriptionsDetailComponent, PrescriptionsListComponent,],
+  imports: [
+    FormsModule,
+    PrescriptionDetailPharmacienComponent,
+    MedicalHistoryComponent,
+    NursingComponent,
+    ButtonsPatientComponent,
+    RouterLink,
+    ConsultationDetailComponent,
+    CommonModule,
+    ConsultationListComponent,
+    HeaderComponent,
+    SearchBarComponent,
+    PatientInfoComponent,
+    PrescriptionsDetailComponent,
+    PrescriptionsListComponent,
+  ],
   templateUrl: './pharmacien.component.html',
-  styleUrl: './pharmacien.component.css'
+  styleUrl: './pharmacien.component.css',
 })
-
 export class PharmacienComponent {
   authService = inject(AuthService);
   dpiService = inject(DpiService);
@@ -38,8 +52,8 @@ export class PharmacienComponent {
   error: string | null = null;
   dpi: any = null;
   theid: any = null;
-
- patients = [
+  ordonnances: any[] = [];
+  patients = [
     {
       nss: '111',
       firstName: 'Oussama',
@@ -54,7 +68,8 @@ export class PharmacienComponent {
           date: '2023-04-20',
           doctorName: 'Dr. Amina',
           notes: 'Routine check-up',
-          summary: 'Routine check-up with Dr. Amina, prescriptions include Paracetamol and Ibuprofen.',
+          summary:
+            'Routine check-up with Dr. Amina, prescriptions include Paracetamol and Ibuprofen.',
           prescriptions: [
             { name: 'Paracetamol', dose: '500mg', duration: '7 days' },
             { name: 'Ibuprofen', dose: '200mg', duration: '5 days' },
@@ -75,18 +90,10 @@ export class PharmacienComponent {
           { name: 'Diabetes', date: '2018-05-01' },
           { name: 'Hypertension', date: '2020-03-10' },
         ],
-        surgeries: [
-          { name: 'Appendectomy', date: '2015-07-20' },
-        ],
-        allergies: [
-          { name: 'Penicillin', date: '2012-08-15' },
-        ],
-        medications: [
-          { name: 'Metformin', date: '2023-06-01' },
-        ],
+        surgeries: [{ name: 'Appendectomy', date: '2015-07-20' }],
+        allergies: [{ name: 'Penicillin', date: '2012-08-15' }],
+        medications: [{ name: 'Metformin', date: '2023-06-01' }],
       },
-
-
     },
     {
       nss: '22222',
@@ -102,13 +109,14 @@ export class PharmacienComponent {
           date: '2024-02-10',
           doctorName: 'Dr. John',
           notes: 'Initial consultation',
-          summary: 'Initial consultation with Dr. John, prescriptions include Amoxicillin and Loratadine.',
+          summary:
+            'Initial consultation with Dr. John, prescriptions include Amoxicillin and Loratadine.',
           prescriptions: [
             { name: 'Amoxicillin', dose: '250mg', duration: '7 days' },
-            { name: 'Loratadine', dose: '10mg', duration: '7 days' }
-          ]
-        }
-      ]
+            { name: 'Loratadine', dose: '10mg', duration: '7 days' },
+          ],
+        },
+      ],
     },
     {
       nss: '33333',
@@ -124,13 +132,14 @@ export class PharmacienComponent {
           date: '2023-12-20',
           doctorName: 'Dr. Sarah',
           notes: 'Diabetes management',
-          summary: 'Diabetes management consultation with Dr. Sarah, prescription includes Metformin.',
+          summary:
+            'Diabetes management consultation with Dr. Sarah, prescription includes Metformin.',
           prescriptions: [
-            { name: 'Metformin', dose: '500mg', duration: '30 days' }
-          ]
-        }
-      ]
-    }
+            { name: 'Metformin', dose: '500mg', duration: '30 days' },
+          ],
+        },
+      ],
+    },
   ];
 
   nss: string = '';
@@ -158,19 +167,34 @@ export class PharmacienComponent {
       next: (outerData) => {
         this.authService.getNom(outerData.medecin_traitant).subscribe({
           next: (innerData) => {
-            console.log("Since i was young",innerData)
+            console.log('Since i was young', innerData);
             outerData.medecin_traitant = innerData;
             console.log('DPI:', outerData);
-            this.patient = outerData
+            this.patient = outerData;
           },
-          error: (error) => console.error('Error fetching DPI:', error)
-        })
+          error: (error) => console.error('Error fetching DPI:', error),
+        });
         // Add more lines of code here
-    },
-      error: (error) => console.error('Error fetching DPI:', error)
+      },
+      error: (error) => console.error('Error fetching DPI:', error),
     });
   }
 
+  ngOnInit() {
+    this.fetchOrdonnances();
+  }
+  fetchOrdonnances() {
+    this.http.get(`${this.API_URL}list_ordonnances/`).subscribe({
+      next: (data: any) => {
+        console.log('Ordonnances fetched:', data); // Log the fetched data for debugging
+        this.ordonnances = data; // Store the fetched ordonnances
+      },
+      error: (error) => {
+        console.error('Error fetching ordonnances:', error); // Log errors if any
+        this.error = 'Failed to load ordonnances.'; // Update the error message
+      },
+    });
+  }
   selectPrescription(prescription: any) {
     if (prescription === null) {
       this.selectedPrescription = null;
@@ -178,8 +202,10 @@ export class PharmacienComponent {
     } else {
       // Si la prescription est un objet unique, le convertir en tableau
       this.selectedPrescription = {
-        ...prescription,  // Copier les données de la prescription
-        medicaments: Array.isArray(prescription.medicaments) ? prescription.medicaments : [prescription]  // S'assurer que medicaments est un tableau
+        ...prescription, // Copier les données de la prescription
+        medicaments: Array.isArray(prescription.medicaments)
+          ? prescription.medicaments
+          : [prescription], // S'assurer que medicaments est un tableau
       };
       this.showPrescriptionsList = false;
       console.log('Prescription sélectionnée:', this.selectedPrescription);
@@ -189,7 +215,7 @@ export class PharmacienComponent {
   // Méthode pour afficher la liste des prescriptions
 
   onViewConsultations() {
-    this.showConsultationsList = true;  // Show consultations list
+    this.showConsultationsList = true; // Show consultations list
   }
   selectConsultation(consultation: any) {
     console.log('Consultation sélectionnée:', consultation);
@@ -220,8 +246,8 @@ export class PharmacienComponent {
   }
   ////////////////////////////////////////////////////////////////////////////////////////////////
   calculateAge(dob: string): number {
-    const [day, month, year] = dob.split('/').map(num => parseInt(num, 10));
-    const birthDate = new Date(year, month - 1, day);  
+    const [day, month, year] = dob.split('/').map((num) => parseInt(num, 10));
+    const birthDate = new Date(year, month - 1, day);
     const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
     const monthDiff = today.getMonth() - birthDate.getMonth();
@@ -233,27 +259,21 @@ export class PharmacienComponent {
     return age;
   }
 
-
-
- 
-
   onViewPrescriptions() {
     this.showPrescriptionsList = true;
   }
 
   onSelectPrescription(prescription: any) {
     this.selectedPrescription = prescription;
-    this.showPrescriptionsList = false;  // Hide the list of prescriptions when one is selected
+    this.showPrescriptionsList = false; // Hide the list of prescriptions when one is selected
   }
   handleBackToList() {
     this.selectedPrescription = null;
     this.showPrescriptionsList = true;
-
   }
 
   backToPatientInfo() {
     this.showPrescriptionsList = false;
     this.selectedPrescription = null;
   }
-
 }
