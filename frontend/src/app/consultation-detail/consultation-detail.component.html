@@ -1,10 +1,10 @@
 <!-- Détails de la consultation -->
 <div *ngIf="selectedConsultation && !selectedPrescription" class="consultation-details">
     <h3>Consultation Details</h3>
-    <p><strong>Date :</strong> {{ selectedConsultation.date }}</p>
-    <p><strong>Doctor :</strong> {{ selectedConsultation.doctorName }}</p>
-    <p><strong>Reason :</strong> {{ selectedConsultation.notes }}</p>
-    <p><strong>Summary :</strong> {{ selectedConsultation.summary }}</p>
+    <p><strong>Date :</strong> {{ selectedConsultation.date_cons }}</p>
+    <p><strong>Doctor :</strong> {{ selectedConsultation.medecin.first_name }}</p>
+    <p><strong>Reason :</strong> {{ selectedConsultation.diagnostic }}</p>
+    <p><strong>Summary :</strong> {{ selectedConsultation.resume }}</p>
   
     <h4>Prescriptions List:</h4>
     <ul>

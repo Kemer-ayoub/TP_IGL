@@ -17,11 +17,7 @@ urlpatterns = [
     path("antecedants/", views.antecedant_list, name="antecedant-list"),
     path("examrequests/", views.examrequests_list, name="exam-requests"),
     path("reportrequests/", views.reportrequests_list, name="report-requests"), 
-    path(
-        "ordonnances/<int:pk>/valider/",
-        views.valider_ordonnance,
-        name="ordonnance-valider",
-    ),  # GET specific report request
+    path("valider_ordonnance/", views.valider_ordonnance, name="ordonnance-valider",),  # GET specific report request
     path('soins/', views.list_soin, name='list_soin'),  
     path('soins/<int:pk>/', views.list_soin, name='detail_soin'),  # GET a single soin by pk.
     path("add-bilan-biologique/", views.add_bilan_biologique, name="add-bilan-biologique"),
@@ -38,28 +34,8 @@ urlpatterns = [
         views.get_patient_by_social_security_number,
         name="search_patient_nss",
     ),
-    path(
-        "add-consultation/",
-        views.add_consultation,
-        name="add_consultation",
-    ),
-    path("list-consultation/", views.list_consultation, name="list_consultation"),
-    path(
-        "list-consultation/<int:consultation_id>/",
-        views.list_consultation,
-        name="get_consultation",
-    ),
-    path(
-        "create-ordonnance/<int:consultation_id>/",
-        views.create_ordonnance_view,
-        name="create_ordonnance",
-    ),
-    path("list-ordonnance/", views.list_ordonnance, name="list_ordonnances"),
-    path(
-        "list-ordonnance/<int:ordonnance_id>/",
-        views.list_ordonnance,
-        name="specific_ordonnance",
-    ),
+    path("consultation/", views.consultation_list, name="add_consultation"),
+    path("ordonnance/", views.ordonnance_list, name="list_ordonnances"),
     path(
         "add-consultation-resume/<int:consultation_id>/",
         views.add_consultation_resume,

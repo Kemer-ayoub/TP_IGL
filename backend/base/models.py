@@ -328,18 +328,24 @@ class Consultation(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return f"Consultation de {self.patient.prenom} {self.patient.nom} le {self.date_cons}"
+        return f"Consultation le {self.date_cons}"
 
 
 class Ordonnance(models.Model):
-    date = models.DateField()
-    valid = models.BooleanField()  # ca sera validé par le pharmacie
+    valid = models.BooleanField(default=False)  # ca sera validé par le pharmacie
     consultation = models.ForeignKey(
-        Consultation, on_delete=models.SET_NULL, null=True, related_name="ordonnances"
+        Consultation, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        related_name="ordonnances"
     )
+    patient_name = models.CharField(max_length=100)
+    patient_age = models.IntegerField()
+    medecin = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.date
+        return f"Ordonnance for {self.patient_name}"
+
 
 
 class Soin(models.Model):
@@ -378,9 +384,9 @@ class Medicament(models.Model):
     ordonnance = models.ForeignKey(
         Ordonnance, on_delete=models.CASCADE, null=True, related_name="medicaments"
     )
-    soin = models.ForeignKey(
+    """soin = models.ForeignKey(
         Soin, on_delete=models.CASCADE, null=True, related_name="medicaments"
-    )
+    )"""
 
     def __str__(self):
         return self.nom
@@ -411,7 +417,7 @@ class BilanRadiologique(models.Model):
     image = models.ImageField(upload_to="examens_radiologiques/")
 
     def __str__(self):
-        return self.radio
+        return self.title
 
 
 class BilanBiologique(models.Model):
@@ -442,7 +448,7 @@ class BilanBiologique(models.Model):
     )
 
     def __str__(self):
-        return self.status
+        return self.statut
 
 
 class ExamRequest(models.Model):  # Request le bilan biologique

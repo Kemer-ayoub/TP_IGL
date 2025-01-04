@@ -64,8 +64,8 @@ class DPISerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ConsultationSerializer(serializers.ModelSerializer):
-    medecin = UserSerializer(read_only=True)
-    dpi = DPISerializer(read_only=True)
+    medecin = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    dpi = serializers.PrimaryKeyRelatedField(queryset=DPI.objects.all())
 
     class Meta:
         model = Consultation
@@ -73,6 +73,8 @@ class ConsultationSerializer(serializers.ModelSerializer):
 
 class OrdonnanceSerializer(serializers.ModelSerializer):
     medicaments = serializers.SerializerMethodField()
+    consultation = serializers.PrimaryKeyRelatedField(queryset=Consultation.objects.all())
+
 
     class Meta:
         model = Ordonnance

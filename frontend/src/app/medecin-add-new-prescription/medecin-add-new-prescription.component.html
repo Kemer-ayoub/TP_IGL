@@ -5,27 +5,27 @@
   </div>
   <div class="careproprities">
     <div class="input-Time">
-        <input type="text" id="time-input" placeholder="Patient full name">
+        <input type="text" id="time-input" placeholder="Patient full name" [(ngModel)]="patientName">
     </div>
     <div class="input-type">
-        <input type="text" id="type-input" placeholder="Patient Age">
+        <input type="text" id="type-input" placeholder="Patient Age" [(ngModel)]="patientAge">
     </div>
     <div class="input-type">
-        <input type="text" id="type-input" placeholder="Doctor name">
+        <input type="text" id="type-input" placeholder="Doctor name" [(ngModel)]="doctorName">
     </div>
     <p>Medications List</p>
     <div class="medication-inputs">
       <input
         type="text"
         id="med-input"
-        [(ngModel)]="medicationName"
+        [(ngModel)]="nom"
         placeholder="Medication name"
       />
-      <input type="text" id="med-input" [(ngModel)]="medicationDose" placeholder="Dose" />
+      <input type="text" id="med-input" [(ngModel)]="dosage" placeholder="Dose" />
       <input
         type="text"
         id="med-input"
-        [(ngModel)]="medicationDuration"
+        [(ngModel)]="duree"
         placeholder="Duration"
       />
       <button class="plus" (click)="addMedication()">
@@ -34,13 +34,13 @@
     </div>
     <ul>
       <li class="med-item" *ngFor="let medication of medications; index as i">
-        {{ medication.name }} - {{ medication.dose }} - {{ medication.duration }}
+        {{ medication.nom }} - {{ medication.dosage }} - {{ medication.duree }}
         <button (click)="deleteMedication(i)"><img src="Photo\delete.png" alt=""></button>
       </li>
     </ul>
   </div>
   <div class="buttons">
     <button class="cancel-btn" (click)="goBack()">Cancel</button>
-    <button class="create-btn">Create</button>
+    <button class="create-btn" (click)="addOrdonnance()">Create</button>
   </div>
 </div>

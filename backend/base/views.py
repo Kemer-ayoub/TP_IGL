@@ -15,7 +15,7 @@ from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import get_user_model
 
 from .models import *
-from .serializers import DPISerializer, AntecedantMedSerializer, ExamRequestSerializer, ReportRequestSerializer, OrdonnanceSerializer,BilanBiologiqueSerializer,BilanRadiologiqueSerializer,SoinSerializer, UserSerializer
+from .serializers import DPISerializer, AntecedantMedSerializer, ExamRequestSerializer, ReportRequestSerializer, OrdonnanceSerializer,BilanBiologiqueSerializer,BilanRadiologiqueSerializer,SoinSerializer, UserSerializer, Consultation, ConsultationSerializer, Ordonnance, OrdonnanceSerializer, Medicament, MedicamentSerializer, BilanBiologique, BilanRadiologique
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -179,17 +179,18 @@ def reportrequests_list(request, pk=None):
 
 @api_view(["PATCH"])
 @permission_classes([IsAuthenticated])
-def valider_ordonnance(request, pk):
-    try:
-        item = Ordonnance.objects.get(pk=pk)
-    except Ordonnance.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-
-    serializer = OrdonnanceSerializer(item, data=request.data, partial=True)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+def valider_ordonnance(request):
+    id = request.GET.get('id')
+    if request.method == "PATCH":
+        if id:
+            # Get specific antecedant
+            ordonnance = get_object_or_404(Ordonnance, id=id)
+            request.data['valid'] = True  # Force the valid field to True
+            serializer = OrdonnanceSerializer(ordonnance, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -288,14 +289,127 @@ def get_patient_by_social_security_number(request):
     except json.JSONDecodeError:
         return JsonResponse({"error": "Invalid JSON format"}, status=400)
 
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def consultation_list(request, pk=None):
+    if request.method == "GET":
+        id = request.GET.get('id')  # Get the 'id' parameter from the request
+        if id:  # If 'id' is present, fetch a specific Consultation
+            consultation = get_object_or_404(Consultation, id=id)
+            serializer = ConsultationSerializer(consultation)
+            return Response(serializer.data)
+        else:  # Otherwise, fetch all Consultation instances
+            dpi = request.GET.get('dpi')
+            # Filter consultations by the specific dpi_id
+            consultations = Consultation.objects.filter(dpi__id=dpi)
+            serializer = ConsultationSerializer(consultations, many=True)
+            return Response(serializer.data)
 
-@csrf_exempt
+    if request.method == "POST":
+        data = request.data
+        dpi_id = get_object_or_404(DPI, patient=data.get("dpi"))
+        data["dpi"] = dpi_id.id
+        serializer = ConsultationSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def ordonnance_list(request, pk=None):
+    if request.method == "GET":
+        id = request.GET.get('id')  # Get the 'id' parameter from the request
+        if id:  # If 'id' is present, fetch a specific Ordonnance
+            ordonnance = get_object_or_404(Ordonnance, id=id)
+            serializer = OrdonnanceSerializer(ordonnance)
+            return Response(serializer.data)
+        else:  # Otherwise, fetch all Ordonnance instances
+            print("123")
+            cons_id = request.GET.get('cons_id')
+            if cons_id:
+                print("456")
+                # Filter ordonnances by the specific cons_id_id
+                ordonnances = Ordonnance.objects.filter(consultation_id=cons_id)
+                print("789")
+                serializer = OrdonnanceSerializer(ordonnances, many=True)
+                return Response(serializer.data)
+            else:
+                ordonnance = Ordonnance.objects.all()
+                serializer = OrdonnanceSerializer(ordonnance, many=True)
+                return Response(serializer.data)
+
+    if request.method == "POST":
+        """data = request.data
+        dpi_id = get_object_or_404(DPI, patient=data.get("dpi"))
+        data["dpi"] = dpi_id.id
+        serializer = OrdonnanceSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)"""
+        try:
+            # Extract ordonnance data
+            ordonnance_data = {
+                'valid': request.data.get('valid', False),
+                'consultation': request.data.get('consultation'),
+                'patient_name': request.data.get('patient_name'),
+                'patient_age': request.data.get('patient_age'),
+                'medecin': request.data.get('medecin')
+            }
+            """consultation_id = get_object_or_404(Consultation, patient=ordonnance_data.get("consultation"))
+            ordonnance_data["consultation"] = consultation_id.id"""
+            
+            # Create Ordonnance instance
+            ordonnance_serializer = OrdonnanceSerializer(data=ordonnance_data)
+            if ordonnance_serializer.is_valid():
+                ordonnance = ordonnance_serializer.save()
+                
+                # Extract medicaments data
+                medicaments_data = request.data.get('medicaments', [])
+                
+                # Create Medicament instances
+                medicaments = []
+                for med_data in medicaments_data:
+                    med_data['ordonnance'] = ordonnance.id
+                    medicament_serializer = MedicamentSerializer(data=med_data)
+                    if medicament_serializer.is_valid():
+                        medicament_serializer.save()
+                        medicaments.append(medicament_serializer.data)
+                    else:
+                        ordonnance.delete()
+                        return Response(
+                            medicament_serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST
+                        )
+                
+                # Return combined response
+                response_data = {
+                    'ordonnance': ordonnance_serializer.data,
+                    'medicaments': medicaments
+                }
+                return Response(response_data, status=status.HTTP_201_CREATED)
+            
+            return Response(
+                ordonnance_serializer.errors,
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        except Exception as e:
+            return Response(
+                {'error': str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+    
+"""
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def add_consultation(request):
     if request.method == "POST":
         try:
             # Get data from the request body (assuming it's JSON)
             data = json.loads(request.body)
-            dpi_id = data.get("dpi_id")
+            consultation_id = data.get("dpi_id")
             medecin_id = data.get("medecin_id")
             date_cons = data.get("date_cons")
             diagnostic = data.get("diagnostic")
@@ -336,9 +450,6 @@ def add_consultation(request):
 
 
 def list_consultation(request, consultation_id=None):
-    """
-    Returns a list of consultations or a specific consultation by its ID.
-    """
     if consultation_id:
         # Fetch a specific consultation by ID
         try:
@@ -371,7 +482,6 @@ def list_consultation(request, consultation_id=None):
             for cons in consultations
         ]
         return JsonResponse(data, safe=False)
-
 
 @csrf_exempt
 def create_ordonnance_view(request, consultation_id):
@@ -458,7 +568,7 @@ def list_ordonnance(request, ordonnance_id=None):
             return JsonResponse({"ordonnances": ordonnances_list}, safe=False)
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
-
+"""
 
 @csrf_exempt
 def add_consultation_resume(request, consultation_id):
