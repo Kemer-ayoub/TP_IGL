@@ -33,7 +33,7 @@
     <app-report-detail-radiologue [selectedCare]="selectedCare"
      (backToConsultationList)="backToConsultationList()">
     </app-report-detail-radiologue>
-    <app-add-report-radiologue   *ngIf="!showCaresList && !selectedCare && showNursing " 
+    <app-add-report-radiologue   *ngIf="!showCaresList && !selectedCare && showNursing " [dpiId]="patient?.id"
     ></app-add-report-radiologue >
     </div>
 </body>

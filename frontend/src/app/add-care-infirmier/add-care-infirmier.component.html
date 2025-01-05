@@ -4,20 +4,20 @@
     </div>
     <div class="careproprities">
         <div class="input-Date">
-            <input type="text" id="date-input" placeholder="Date">
+            <input type="text" id="date-input" placeholder="Date" [(ngModel)]="date">
         </div>
         <div class="input-Time">
-            <input type="text" id="time-input" placeholder="Time">
+            <input type="text" id="time-input" placeholder="Time" [(ngModel)]="time">
         </div>
         <div class="input-type">
-            <input type="text" id="type-input" placeholder="Type of care">
+            <input type="text" id="type-input" placeholder="Type of care" [(ngModel)]="typecare">
         </div>
         <div class="input-description">
-            <textarea type="text" id="description-input" placeholder="Description"></textarea>
+            <textarea type="text" id="description-input" placeholder="Description" [(ngModel)]="description"></textarea>
         </div>
         <div class="input-observation">
-            <textarea type="text" id="observation-input" placeholder="Observations"></textarea>
+            <textarea type="text" id="observation-input" placeholder="Observations" [(ngModel)]="observation"></textarea>
         </div>
     </div>
-    <button class="create-btn">Create</button>
+    <button class="create-btn" (click)="addSoin()">Create</button>
     </div>

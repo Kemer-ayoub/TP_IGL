@@ -84,8 +84,8 @@ class OrdonnanceSerializer(serializers.ModelSerializer):
         return MedicamentSerializer(obj.medicaments.all(), many=True).data
 
 class SoinSerializer(serializers.ModelSerializer):
-    infirmier = UserSerializer(read_only=True)
-    dpi = DPISerializer(read_only=True)
+    infirmier = serializers.PrimaryKeyRelatedField(queryset=Infirmier.objects.all())
+    dpi = serializers.PrimaryKeyRelatedField(queryset=DPI.objects.all())
 
     class Meta:
         model = Soin
@@ -97,9 +97,8 @@ class MedicamentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BilanRadiologiqueSerializer(serializers.ModelSerializer):
-    medecin = UserSerializer(read_only=True)
-    dpi = DPISerializer(read_only=True)
-    radiologue = UserSerializer(read_only=True)
+    radiologue = serializers.PrimaryKeyRelatedField(queryset=Radiologue.objects.all())
+    dpi = serializers.PrimaryKeyRelatedField(queryset=DPI.objects.all())
 
     class Meta:
         model = BilanRadiologique

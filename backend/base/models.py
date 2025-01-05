@@ -400,24 +400,29 @@ class BilanRadiologique(models.Model):
         null=True,
         related_name="bilan_radiologiques_red",
     )
-    medecin = models.ForeignKey(
+    """medecin = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
         limit_choices_to={"role": User.Role.MEDECIN},
         null=True,
         related_name="bilan_radiologiques_med",
-    )
+    )"""
     dpi = models.ForeignKey(
         DPI, on_delete=models.CASCADE, related_name="bilans_radiologiques"
     )
-    title = models.TextField(max_length=50)
-    observation = models.TextField(max_length=500)
-    recommendation = models.TextField(max_length=500)
+    date = models.DateField()
+    time = models.TimeField()
+    type_br = models.CharField(max_length=50)
+    description = models.TextField(max_length=500, null=True, blank=True)
+    # help_text="Description détaillée du soin prodigué"
+
+    # Observations générales
+    observations = models.TextField(max_length=500, blank=True, null=True)
     # Image principale de l'examen
     image = models.ImageField(upload_to="examens_radiologiques/")
 
     def __str__(self):
-        return self.title
+        return self.type_br
 
 
 class BilanBiologique(models.Model):
