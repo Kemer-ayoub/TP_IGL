@@ -35,7 +35,7 @@
     <app-care-detail-infirmier [selectedCare]="selectedCare"
      (backToConsultationList)="backToConsultationList()">
     </app-care-detail-infirmier>
-    <app-add-care-infirmier   *ngIf="!showCaresList && !selectedCare && showNursing " 
+    <app-add-care-infirmier   *ngIf="!showCaresList && !selectedCare && showNursing " [dpiId]="patient?.id"
     ></app-add-care-infirmier>
     </div>
 </body>

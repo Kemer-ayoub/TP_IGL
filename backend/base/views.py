@@ -13,6 +13,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import get_user_model
+from rest_framework.parsers import MultiPartParser, FormParser
 
 from .models import *
 from .serializers import DPISerializer, AntecedantMedSerializer, ExamRequestSerializer, ReportRequestSerializer, OrdonnanceSerializer,BilanBiologiqueSerializer,BilanRadiologiqueSerializer,SoinSerializer, UserSerializer, Consultation, ConsultationSerializer, Ordonnance, OrdonnanceSerializer, Medicament, MedicamentSerializer, BilanBiologique, BilanRadiologique
@@ -192,25 +193,24 @@ def valider_ordonnance(request):
                 return Response(serializer.data)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def add_soin(request):
-    serializer = SoinSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET'])
+@api_view(['GET','POST'])
 @permission_classes([IsAuthenticated])
 def list_soin(request, pk=None):
-    if pk is not None:
-        soin = get_object_or_404(Soin, pk=pk)
-        serializer = SoinSerializer(soin)
+    if request.method == "GET":
+        if pk is not None:
+            soin = get_object_or_404(Soin, pk=pk)
+            serializer = SoinSerializer(soin)
+            return Response(serializer.data)
+        soins = Soin.objects.all()
+        serializer = SoinSerializer(soins, many=True)
         return Response(serializer.data)
-    soins = Soin.objects.all()
-    serializer = SoinSerializer(soins, many=True)
-    return Response(serializer.data)
+    if request.method == "POST":
+        serializer = SoinSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -235,6 +235,7 @@ def list_bilan_biologique(request, pk=None):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def add_bilan_radiologique(request):
+    parser_classes = [MultiPartParser, FormParser]  # Required for handling multipart/form-data
     serializer = BilanRadiologiqueSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
