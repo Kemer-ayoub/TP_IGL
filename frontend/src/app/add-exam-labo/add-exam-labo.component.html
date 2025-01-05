@@ -1,0 +1,32 @@
+<div class="Card">
+    <div class="cardtext">
+        <span>New Test</span>
+    </div>
+    <div class="careproprities">
+        <div class="input-Date">
+            <textarea type="text" id="description-input" placeholder="Laborantin name"></textarea>
+          
+        </div>
+        <div class="input-Time">
+            <textarea type="text" id="description-input" placeholder="Date of the exam"></textarea>
+        </div>
+        <div class="input-type">
+            <select id="type-input">
+                <option value="" disabled selected>Select type of exam</option>
+                <option value="exam1">cholesterol</option>
+                <option value="exam2">Iron</option>
+                <option value="exam3">Hypertension</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+        <div class="input-description">
+            <textarea type="text" id="description-input2" placeholder="Result ( level in mg/dL )"></textarea>
+        </div>
+        <div class="input-observation">
+            <textarea type="text" id="observation-input" placeholder="Observations" va></textarea>
+        </div>
+    </div>
+    <button class="addgraph-btn" (click)="AddGraph()">Add Graph</button>
+    <canvas id="myChart" width="400" height="200"></canvas>
+    <button class="create-btn">Create</button>
+    </div>
