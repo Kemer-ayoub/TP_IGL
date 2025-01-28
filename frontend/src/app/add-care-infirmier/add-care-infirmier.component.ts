@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component,CUSTOM_ELEMENTS_SCHEMA,EventEmitter, inject, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -57,5 +58,16 @@ export class AddCareInfirmierComponent {
     });
 
   }
+=======
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-add-care-infirmier',
+  imports: [],
+  templateUrl: './add-care-infirmier.component.html',
+  styleUrl: './add-care-infirmier.component.css'
+})
+export class AddCareInfirmierComponent {
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
 }

@@ -8,17 +8,30 @@
    
         <app-search-bar
         *ngIf="!showCaresList && !selectedCare && !showNursing " 
+<<<<<<< HEAD
         (ssnEntered)="onnssEntered($event)"></app-search-bar>
 
 
         <!-- <div *ngIf="errorMessage" class="error-message">
             <p>{{ errorMessage }}</p>
         </div> -->
+=======
+        (ssnEntered)="onSSNEntered($event)"></app-search-bar>
+
+
+        <div *ngIf="errorMessage" class="error-message">
+            <p>{{ errorMessage }}</p>
+        </div>
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
         <div class="container"
         *ngIf="patient && !showCaresList && !selectedCare && !showNursing ">
         <!-- Patient Info -->
+<<<<<<< HEAD
         <app-patient-info [patient]="patient"></app-patient-info>
+=======
+        <app-patient-info-infirmier [patient]="patient"></app-patient-info-infirmier>
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
     
         <!-- Buttons -->
         <app-buttons-labo

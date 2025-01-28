@@ -1,21 +1,32 @@
 // src/app/medecin-add-new-consultation/medecin-add-new-consultation.component.ts
+<<<<<<< HEAD
 import { Component,CUSTOM_ELEMENTS_SCHEMA,EventEmitter, inject, Output } from '@angular/core';
+=======
+import { Component,EventEmitter, Output } from '@angular/core';
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
 import { Location } from '@angular/common';
 import { MedecinAddNewPrescriptionComponent } from '../medecin-add-new-prescription/medecin-add-new-prescription.component';
+<<<<<<< HEAD
 import { ConsultationService } from '../consultation.service';
 import { AuthService } from '../auth.service';
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
 
 @Component({
   selector: 'app-medecin-add-new-consultation',
   imports: [FormsModule, MedecinAddNewPrescriptionComponent, CommonModule],
   templateUrl: './medecin-add-new-consultation.component.html',
+<<<<<<< HEAD
   styleUrls: ['./medecin-add-new-consultation.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
+=======
+  styleUrls: ['./medecin-add-new-consultation.component.css']
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 })
 export class MedecinAddNewConsultationComponent {
   consultation = {
@@ -25,6 +36,7 @@ export class MedecinAddNewConsultationComponent {
     summary: '',
     prescriptions: [],
   };
+<<<<<<< HEAD
   date: string = '';
   doctor: string = '';
   patient: string = '';
@@ -39,6 +51,8 @@ export class MedecinAddNewConsultationComponent {
   
   
 
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
   showAddPrescription: boolean = false;
   @Output() backToPatientInfo = new EventEmitter<void>();
@@ -50,6 +64,7 @@ export class MedecinAddNewConsultationComponent {
     // Logique pour sauvegarder les données dans la base de données
   }
 
+<<<<<<< HEAD
   addConsultation() {
     console.log('addConsultation');
     if (!this.date || !this.doctor || !this.patient || !this.reason || !this.summary) {
@@ -103,11 +118,16 @@ export class MedecinAddNewConsultationComponent {
       })*/
   }
 
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   // Fonction qui gère l'affichage de la prescription
   togglePrescriptionVisibility() {
     console.log('togglePrescriptionVisibility');
     this.showAddPrescription = !this.showAddPrescription;
+<<<<<<< HEAD
     
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   }
   cancel() {
     this.backToPatientInfo.emit();

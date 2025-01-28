@@ -5,6 +5,7 @@
   </div>
   <div class="careproprities">
     <div class="input-Time">
+<<<<<<< HEAD
         <input type="text" id="time-input" placeholder="Patient full name" [(ngModel)]="patientName">
     </div>
     <div class="input-type">
@@ -12,12 +13,22 @@
     </div>
     <div class="input-type">
         <input type="text" id="type-input" placeholder="Doctor name" [(ngModel)]="doctorName">
+=======
+        <input type="text" id="time-input" placeholder="Patient full name">
+    </div>
+    <div class="input-type">
+        <input type="text" id="type-input" placeholder="Patient Age">
+    </div>
+    <div class="input-type">
+        <input type="text" id="type-input" placeholder="Doctor name">
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
     </div>
     <p>Medications List</p>
     <div class="medication-inputs">
       <input
         type="text"
         id="med-input"
+<<<<<<< HEAD
         [(ngModel)]="nom"
         placeholder="Medication name"
       />
@@ -26,6 +37,16 @@
         type="text"
         id="med-input"
         [(ngModel)]="duree"
+=======
+        [(ngModel)]="medicationName"
+        placeholder="Medication name"
+      />
+      <input type="text" id="med-input" [(ngModel)]="medicationDose" placeholder="Dose" />
+      <input
+        type="text"
+        id="med-input"
+        [(ngModel)]="medicationDuration"
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
         placeholder="Duration"
       />
       <button class="plus" (click)="addMedication()">
@@ -34,13 +55,21 @@
     </div>
     <ul>
       <li class="med-item" *ngFor="let medication of medications; index as i">
+<<<<<<< HEAD
         {{ medication.nom }} - {{ medication.dosage }} - {{ medication.duree }}
+=======
+        {{ medication.name }} - {{ medication.dose }} - {{ medication.duration }}
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
         <button (click)="deleteMedication(i)"><img src="Photo\delete.png" alt=""></button>
       </li>
     </ul>
   </div>
   <div class="buttons">
     <button class="cancel-btn" (click)="goBack()">Cancel</button>
+<<<<<<< HEAD
     <button class="create-btn" (click)="addOrdonnance()">Create</button>
+=======
+    <button class="create-btn">Create</button>
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   </div>
 </div>

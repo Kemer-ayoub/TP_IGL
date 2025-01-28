@@ -1,10 +1,19 @@
 <div *ngIf="selectedCare " class="consultation-details">
     <h3>Exam Request Details</h3>
+<<<<<<< HEAD
     <p><strong>Test Type :</strong> {{ selectedCare.type_test }}</p>
     <p><strong>Sub-Type :</strong> {{ selectedCare.body_part }}</p>
     <p><strong>Priority :</strong> {{ selectedCare.priority }}</p>
     <p><strong>Medical Justification :</strong> {{ selectedCare.medical_just }}</p>
     <p><strong>Desired date :</strong> {{ selectedCare.req_date }}</p>
     <p><strong>Doctor name :</strong> {{ selectedCare.medecin.first_name }}</p>
+=======
+    <p><strong>Test Type :</strong> {{ selectedCare.type }}</p>
+    <p><strong>Sub-Type :</strong> {{ selectedCare.body_part }}</p>
+    <p><strong>Priority :</strong> {{ selectedCare.priority }}</p>
+    <p><strong>Medical Justification :</strong> {{ selectedCare.reason }}</p>
+    <p><strong>Desired date :</strong> {{ selectedCare.date }}</p>
+    <p><strong>Doctor name :</strong> {{ selectedCare.dname }}</p>
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
     <button class="back-btn" (click)="onBackToConsultationList()">Retour à la liste des consultations</button>
 </div>

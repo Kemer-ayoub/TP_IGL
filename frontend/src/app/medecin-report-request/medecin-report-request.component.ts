@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component,EventEmitter, inject, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -7,10 +8,19 @@ import { ReportrequestService } from '../reportrequest.service';
 @Component({
   selector: 'app-medecin-report-request',
   imports: [FormsModule],
+=======
+import { Component,EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-medecin-report-request',
+  imports: [],
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   templateUrl: './medecin-report-request.component.html',
   styleUrl: './medecin-report-request.component.css'
 })
 export class MedecinReportRequestComponent {
+<<<<<<< HEAD
   Typeofimaging: string = '';  // Default value for priority
   bodypart: string = '';
   priority: string = 'standard';
@@ -70,5 +80,13 @@ export class MedecinReportRequestComponent {
     
     
   }
+=======
+  @Output() toggleReportRequest= new EventEmitter<void>();
+  
+    constructor(private router: Router) {}
+    cancel() {
+      this.toggleReportRequest.emit();
+    }
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
 }

@@ -19,4 +19,8 @@ def main():
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     main(), # type: ignore
+=======
+    main()
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b

@@ -63,6 +63,7 @@ export class MedHistoryService {
       })
     );
   }
+<<<<<<< HEAD
 
   createAntecedants(antec: any): Observable<any> { 
     const makeRequest = (token: string) => {
@@ -110,4 +111,9 @@ export class MedHistoryService {
     );
   }
   
+=======
+  
+
+
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 }

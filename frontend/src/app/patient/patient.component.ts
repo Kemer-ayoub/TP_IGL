@@ -17,8 +17,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, switchMap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { MedHistoryService } from '../medHistory.service';
+<<<<<<< HEAD
 import { ConsultationService } from '../consultation.service';
 import { OrdonnanceService } from '../ordonnance.service';
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
 @Component({
@@ -30,8 +33,11 @@ import { OrdonnanceService } from '../ordonnance.service';
 export class PatientComponent implements OnInit {
   authService = inject(AuthService);
   medHistoryService = inject(MedHistoryService);
+<<<<<<< HEAD
   consultationService = inject(ConsultationService);
   ordonnanceService = inject(OrdonnanceService);
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   user?: any;
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly API_URL = 'http://127.0.0.1:8000/api/';
@@ -320,6 +326,7 @@ export class PatientComponent implements OnInit {
   // Méthode pour afficher la liste des prescriptions
 
   onViewConsultations() {
+<<<<<<< HEAD
     this.consultationService.getAllConsultation(this.dpi.id).subscribe({
       next: (response) => {
         console.log("the reda response:", response)
@@ -377,6 +384,9 @@ export class PatientComponent implements OnInit {
       },
       error: (error) => console.error('Error fetching DPI:', error)
     })
+=======
+    this.showConsultationsList = true;  // Show consultations list
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   }
   selectConsultation(consultation: any) {
     console.log('Consultation sélectionnée:', consultation);

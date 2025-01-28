@@ -18,8 +18,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, switchMap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { DpiService } from '../dpi.service';
+<<<<<<< HEAD
 import { OrdonnanceService } from '../ordonnance.service';
 import { ConsultationService } from '../consultation.service';
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
 @Component({
   selector: 'app-pharmacien',
@@ -31,9 +34,12 @@ import { ConsultationService } from '../consultation.service';
 export class PharmacienComponent {
   authService = inject(AuthService);
   dpiService = inject(DpiService);
+<<<<<<< HEAD
   consultationService = inject(ConsultationService);
   ordonnanceService = inject(OrdonnanceService);
   
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   user?: any;
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly API_URL = 'http://127.0.0.1:8000/api/';
@@ -43,7 +49,10 @@ export class PharmacienComponent {
   error: string | null = null;
   dpi: any = null;
   theid: any = null;
+<<<<<<< HEAD
   errorMessage: string = '';
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
  patients = [
     {
@@ -194,6 +203,12 @@ export class PharmacienComponent {
 
   // Méthode pour afficher la liste des prescriptions
 
+<<<<<<< HEAD
+=======
+  onViewConsultations() {
+    this.showConsultationsList = true;  // Show consultations list
+  }
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   selectConsultation(consultation: any) {
     console.log('Consultation sélectionnée:', consultation);
 
@@ -237,6 +252,7 @@ export class PharmacienComponent {
   }
 
 
+<<<<<<< HEAD
   onViewConsultations() {
     this.consultationService.getAllConsultation(this.patient.id).subscribe({
       next: (response) => {
@@ -298,6 +314,8 @@ export class PharmacienComponent {
   }
 
 
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
  
 

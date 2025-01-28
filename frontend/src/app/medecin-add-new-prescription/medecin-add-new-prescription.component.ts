@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 import { Component,EventEmitter, inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';  // Importez FormsModule
 import { AuthService } from '../auth.service';
 import { OrdonnanceService } from '../ordonnance.service';
+=======
+import { Component,EventEmitter, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';  // Importez FormsModule
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
 @Component({
   selector: 'app-medecin-add-new-prescription',
@@ -12,6 +18,7 @@ import { OrdonnanceService } from '../ordonnance.service';
   styleUrls: ['./medecin-add-new-prescription.component.css'],
 })
 export class MedecinAddNewPrescriptionComponent {
+<<<<<<< HEAD
   //@Input() consultationId: any
   @Input() consultationId!: number; // Replace with the correct type (e.g., string or number)
 
@@ -71,6 +78,29 @@ export class MedecinAddNewPrescriptionComponent {
       }
     
 
+=======
+  @Output() togglePrescriptionVisibility = new EventEmitter<void>();
+  
+
+  medications: { name: string; dose: string; duration: string }[] = [];
+  medicationName: string = '';
+  medicationDose: string = '';
+  medicationDuration: string = '';
+
+  addMedication() {
+    if (this.medicationName && this.medicationDose && this.medicationDuration) {
+      this.medications.push({
+        name: this.medicationName,
+        dose: this.medicationDose,
+        duration: this.medicationDuration,
+      });
+      this.medicationName = '';
+      this.medicationDose = '';
+      this.medicationDuration = '';
+    }
+  }
+
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   deleteMedication(index: number) {
     this.medications.splice(index, 1);
   }

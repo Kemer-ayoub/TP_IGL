@@ -12,4 +12,7 @@ pycodestyle==2.12.1
 PyJWT==2.10.1
 sqlparse==0.5.3
 tzdata==2024.2
+<<<<<<< HEAD
 drf_yasg
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b

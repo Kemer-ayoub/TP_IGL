@@ -42,7 +42,10 @@ INSTALLED_APPS = [
     "base.apps.BaseConfig",
     "silk",
     "corsheaders",
+<<<<<<< HEAD
     'drf_yasg',
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 ]
 
 AUTH_USER_MODEL = "base.User"
@@ -50,11 +53,17 @@ AUTH_USER_MODEL = "base.User"
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
+<<<<<<< HEAD
     
     )
 }
 
 
+=======
+    )
+}
+
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=10),
@@ -135,7 +144,11 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sample',
         'USER': 'root',
+<<<<<<< HEAD
         'PASSWORD': 'kemerAyoub2005$',
+=======
+        'PASSWORD': '12345',
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
         'HOST': 'localhost',  # or the hostname where your MySQL server is running
         'PORT': '3306',      # or the port on which your MySQL server is listening
     }

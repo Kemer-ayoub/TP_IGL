@@ -1,11 +1,21 @@
+<<<<<<< HEAD
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
+=======
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../header/header.component';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { PatientInfoComponent } from '../patient-info/patient-info.component';
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 import {MedecinAddNewConsultationComponent } from '../medecin-add-new-consultation/medecin-add-new-consultation.component'
 import { MedicalHistoryComponent } from '../medical-history/medical-history.component';
 import {MedecinExamRequestComponent} from '../medecin-exam-request/medecin-exam-request.component'
 import { MedecinReportRequestComponent } from '../medecin-report-request/medecin-report-request.component';
+<<<<<<< HEAD
 import { ButtonRadiologueComponent } from "../button-radiologue/button-radiologue.component";
 import { ReportListRadiologueComponent } from "../report-list-radiologue/report-list-radiologue.component";
 import { ReportDetailRadiologueComponent } from "../report-detail-radiologue/report-detail-radiologue.component";
@@ -18,16 +28,23 @@ import { throwError } from 'rxjs';
 import { DpiService } from '../dpi.service';
 import { PatientInfoComponent } from '../patient-info/patient-info.component';
 import { MedHistoryService } from '../medHistory.service';
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
 
 @Component({
   selector: 'app-medecin-consulter-dpi',
+<<<<<<< HEAD
   imports: [FormsModule,MedecinAddNewConsultationComponent,MedecinReportRequestComponent, MedecinExamRequestComponent, MedicalHistoryComponent, CommonModule, HeaderComponent, SearchBarComponent, PatientInfoComponent, ReactiveFormsModule],
+=======
+  imports: [FormsModule,MedecinAddNewConsultationComponent,MedecinReportRequestComponent, MedecinExamRequestComponent, MedicalHistoryComponent, CommonModule, HeaderComponent, SearchBarComponent, PatientInfoComponent,],
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   templateUrl: './medecin-consulter-dpi.component.html',
   styleUrl: './medecin-consulter-dpi.component.css'
 })
 
 export class MedecinConsulterDpiComponent {
+<<<<<<< HEAD
 
   Typeofrecord: string = '';
   Nameofrecord: string = '';
@@ -54,6 +71,11 @@ export class MedecinConsulterDpiComponent {
  patients = [
     {
       nss: '111',
+=======
+ patients = [
+    {
+      ssn: '111',
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
       firstName: 'Oussama',
       lastName: 'Benhebbadj',
       address: 'Algiers',
@@ -101,7 +123,11 @@ export class MedecinConsulterDpiComponent {
 
     },
     {
+<<<<<<< HEAD
       nss: '22222',
+=======
+      ssn: '22222',
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
       firstName: 'John',
       lastName: 'Doe',
       address: 'Oran',
@@ -123,7 +149,11 @@ export class MedecinConsulterDpiComponent {
       ]
     },
     {
+<<<<<<< HEAD
       nss: '33333',
+=======
+      ssn: '33333',
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
       firstName: 'Jane',
       lastName: 'Smith',
       address: 'Tlemcen',
@@ -145,7 +175,11 @@ export class MedecinConsulterDpiComponent {
     }
   ];
 
+<<<<<<< HEAD
   nss: string = '';
+=======
+  ssn: string = '';
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   patient: any = null;
   errorMessage: string = '';
   showPrescriptionsList: boolean = false;
@@ -157,6 +191,7 @@ export class MedecinConsulterDpiComponent {
   showMedicalHistory: boolean = false;
   showExamRequest: boolean = false ;
   showReportRequest: boolean = false ;
+<<<<<<< HEAD
   
 
   searchPatient() {
@@ -214,6 +249,20 @@ export class MedecinConsulterDpiComponent {
       // Reset the form after successful submission
   }
 
+=======
+
+  searchPatient() {
+    this.errorMessage = '';
+    this.patient = this.patients.find(patient => patient.ssn === this.ssn);
+    if (!this.patient) {
+      this.errorMessage = 'Patient not found!';
+    }
+  }
+  onSSNEntered(ssn: string) {
+    this.ssn = ssn;
+    this.searchPatient();
+  }
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   selectPrescription(prescription: any) {
     if (prescription === null) {
       this.selectedPrescription = null;
@@ -299,6 +348,7 @@ export class MedecinConsulterDpiComponent {
     this.showPrescriptionsList = false;
     this.selectedPrescription = null;
   }
+<<<<<<< HEAD
   // Méthode pour afficher ou masquer l'historique médical
   toggleMedicalHistory() {
     this.medHistoryService.getAntecedants(this.patient.id).subscribe({
@@ -343,14 +393,29 @@ export class MedecinConsulterDpiComponent {
     })
   }
 
+=======
+  toggleMedicalHistory() {
+    if (this.patient?.medicalHistory) {
+      this.showMedicalHistory = !this.showMedicalHistory;
+    } else {
+      this.errorMessage = 'Medical history not available for this patient!';
+    }
+  }
+  toggleExamRequest(){
+    this.showExamRequest = !this.showExamRequest ;
+  }
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   toggleReportRequest(){
     console.log('toggleReportRequest');
     this.showReportRequest = !this.showReportRequest ;
   }
+<<<<<<< HEAD
   toggleExamRequest(){
     console.log('toggleExamRequest');
     this.showExamRequest = !this.showExamRequest ;
   }
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   backToPatientInfoMedicalHistory() {
     this.showMedicalHistory = !this.showMedicalHistory;
   }

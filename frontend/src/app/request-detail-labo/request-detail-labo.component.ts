@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import { Component, EventEmitter, inject, Input, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
+=======
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 @Component({
   selector: 'app-request-detail-labo',
   imports: [CommonModule],
@@ -8,6 +13,7 @@ import { AuthService } from '../auth.service';
   styleUrl: './request-detail-labo.component.css'
 })
 export class RequestDetailLaboComponent {
+<<<<<<< HEAD
   authService = inject(AuthService);
   error: string | null = null;
   displayCare: any = null; // This will hold our modified data for display
@@ -59,6 +65,10 @@ export class RequestDetailLaboComponent {
     }
   }
 
+=======
+  @Input() selectedCare: any;
+  @Output() backToConsultationList: EventEmitter<void> = new EventEmitter();
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   onBackToConsultationList() {
     this.backToConsultationList.emit();
   }

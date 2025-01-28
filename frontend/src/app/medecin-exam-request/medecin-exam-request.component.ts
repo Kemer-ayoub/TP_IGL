@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component,EventEmitter, inject, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ExamrequestService } from '../examrequest.service';
@@ -7,10 +8,19 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-medecin-exam-request',
   imports: [FormsModule],
+=======
+import { Component,EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-medecin-exam-request',
+  imports: [],
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   templateUrl: './medecin-exam-request.component.html',
   styleUrl: './medecin-exam-request.component.css'
 })
 export class MedecinExamRequestComponent {
+<<<<<<< HEAD
   priority: string = 'standard';  // Default value for priority
   medicalJustification: string = '';
   testDate: string = '';
@@ -28,11 +38,20 @@ export class MedecinExamRequestComponent {
   authService = inject(AuthService);
 
 
+=======
+  priority: string = 'Standard';  // Default value for priority
+  medicalJustification: string = '';
+  testDate: string = '';
+  doctorName: string = '';
+  @Output() toggleExamRequest= new EventEmitter<void>();
+
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   constructor(private router: Router) {}
   cancel() {
     this.toggleExamRequest.emit();
   }
 
+<<<<<<< HEAD
   addExamRequest() {
 
     if (!this.priority || !this.medicalJustification || !this.testDate || !this.doctorName || !this.Typeoftest || !this.Subtypeoftest) {
@@ -71,4 +90,6 @@ export class MedecinExamRequestComponent {
 
   }
 
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 }

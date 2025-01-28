@@ -13,7 +13,10 @@ import { catchError, switchMap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { DpiService } from '../dpi.service';
 import { PatientInfoComponent } from '../patient-info/patient-info.component';
+<<<<<<< HEAD
 import { ReportrequestService } from '../reportrequest.service';
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
 @Component({
   selector: 'app-radiologue',
@@ -24,7 +27,10 @@ import { ReportrequestService } from '../reportrequest.service';
 export class RadiologueComponent {
   authService = inject(AuthService);
   dpiService = inject(DpiService);
+<<<<<<< HEAD
   reportrequestService = inject(ReportrequestService);
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   user?: any;
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly API_URL = 'http://127.0.0.1:8000/api/';
@@ -166,6 +172,7 @@ export class RadiologueComponent {
       error: (error) => console.error('Error fetching DPI:', error)
     });
   }
+<<<<<<< HEAD
 
   getAllReportReq(){
     this.reportrequestService.getAllReportReq().subscribe({
@@ -190,6 +197,11 @@ export class RadiologueComponent {
   onViewCares() {
     console.log("the view get called")
     this.getAllReportReq();
+=======
+ 
+  onViewCares() {
+    console.log("the view get called")
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
     this.showCaresList = true;  
   }
   AddCare() {

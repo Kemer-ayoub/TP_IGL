@@ -5,6 +5,7 @@
     </div>
     <div class="careproprities">
         <div class="input-Date">
+<<<<<<< HEAD
             <input type="date" id="date-input" placeholder="Date" [(ngModel)]="date">
         </div>
         <div class="input-Time">
@@ -18,17 +19,38 @@
         </div>
         <div class="input-description">
             <textarea type="text" id="description-input" placeholder="Summary" [(ngModel)]="summary"></textarea>
+=======
+            <input type="date" id="date-input" placeholder="Date">
+        </div>
+        <div class="input-Time">
+            <input type="text" id="time-input" placeholder="Doctor name">
+        </div>
+        <div class="input-type">
+            <input type="text" id="type-input" placeholder="Reason">
+        </div>
+        <div class="input-description">
+            <textarea type="text" id="description-input" placeholder="Summary"></textarea>
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
         </div>
         <button class="add-btn" (click)="togglePrescriptionVisibility()">
           <img src="Photo\Group 39.png" alt=""> Add Prescriptions
         </button>
     </div>
     <div class="buttons">
+<<<<<<< HEAD
         <button class="cancel-btn" (click)="addConsultation()"> Cancel</button>
         <button class="create-btn" (click)="addConsultation()">Submit</button>
     </div>
 </div>
 <div class="consultations_container">
     <app-medecin-add-new-prescription *ngIf="showAddPrescription" [consultationId]="consultationId" (togglePrescriptionVisibility)="togglePrescriptionVisibility()">
+=======
+        <button class="cancel-btn" (click)="cancel()"> Cancel</button>
+        <button class="create-btn">Submit</button>
+    </div>
+</div>
+<div class="consultations_container">
+    <app-medecin-add-new-prescription *ngIf="showAddPrescription" (togglePrescriptionVisibility)="togglePrescriptionVisibility()">
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
     </app-medecin-add-new-prescription>
 </div>

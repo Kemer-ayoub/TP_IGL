@@ -328,6 +328,7 @@ class Consultation(models.Model):
     objects = models.Manager()
 
     def __str__(self):
+<<<<<<< HEAD
         return f"Consultation le {self.date_cons}"
 
 
@@ -346,6 +347,20 @@ class Ordonnance(models.Model):
     def __str__(self):
         return f"Ordonnance for {self.patient_name}"
 
+=======
+        return f"Consultation de {self.patient.prenom} {self.patient.nom} le {self.date_cons}"
+
+
+class Ordonnance(models.Model):
+    date = models.DateField()
+    valid = models.BooleanField()  # ca sera validé par le pharmacie
+    consultation = models.ForeignKey(
+        Consultation, on_delete=models.SET_NULL, null=True, related_name="ordonnances"
+    )
+
+    def __str__(self):
+        return self.date
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
 
 class Soin(models.Model):
@@ -384,9 +399,15 @@ class Medicament(models.Model):
     ordonnance = models.ForeignKey(
         Ordonnance, on_delete=models.CASCADE, null=True, related_name="medicaments"
     )
+<<<<<<< HEAD
     """soin = models.ForeignKey(
         Soin, on_delete=models.CASCADE, null=True, related_name="medicaments"
     )"""
+=======
+    soin = models.ForeignKey(
+        Soin, on_delete=models.CASCADE, null=True, related_name="medicaments"
+    )
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
     def __str__(self):
         return self.nom
@@ -400,12 +421,17 @@ class BilanRadiologique(models.Model):
         null=True,
         related_name="bilan_radiologiques_red",
     )
+<<<<<<< HEAD
     """medecin = models.ForeignKey(
+=======
+    medecin = models.ForeignKey(
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
         User,
         on_delete=models.SET_NULL,
         limit_choices_to={"role": User.Role.MEDECIN},
         null=True,
         related_name="bilan_radiologiques_med",
+<<<<<<< HEAD
     )"""
     dpi = models.ForeignKey(
         DPI, on_delete=models.CASCADE, related_name="bilans_radiologiques"
@@ -418,11 +444,24 @@ class BilanRadiologique(models.Model):
 
     # Observations générales
     observations = models.TextField(max_length=500, blank=True, null=True)
+=======
+    )
+    dpi = models.ForeignKey(
+        DPI, on_delete=models.CASCADE, related_name="bilans_radiologiques"
+    )
+    title = models.TextField(max_length=50)
+    observation = models.TextField(max_length=500)
+    recommendation = models.TextField(max_length=500)
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
     # Image principale de l'examen
     image = models.ImageField(upload_to="examens_radiologiques/")
 
     def __str__(self):
+<<<<<<< HEAD
         return self.type_br
+=======
+        return self.radio
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
 
 class BilanBiologique(models.Model):
@@ -453,7 +492,11 @@ class BilanBiologique(models.Model):
     )
 
     def __str__(self):
+<<<<<<< HEAD
         return self.statut
+=======
+        return self.status
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
 
 class ExamRequest(models.Model):  # Request le bilan biologique

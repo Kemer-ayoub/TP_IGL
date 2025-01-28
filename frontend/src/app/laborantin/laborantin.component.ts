@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import { Component } from '@angular/core';
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 import { HeaderComponent } from "../header/header.component";
 import { SearchBarComponent } from "../search-bar/search-bar.component";
 import { PatientInfoInfirmierComponent } from "../patient-info-infirmier/patient-info-infirmier.component";
@@ -5,6 +9,7 @@ import { ButtonsLaboComponent } from "../buttons-labo/buttons-labo.component";
 import { ExamsListLaboComponent } from "../exams-list-labo/exams-list-labo.component";
 import { RequestDetailLaboComponent } from "../request-detail-labo/request-detail-labo.component";
 import { CommonModule } from '@angular/common';
+<<<<<<< HEAD
 import { ButtonRadiologueComponent } from "../button-radiologue/button-radiologue.component";
 import { ReportListRadiologueComponent } from "../report-list-radiologue/report-list-radiologue.component";
 import { ReportDetailRadiologueComponent } from "../report-detail-radiologue/report-detail-radiologue.component";
@@ -20,10 +25,16 @@ import { ExamrequestService } from "../examrequest.service";
 @Component({
   selector: 'app-laborantin',
   imports: [HeaderComponent, SearchBarComponent, PatientInfoInfirmierComponent, PatientInfoComponent, ButtonsLaboComponent, ExamsListLaboComponent, RequestDetailLaboComponent,CommonModule],
+=======
+@Component({
+  selector: 'app-laborantin',
+  imports: [HeaderComponent, SearchBarComponent, PatientInfoInfirmierComponent, ButtonsLaboComponent, ExamsListLaboComponent, RequestDetailLaboComponent,CommonModule],
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   templateUrl: './laborantin.component.html',
   styleUrl: './laborantin.component.css'
 })
 export class LaborantinComponent {
+<<<<<<< HEAD
   authService = inject(AuthService);
   dpiService = inject(DpiService);
   examrequestService = inject(ExamrequestService);
@@ -41,6 +52,11 @@ export class LaborantinComponent {
   patients = [
     {
      nss: '11111',
+=======
+  patients = [
+    {
+     ssn: '11111',
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
       firstName: 'Oussama',
       lastName: 'Benhebbadj',
       address: 'Algiers',
@@ -73,7 +89,11 @@ export class LaborantinComponent {
       ,
         
     {
+<<<<<<< HEAD
       nss: '22222',
+=======
+      ssn: '22222',
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
       firstName: 'John',
       lastName: 'Doe',
       address: 'Oran',
@@ -105,7 +125,11 @@ export class LaborantinComponent {
         }]
     },
     {
+<<<<<<< HEAD
       nss: '33333',
+=======
+      ssn: '33333',
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
       firstName: 'Jane',
       lastName: 'Smith',
       address: 'Tlemcen',
@@ -138,13 +162,18 @@ export class LaborantinComponent {
     }
   ];
 
+<<<<<<< HEAD
   nss: string = '';
+=======
+  ssn: string = '';
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   patient: any = null;
   errorMessage: string='';
   selectedCare: any = null;
   showCaresList: boolean = false;
   showNursing: boolean = false;
   searchPatient() {
+<<<<<<< HEAD
     this.fetchDpi(this.nss);
     if (!this.patient) {
     }
@@ -193,6 +222,21 @@ export class LaborantinComponent {
   onViewCares() {
     console.log("the view get called")
     this.getAllExamReq();
+=======
+    this.errorMessage = '';
+    this.patient = this.patients.find(patient => patient.ssn === this.ssn);
+    if (!this.patient) {
+      this.errorMessage = 'Patient not found!';
+    }
+  }
+  onSSNEntered(ssn: string) {
+    this.ssn=ssn; 
+    this.searchPatient();
+    }
+ 
+  onViewCares() {
+    console.log("the view get called")
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
     this.showCaresList = true;  
   }
   AddCare() {

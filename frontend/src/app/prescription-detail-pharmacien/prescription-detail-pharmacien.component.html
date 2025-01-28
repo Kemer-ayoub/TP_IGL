@@ -2,18 +2,30 @@
     <div *ngIf="selectedPrescription" class="prescription-detail">
         <!-- Première ligne : nom complet, âge, médecin et statut -->
         <div class="patient-header">
+<<<<<<< HEAD
             <p><strong>Full Name:</strong> {{ patient.nom }} {{ patient.prenom }}</p>
             <p><strong>Age:</strong> {{ calculateAge(patient.date_naissance) }} years</p>
             <p><strong>Doctor:</strong> {{ selectedPrescription.medecin }}</p>
+=======
+            <p><strong>Full Name:</strong> {{ patient.firstName }} {{ patient.lastName }}</p>
+            <p><strong>Age:</strong> {{ calculateAge(patient.dob) }} years</p>
+            <p><strong>Doctor:</strong> {{ selectedPrescription.doctorName }}</p>
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
             <p><strong>Status:</strong> {{ selectedPrescription.valid ? 'Valid' : 'Expired' }}</p>
         </div>
         <h4>Medications List:</h4>
         <!-- Liste des médicaments -->
         <div *ngIf="selectedPrescription?.medicaments?.length > 0">
             <div *ngFor="let medicament of selectedPrescription.medicaments" class="medication-info">
+<<<<<<< HEAD
                 <div><strong>Médicament:</strong> {{ medicament.nom }}</div>
                 <div><strong>Dose:</strong> {{ medicament.dosage }}</div>
                 <div><strong>Durée:</strong> {{ medicament.duree }}</div>
+=======
+                <div><strong>Médicament:</strong> {{ medicament.name }}</div>
+                <div><strong>Dose:</strong> {{ medicament.dose }}</div>
+                <div><strong>Durée:</strong> {{ medicament.duration }}</div>
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
             </div>
         </div>
   

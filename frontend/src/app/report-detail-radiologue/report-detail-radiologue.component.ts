@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import { Component, EventEmitter, inject, Input, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
+=======
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 @Component({
   selector: 'app-report-detail-radiologue',
   imports: [CommonModule],
@@ -8,6 +13,7 @@ import { AuthService } from '../auth.service';
   styleUrl: './report-detail-radiologue.component.css'
 })
 export class ReportDetailRadiologueComponent {
+<<<<<<< HEAD
   authService = inject(AuthService);
   error: string | null = null;
   displayCare: any = null; // This will hold our modified data for display
@@ -65,6 +71,11 @@ export class ReportDetailRadiologueComponent {
   
   onBackToConsultationList() {
     console.log("selectedCare", this.selectedCare);
+=======
+  @Input() selectedCare: any;
+  @Output() backToConsultationList: EventEmitter<void> = new EventEmitter();
+  onBackToConsultationList() {
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
     this.backToConsultationList.emit();
   }
 }

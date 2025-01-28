@@ -64,8 +64,13 @@ class DPISerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ConsultationSerializer(serializers.ModelSerializer):
+<<<<<<< HEAD
     medecin = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
     dpi = serializers.PrimaryKeyRelatedField(queryset=DPI.objects.all())
+=======
+    medecin = UserSerializer(read_only=True)
+    dpi = DPISerializer(read_only=True)
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
     class Meta:
         model = Consultation
@@ -73,8 +78,11 @@ class ConsultationSerializer(serializers.ModelSerializer):
 
 class OrdonnanceSerializer(serializers.ModelSerializer):
     medicaments = serializers.SerializerMethodField()
+<<<<<<< HEAD
     consultation = serializers.PrimaryKeyRelatedField(queryset=Consultation.objects.all())
 
+=======
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
     class Meta:
         model = Ordonnance
@@ -84,8 +92,13 @@ class OrdonnanceSerializer(serializers.ModelSerializer):
         return MedicamentSerializer(obj.medicaments.all(), many=True).data
 
 class SoinSerializer(serializers.ModelSerializer):
+<<<<<<< HEAD
     infirmier = serializers.PrimaryKeyRelatedField(queryset=Infirmier.objects.all())
     dpi = serializers.PrimaryKeyRelatedField(queryset=DPI.objects.all())
+=======
+    infirmier = UserSerializer(read_only=True)
+    dpi = DPISerializer(read_only=True)
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
     class Meta:
         model = Soin
@@ -97,8 +110,14 @@ class MedicamentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BilanRadiologiqueSerializer(serializers.ModelSerializer):
+<<<<<<< HEAD
     radiologue = serializers.PrimaryKeyRelatedField(queryset=Radiologue.objects.all())
     dpi = serializers.PrimaryKeyRelatedField(queryset=DPI.objects.all())
+=======
+    medecin = UserSerializer(read_only=True)
+    dpi = DPISerializer(read_only=True)
+    radiologue = UserSerializer(read_only=True)
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
     class Meta:
         model = BilanRadiologique
@@ -114,16 +133,26 @@ class BilanBiologiqueSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ExamRequestSerializer(serializers.ModelSerializer):
+<<<<<<< HEAD
     medecin = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
     laborantin = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+=======
+    medecin = UserSerializer(read_only=True)
+    laborantin = UserSerializer(read_only=True)
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
     class Meta:
         model = ExamRequest
         fields = '__all__'
 
 class ReportRequestSerializer(serializers.ModelSerializer):
+<<<<<<< HEAD
     medecin = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
     radiologue = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+=======
+    medecin = UserSerializer(read_only=True)
+    radiologue = UserSerializer(read_only=True)
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
     class Meta:
         model = ReportRequest

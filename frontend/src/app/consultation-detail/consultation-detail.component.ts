@@ -10,7 +10,11 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './consultation-detail.component.css'
 })
 export class ConsultationDetailComponent {
+<<<<<<< HEAD
   @Input() selectedConsultation: any;
+=======
+   @Input() selectedConsultation: any;
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   @Input() selectedPrescription: any;
 
   @Output() backToConsultationList: EventEmitter<void> = new EventEmitter();

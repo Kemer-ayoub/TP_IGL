@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component,CUSTOM_ELEMENTS_SCHEMA,EventEmitter, inject, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -86,5 +87,16 @@ export class AddReportRadiologueComponent {
     });
 
   }
+=======
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-add-report-radiologue',
+  imports: [],
+  templateUrl: './add-report-radiologue.component.html',
+  styleUrl: './add-report-radiologue.component.css'
+})
+export class AddReportRadiologueComponent {
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
 
 }

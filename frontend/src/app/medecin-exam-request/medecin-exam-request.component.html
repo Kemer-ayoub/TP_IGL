@@ -5,6 +5,7 @@
     </div>
     <div class="careproprities">
         <div class="input-Date">
+<<<<<<< HEAD
             <input type="text" id="date-input" placeholder="Type of test" [(ngModel)]="Typeoftest" name="Typeoftest" required>
         </div>
         <div class="input-Time">
@@ -26,10 +27,37 @@
         </div>
         <div class="input-type">
             <input type="text" id="type-input" placeholder="Doctor name" [(ngModel)]="doctorName" name="doctorName" required>
+=======
+            <input type="text" id="date-input" placeholder="Type of test">
+        </div>
+        <div class="input-Time">
+            <input type="text" id="time-input" placeholder="Sub-Type">
+        </div>
+        <div class="dropdown">
+            <label for="fruits">Priority</label>
+            <select id="prioriti" name="priority">
+                <option value="Standard">Standard</option>
+                <option value="High priority">High priority</option>
+                <option value="Urgent">Urgent</option>
+            </select>
+        </div>
+        <div class="input-Date">
+            <input type="text" id="description-input" placeholder="Medical justification">
+        </div>
+        <div class="input-Time">
+            <input type="date" id="observation-input" placeholder="Desired test date">
+        </div>
+        <div class="input-type">
+            <input type="text" id="type-input" placeholder="Doctor name">
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
         </div>
     </div>
     <div class="btns">
         <button class="cancel-btn" (click)="cancel()">Cancel</button>
+<<<<<<< HEAD
         <button class="create-btn" (click)="addExamRequest()">Submit</button>
+=======
+        <button class="create-btn">Submit</button>
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
     </div>
     </div>

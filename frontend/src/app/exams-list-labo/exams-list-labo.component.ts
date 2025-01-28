@@ -7,7 +7,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './exams-list-labo.component.css'
 })
 export class ExamsListLaboComponent {
+<<<<<<< HEAD
   @Input() cares: any[] = [];  // Array of consultations passed from parent
+=======
+@Input() cares: any[] = [];  // Array of consultations passed from parent
+>>>>>>> 1109aeef4c2c5a93517dd75840f96155dc960e5b
   @Input() selectedCare: any;   // Current selected consultation
   @Output() consultationSelected = new EventEmitter<any>();  // Emit when consultation is selected
   @Output() backToPatientInfo = new EventEmitter<void>(); 
