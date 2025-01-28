@@ -1,4 +1,4 @@
-import { Component,HostListener, inject, OnInit  } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
@@ -24,12 +24,11 @@ import { OrdonnanceService } from '../ordonnance.service';
 import { SoinService } from '../soin.service';
 import { BilanbiologiqueService } from '../bilanbiologique.service';
 
-/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
 @Component({
   selector: 'app-patient',
   imports: [FormsModule,ExamDetailPatientComponent,ExamsListPatientComponent, MedicalHistoryComponent,NursingComponent, ButtonsPatientComponent,RouterLink, ConsultationDetailComponent, CommonModule, ConsultationListComponent, HeaderComponent, SearchBarComponent, PatientInfoComponent, PrescriptionsDetailComponent, PrescriptionsListComponent,],
   templateUrl: './patient.component.html',
-  styleUrls: ['./patient.component.css']
+  styleUrls: ['./patient.component.css'],
 })
 export class PatientComponent implements OnInit {
   authService = inject(AuthService);
@@ -40,132 +39,32 @@ export class PatientComponent implements OnInit {
   
   soinService = inject(SoinService);
   user?: any;
+  dpi: any = null;
+  patient: any = null;
+  error: string | null = null;
+  errorMessage: string = '';
+  ssn: string = '';
+
+  // API endpoints
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly API_URL = 'http://127.0.0.1:8000/api/';
   private readonly REFRESH_URL = `${this.API_URL}token/refresh/`;
   private DPI_URL!: string;
-  private http = inject(HttpClient);
-  error: string | null = null;
-  dpi: any = null;
-  ssn: string = '';
-  patient: any = null;
-  errorMessage: string = '';
-  showPrescriptionsList: boolean = false;
+
+  // UI State
+  showPrescriptionsList = false;
   selectedPrescription: any = null;
   selectedConsultation: any = null;
-  showConsultationsList: boolean = false;
-  showNursingCareList: boolean = false;
+  showConsultationsList = false;
+  showNursingCareList = false;
   selectedNursingCare: any = null;
-  showMedicalHistory: boolean = false;
+  showMedicalHistory = false;
   selectedNursingCareIndex: number | null = null;
   nss: string = '';
   selectedCare: any = null;
   showCaresList: boolean = false;
   showNursing: boolean = false;
 
-
-  constructor() {
-    this.authService.getCurrentAuthUser().subscribe((r) => {
-      console.log(r);
-      this.user = r;
-      this.DPI_URL = `${this.API_URL}dpi/${this.user.id}`;
-      this.fetchDpi();
-    });
-  }
-  private fetchDpi() {
-    try {
-      const tokenData = JSON.parse(localStorage.getItem(this.JWT_TOKEN) || '{}');
-      const accessToken = tokenData.access;
-      console.log('Access token:', accessToken);
-  
-      if (!accessToken) {
-        throw new Error('Access token not found.');
-      }
-  
-      const makeRequest = (token: string) => {
-        const headers = new HttpHeaders({
-          Authorization: `Bearer ${token}`
-        });
-  
-        return this.http.get(this.DPI_URL, { headers });
-      };
-  
-      makeRequest(accessToken).pipe(
-        catchError((error) => {
-          if (error.status === 401) {
-            // Get refresh token
-            const refreshToken = tokenData.refresh;
-            
-            if (!refreshToken) {
-              return throwError(() => new Error('Refresh token not found'));
-            }
-  
-            // Call refresh token endpoint
-            return this.http.post<{ access: string, refresh: string }>(
-              this.REFRESH_URL, 
-              { refresh: refreshToken }
-            ).pipe(
-              switchMap(newTokens => {
-                // Save new tokens
-                localStorage.setItem(this.JWT_TOKEN, JSON.stringify(newTokens));
-                
-                // Retry the original request with new token
-                return makeRequest(newTokens.access);
-              }),
-              catchError(refreshError => {
-                // If refresh fails, clear tokens and throw error
-                localStorage.removeItem(this.JWT_TOKEN);
-                return throwError(() => new Error('Token refresh failed'));
-              })
-            );
-          }
-          return throwError(() => new Error('Failed to fetch DPI information'));
-        })
-      ).subscribe({
-        next: (response) => {
-          this.dpi = response;
-          this.ssn = this.dpi.ssn;
-          console.log('DPI:', this.dpi);
-          this.authService.getNom(this.dpi.medecin_traitant).subscribe({
-            next: (innerData) => {
-              this.dpi.medecin_traitant = innerData;
-              this.patient = this.dpi;
-
-            },
-            error: (error) => console.error('Error fetching DPI:', error)
-          })
-        },
-        error: (error) => {
-          this.error = error.message;
-          if (error.message === 'Token refresh failed') {
-            // Handle refresh failure (e.g., redirect to login)
-            // this.router.navigate(['/login']);
-          }
-        }
-      });
-  
-    } catch (error) {
-      this.error = error instanceof Error ? error.message : 'An unknown error occurred';
-    }
-  }
-
-  //----------------------------------------------------
-  ngOnInit(): void {
-    // Initialisation lors du chargement du composant
-    this.updateHeight();
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
-    // Mettre à jour la hauteur lors du redimensionnement
-    this.updateHeight();
-  }
-
-  private updateHeight(): void {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-  }
-  
   patients = [
     {
       ssn: '111',
@@ -181,26 +80,13 @@ export class PatientComponent implements OnInit {
           date: '2023-04-20',
           doctorName: 'Dr. Amina',
           notes: 'Routine check-up',
-          summary: 'Routine check-up with Dr. Amina, prescriptions include Paracetamol and Ibuprofen.',
+          summary:
+            'Routine check-up with Dr. Amina, prescriptions include Paracetamol and Ibuprofen.',
           prescriptions: [
             { name: 'Paracetamol', dose: '500mg', duration: '7 days' },
             { name: 'Ibuprofen', dose: '200mg', duration: '5 days' },
           ],
         },
-        
-        
-        {
-          date: '2024-02-10',
-          doctorName: 'Dr. John',
-          notes: 'Initial consultation',
-          summary: 'Initial consultation with Dr. John, prescriptions include Amoxicillin and Loratadine.',
-          prescriptions: [
-            { name: 'Amoxicillin', dose: '250mg', duration: '7 days' },
-            { name: 'Loratadine', dose: '10mg', duration: '7 days' }
-          ]
-        },
-        
-        
       ],
       nursingCare: [
         {
@@ -210,123 +96,115 @@ export class PatientComponent implements OnInit {
           description: 'Dressing of a wound on the left arm.',
           observations: 'Healing well, no signs of infection.',
         },
-        {
-          date: '2023-06-15',
-          time: '10:00 AM',
-          type: 'Wound Dressing',
-          description: 'Dressing of a wound on the left arm.',
-          observations: 'Healing well, no signs of infection.',
-        },
       ],
       medicalHistory: {
-        chronicIllnesses: [
-          { name: 'Diabetes', date: '2018-05-01' },
-          { name: 'Hypertension', date: '2020-03-10' },
-          { name: 'Hypertension', date: '2020-03-10' },
-        ],
-        surgeries: [
-          { name: 'Appendectomy', date: '2015-07-20' },
-          { name: 'Appendectomy', date: '2015-07-20' },
-        ],
-        allergies: [
-          { name: 'Penicillin', date: '2012-08-15' },
-          { name: 'Penicillin', date: '2012-08-15' },
-        ],
-        medications: [
-          { name: 'Metformin', date: '2023-06-01' },
-          { name: 'Metformin', date: '2023-06-01' },
-        ],
+        chronicIllnesses: [{ name: 'Diabetes', date: '2018-05-01' }],
+        surgeries: [{ name: 'Appendectomy', date: '2015-07-20' }],
+        allergies: [{ name: 'Penicillin', date: '2012-08-15' }],
+        medications: [{ name: 'Metformin', date: '2023-06-01' }],
       },
-
-
     },
-    {
-      ssn: '22222',
-      firstName: 'John',
-      lastName: 'Doe',
-      address: 'Oran',
-      phoneNumber: '0777333444',
-      dob: '15/09/1990',
-      emergencyContact: '0668333777',
-      carePhysician: 'doctorY',
-      medicalHistory: {
-        chronicIllnesses: [
-          { name: 'Diabetes', date: '2018-05-01' },
-          { name: 'Hypertension', date: '2020-03-10' },
-        ],
-        surgeries: [
-          { name: 'Appendectomy', date: '2015-07-20' },
-        ],
-        allergies: [
-          { name: 'Penicillin', date: '2012-08-15' },
-        ],
-        medications: [
-          { name: 'Metformin', date: '2023-06-01' },
-        ],
-      },
-      consultations: [
-        {
-          date: '2024-02-10',
-          doctorName: 'Dr. John',
-          notes: 'Initial consultation',
-          summary: 'Initial consultation with Dr. John, prescriptions include Amoxicillin and Loratadine.',
-          prescriptions: [
-            { name: 'Amoxicillin', dose: '250mg', duration: '7 days' },
-            { name: 'Loratadine', dose: '10mg', duration: '7 days' }
-          ]
-        }
-      ]
-    },
-    {
-      ssn: '33333',
-      firstName: 'Jane',
-      lastName: 'Smith',
-      address: 'Tlemcen',
-      phoneNumber: '0798123456',
-      dob: '02/11/1985',
-      emergencyContact: '0669123456',
-      carePhysician: 'doctorZ',
-      consultations: [
-        {
-          date: '2023-12-20',
-          doctorName: 'Dr. Sarah',
-          notes: 'Diabetes management',
-          summary: 'Diabetes management consultation with Dr. Sarah, prescription includes Metformin.',
-          prescriptions: [
-            { name: 'Metformin', dose: '500mg', duration: '30 days' }
-          ]
-        }
-      ]
-    }
   ];
 
-   getDPI() {
-      const tokenData = JSON.parse(localStorage.getItem(this.JWT_TOKEN) || '{}'); // Parse stored token JSON
-      const accessToken = tokenData.access; // Extract the access token
-      
-    
+  constructor() {
+    this.authService.getCurrentAuthUser().subscribe((user) => {
+      this.user = user;
+      this.DPI_URL = `${this.API_URL}dpi/${this.user.id}`;
+      this.fetchDpi();
+    });
+  }
+
+  ngOnInit(): void {
+    this.updateHeight();
+  }
+
+  private fetchDpi() {
+    try {
+      const tokenData = JSON.parse(
+        localStorage.getItem(this.JWT_TOKEN) || '{}',
+      );
+      const accessToken = tokenData.access;
+
       if (!accessToken) {
         throw new Error('Access token not found.');
       }
-    
+
       const headers = new HttpHeaders({
         Authorization: `Bearer ${accessToken}`,
       });
-    
-      return this.http.get(this.DPI_URL, { headers });
+
+      this.http
+        .get(this.DPI_URL, { headers })
+        .pipe(
+          catchError((error) => {
+            if (error.status === 401) {
+              const refreshToken = tokenData.refresh;
+              if (!refreshToken) {
+                return throwError(() => new Error('Refresh token not found'));
+              }
+
+              return this.http
+                .post<{
+                  access: string;
+                }>(this.REFRESH_URL, { refresh: refreshToken })
+                .pipe(
+                  switchMap((newTokens) => {
+                    localStorage.setItem(
+                      this.JWT_TOKEN,
+                      JSON.stringify(newTokens),
+                    );
+                    return this.http.get(this.DPI_URL, {
+                      headers: new HttpHeaders({
+                        Authorization: `Bearer ${newTokens.access}`,
+                      }),
+                    });
+                  }),
+                  catchError(() => {
+                    localStorage.removeItem(this.JWT_TOKEN);
+                    return throwError(() => new Error('Token refresh failed'));
+                  }),
+                );
+            }
+            return throwError(
+              () => new Error('Failed to fetch DPI information'),
+            );
+          }),
+        )
+        .subscribe({
+          next: (response) => {
+            this.dpi = response;
+            this.ssn = this.dpi.ssn;
+            this.authService.getNom(this.dpi.medecin_traitant).subscribe({
+              next: (name) => (this.dpi.medecin_traitant = name),
+              error: (err) => console.error('Error fetching doctor name:', err),
+            });
+          },
+          error: (err) => (this.error = err.message),
+        });
+    } catch (err) {
+      this.error =
+        err instanceof Error ? err.message : 'An unknown error occurred';
     }
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.updateHeight();
+  }
+
+  private updateHeight(): void {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  }
 
   searchPatient() {
     this.errorMessage = '';
-    this.patient = this.patients.find(patient => patient.ssn === this.ssn);
+    this.patient = this.patients.find((p) => p.ssn === this.ssn);
     if (!this.patient) {
       this.errorMessage = 'Patient not found!';
     }
   }
-  onSSNEntered(ssn: string) { // this is executed when the search
-    this.ssn = ssn;
-    this.searchPatient();
-  }
+
 
   // Méthode pour afficher la liste des prescriptions
 
@@ -377,46 +255,28 @@ export class PatientComponent implements OnInit {
   selectConsultation(consultation: any) {
     console.log('Consultation sélectionnée:', consultation);
 
-    if (!consultation) {
-      // Si aucune consultation n'est sélectionnée, affiche la liste des consultations
-      this.showConsultationsList = true;
-      this.selectedConsultation = null;
-      this.selectedPrescription = null;
-    } else {
-      // Si une consultation est sélectionnée, masque la liste et affiche les détails
-      this.selectedConsultation = consultation;
-      this.showConsultationsList = false;
-      this.selectedPrescription = null;
+          this.showMedicalHistory = !this.showMedicalHistory;
+        },
+        error: (err) => console.error('Error fetching medical history:', err),
+      });
     }
   }
-  backToConsultationList() {
-    this.selectedConsultation = null;
-    this.showConsultationsList = true;
-    this.showPrescriptionsList = true;
-    this.selectedPrescription = null;
-  }
 
-  backToPatientInfoConsultation() {
-    this.showConsultationsList = false;
-    this.selectedConsultation = null;
-    this.selectedPrescription = null;
-  }
-  ////////////////////////////////////////////////////////////////////////////////////////////////
   calculateAge(dob: string): number {
-    const [day, month, year] = dob.split('/').map(num => parseInt(num, 10));
-    const birthDate = new Date(year, month - 1, day);  
+    const [day, month, year] = dob.split('/').map(Number);
+    const birthDate = new Date(year, month - 1, day);
     const today = new Date();
+
     let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-    const dayDiff = today.getDate() - birthDate.getDate();
-    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+    if (
+      today.getMonth() < birthDate.getMonth() ||
+      (today.getMonth() === birthDate.getMonth() &&
+        today.getDate() < birthDate.getDate())
+    ) {
       age--;
     }
-
     return age;
   }
-
-
 
   selectPrescription(prescription: any) {
     if (prescription === null) {

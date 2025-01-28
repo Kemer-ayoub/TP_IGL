@@ -1,3 +1,4 @@
+
 import { Component,EventEmitter, inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';  // Importez FormsModule
@@ -6,8 +7,8 @@ import { OrdonnanceService } from '../ordonnance.service';
 
 @Component({
   selector: 'app-medecin-add-new-prescription',
-  standalone: true,  // Si votre composant est autonome
-  imports: [CommonModule, FormsModule],  // Ajoutez FormsModule ici
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './medecin-add-new-prescription.component.html',
   styleUrls: ['./medecin-add-new-prescription.component.css'],
 })
@@ -77,5 +78,28 @@ export class MedecinAddNewPrescriptionComponent {
 
   goBack() {
     this.togglePrescriptionVisibility.emit();
+  }
+
+  createPrescription() {
+    const url = `/api/ordonnance/create/${this.consultationId}/`; // Adjust API endpoint
+    const payload = {
+      medications: this.medications.map((med) => ({
+        name: med.name,
+        dosage: med.dose,
+        duration: med.duration,
+      })),
+    };
+
+    this.http.post(url, payload).subscribe(
+      (response) => {
+        console.log('Prescription created successfully:', response);
+        alert('Prescription created successfully!');
+        this.goBack(); // Optionally go back or reset
+      },
+      (error) => {
+        console.error('Error creating prescription:', error);
+        alert('Error creating prescription. Please try again.');
+      },
+    );
   }
 }

@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "9b37005b-1c43-4bad-ad30-aeabe8546ff0",
+		"name": "Patient Manager",
+		"description": "API test for our Django-RestFramework web application.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40812556"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8000/api/token/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test if the status code is 200 (OK)",
+							"pm.test(\"Status is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// Test if the response contains the access and refresh tokens",
+							"pm.test(\"Response contains tokens\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"access\");",
+							"    pm.expect(jsonData).to.have.property(\"refresh\");",
+							"});",
+							"",
+							"// Save the access and refresh tokens to variables for reuse",
+							"pm.environment.set(\"accessToken\", pm.response.json().access);",
+							"pm.environment.set(\"refreshToken\", pm.response.json().refresh);",
+							"",
+							"// Test if the response body is in JSON format",
+							"pm.test(\"Response is JSON\", function () {",
+							"    pm.response.to.have.jsonBody();",
+							"});",
+							"",
+							"// Test if the response time is less than 1000ms (adjust if needed)",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.response.to.have.responseTime.lessThan(1000);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"root\",\n  \"password\": \"root\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/token/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"token",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/search-patient-nss/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test if the response status is 200",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"// Test if the response is in JSON format",
+							"pm.test(\"Response is JSON\", function () {",
+							"    pm.response.to.have.jsonBody();",
+							"});",
+							"",
+							"// Test if the DPI object has all the required properties",
+							"pm.test(\"DPI object has required properties\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"nom\");",
+							"    pm.expect(jsonData).to.have.property(\"prenom\");",
+							"    pm.expect(jsonData).to.have.property(\"nss\");",
+							"});",
+							"",
+							"// Log the response for debugging",
+							"console.log(\"GET DPI Response:\", pm.response.json());",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM2MTU5OTA0LCJpYXQiOjE3MzYxNTgxMDQsImp0aSI6Ijk0MzYyMTJhNjZjYjQzZTVhZWFjMDIyNjU4ODg4YTk4IiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJyb290In0.iHqq04ieM5-HIeNZ92HI6sqFgG8_L68KmB9XJ_zZJPI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nom\": \"Do\",\n  \"prenom\": \"Jane\",\n  \"mot_passe\": \"securepassword\",\n  \"date_naissance\": \"1995-01-01\",\n  \"adresse\": \"123 Test Lane\",\n  \"telephone\": \"123456789\",\n  \"nss\": \"9876543219\",\n  \"mutuelle\": \"Yes\",\n  \"num_pers_contact\": \"987654321\",\n  \"medecin_traitant\": 2,\n  \"patient\": 2\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/dpi/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"dpi",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8000/api/dpi/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Test if the response status is 200",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"// Test if the response is in JSON format",
+							"pm.test(\"Response is JSON\", function () {",
+							"    pm.response.to.have.jsonBody();",
+							"});",
+							"",
+							"// Test if the DPI object has all the required properties",
+							"pm.test(\"DPI object has required properties\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property(\"nom\");",
+							"    pm.expect(jsonData).to.have.property(\"prenom\");",
+							"    pm.expect(jsonData).to.have.property(\"nss\");",
+							"});",
+							"",
+							"// Log the response for debugging",
+							"console.log(\"GET DPI Response:\", pm.response.json());",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM2MTU5OTA0LCJpYXQiOjE3MzYxNTgxMDQsImp0aSI6Ijk0MzYyMTJhNjZjYjQzZTVhZWFjMDIyNjU4ODg4YTk4IiwidXNlcl9pZCI6MSwidXNlcm5hbWUiOiJyb290In0.iHqq04ieM5-HIeNZ92HI6sqFgG8_L68KmB9XJ_zZJPI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nom\": \"Do\",\n  \"prenom\": \"Jane\",\n  \"mot_passe\": \"securepassword\",\n  \"date_naissance\": \"1995-01-01\",\n  \"adresse\": \"123 Test Lane\",\n  \"telephone\": \"123456789\",\n  \"nss\": \"9876543219\",\n  \"mutuelle\": \"Yes\",\n  \"num_pers_contact\": \"987654321\",\n  \"medecin_traitant\": 2,\n  \"patient\": 2\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/dpi/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"dpi",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

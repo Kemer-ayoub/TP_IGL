@@ -1,4 +1,4 @@
-// src/app/medecin-add-new-consultation/medecin-add-new-consultation.component.ts
+
 import { Component,CUSTOM_ELEMENTS_SCHEMA,EventEmitter, inject, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +11,6 @@ import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-medecin-add-new-consultation',
-  imports: [FormsModule, MedecinAddNewPrescriptionComponent, CommonModule],
   templateUrl: './medecin-add-new-consultation.component.html',
   styleUrls: ['./medecin-add-new-consultation.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -40,14 +39,44 @@ export class MedecinAddNewConsultationComponent {
   
 
 
+  consultationId: number = 0; // Stores the created consultation's ID
   showAddPrescription: boolean = false;
-  @Output() backToPatientInfo = new EventEmitter<void>();
 
-  constructor(private router: Router, private location: Location) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {}
 
+  // Toggle the prescription section
+  togglePrescriptionVisibility() {
+    this.showAddPrescription = !this.showAddPrescription;
+  }
+
+  // Submit the new consultation
   submitConsultation() {
-    console.log('Consultation créée :', this.consultation);
-    // Logique pour sauvegarder les données dans la base de données
+    if (!this.date_cons || !this.medecin_id || !this.dpi_id || !this.resume) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    const consultationData = {
+      date_cons: this.date_cons,
+      medecin_id: this.medecin_id,
+      dpi_id: this.dpi_id,
+      diagnostic: this.diagnostic,
+      resume: this.resume,
+    };
+
+    this.http.post('/api/add-consultation/', consultationData).subscribe(
+      (response: any) => {
+        this.consultationId = response.id; // Save the consultation ID
+        alert('Consultation added successfully!');
+      },
+      (error) => {
+        console.error('Error adding consultation:', error);
+        alert('Failed to add consultation. Please try again.');
+      },
+    );
   }
 
   addConsultation() {
@@ -109,7 +138,9 @@ export class MedecinAddNewConsultationComponent {
     this.showAddPrescription = !this.showAddPrescription;
     
   }
+
+  // Cancel the operation
   cancel() {
-    this.backToPatientInfo.emit();
+    this.router.navigate(['/dashboard']); // Navigate to the desired route
   }
 }

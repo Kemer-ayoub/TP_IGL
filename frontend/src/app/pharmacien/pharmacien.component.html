@@ -1,7 +1,6 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
-<body>
+  <body>
     <!-- Header -->
     <app-header></app-header>
 
@@ -39,24 +38,54 @@
                 (backToPatientInfo)="backToPatientInfoConsultation()">
             </app-consultation-list>
         </div>
+      </div>
 
-        <!--Consultation détails -->
+      <!-- List of Consultations -->
+      <div class="consultations_container">
+        <app-consultation-list
+          *ngIf="showConsultationsList"
+          [consultations]="patient?.consultations"
+          [selectedConsultation]="selectedConsultation"
+          (consultationSelected)="selectConsultation($event)"
+          (backToPatientInfo)="backToPatientInfoConsultation()"
+        >
+        </app-consultation-list>
+      </div>
 
-        <app-consultation-detail [selectedConsultation]="selectedConsultation"
-            [selectedPrescription]="selectedPrescription" (backToConsultationList)="backToConsultationList()"
-            (selectPrescription)="selectPrescription($event)">
-        </app-consultation-detail>
+      <!-- Consultation Details -->
+      <app-consultation-detail
+        [selectedConsultation]="selectedConsultation"
+        [selectedPrescription]="selectedPrescription"
+        (backToConsultationList)="backToConsultationList()"
+        (selectPrescription)="selectPrescription($event)"
+      >
+      </app-consultation-detail>
 
+      <!-- List of Prescriptions -->
+      <div *ngIf="showPrescriptionsList" class="prescriptions-container">
+        <h3>Prescriptions:</h3>
+        <ul>
+          <li
+            *ngFor="let prescription of prescriptions"
+            (click)="onSelectPrescription(prescription)"
+          >
+            {{ prescription.name }} - {{ prescription.dose }} -
+            {{ prescription.duration }}
+          </li>
+        </ul>
+        <button class="back-button" (click)="handleBackToList()">
+          Back to List
+        </button>
+      </div>
 
-
-        <!--- Prescription Detail  -->
-        <app-prescription-detail-pharmacien [patient]="patient" [selectedPrescription]="selectedPrescription"
-            (backToConsultationList)="backToConsultationList()">
-        </app-prescription-detail-pharmacien>
-
+      <!-- Prescription Details -->
+      <app-prescription-detail-pharmacien
+        [patient]="patient"
+        [selectedPrescription]="selectedPrescription"
+        (backToConsultationList)="backToConsultationList()"
+      >
+      </app-prescription-detail-pharmacien>
     </div>
-
-
-</body>
-
+  </body>
 </html>
+
