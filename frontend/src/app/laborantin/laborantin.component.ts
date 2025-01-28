@@ -16,10 +16,11 @@ import { catchError, switchMap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { DpiService } from '../dpi.service';
 import { PatientInfoComponent } from '../patient-info/patient-info.component';
+import { AddExamLaboComponent } from "../add-exam-labo/add-exam-labo.component";
 import { ExamrequestService } from "../examrequest.service";
 @Component({
   selector: 'app-laborantin',
-  imports: [HeaderComponent, SearchBarComponent, PatientInfoInfirmierComponent, PatientInfoComponent, ButtonsLaboComponent, ExamsListLaboComponent, RequestDetailLaboComponent,CommonModule],
+  imports: [HeaderComponent, SearchBarComponent, PatientInfoInfirmierComponent, PatientInfoComponent, ButtonsLaboComponent, ExamsListLaboComponent, RequestDetailLaboComponent,CommonModule,AddExamLaboComponent],
   templateUrl: './laborantin.component.html',
   styleUrl: './laborantin.component.css'
 })

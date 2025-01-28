@@ -15,6 +15,8 @@ import { MedecinAddNewPrescriptionComponent } from './medecin-add-new-prescripti
 import {MedicalHistoryComponent} from './medical-history/medical-history.component';
 import { LaborantinComponent } from './laborantin/laborantin.component';
 import { authGuard } from './auth.guard';
+import { AddExamLaboComponent } from './add-exam-labo/add-exam-labo.component';
+import { ExamDetailPatientComponent } from './exam-detail-patient/exam-detail-patient.component';
 
 
 export const routes: Routes = [
