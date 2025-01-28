@@ -1,3 +1,4 @@
+
 import json
 
 from django.http import HttpResponseNotFound, JsonResponse
@@ -12,16 +13,10 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import get_user_model
+from rest_framework.parsers import MultiPartParser, FormParser
 
 from .models import *
-from .serializers import (
-    AntecedantMedSerializer,
-    DPISerializer,
-    ExamRequestSerializer,
-    OrdonnanceSerializer,
-    ReportRequestSerializer,
-    UserSerializer
-)
+from .serializers import DPISerializer, AntecedantMedSerializer, ExamRequestSerializer, ReportRequestSerializer, OrdonnanceSerializer,BilanBiologiqueSerializer,BilanRadiologiqueSerializer,SoinSerializer, UserSerializer, Consultation, ConsultationSerializer, Ordonnance, OrdonnanceSerializer, Medicament, MedicamentSerializer, BilanBiologique, BilanRadiologique
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -142,16 +137,15 @@ def antecedant_list(request):
 @permission_classes([IsAuthenticated])
 def examrequests_list(request, pk=None):
     if request.method == "GET":
-        if pk is not None:
-            # Get specific antecedant
-            exam_request = get_object_or_404(ExamRequest, pk=pk)
+        id = request.GET.get('id')  # Get the 'id' parameter from the request
+        if id:  # If 'id' is present, fetch a specific ExamRequest
+            exam_request = get_object_or_404(ExamRequest, id=id)
             serializer = ExamRequestSerializer(exam_request)
             return Response(serializer.data)
-
-        # Get all antecedants
-        exam_requests = ExamRequest.objects.all()
-        serializer = ExamRequestSerializer(exam_requests, many=True)
-        return Response(serializer.data)
+        else:  # Otherwise, fetch all ExamRequest instances
+            exam_requests = ExamRequest.objects.all()
+            serializer = ExamRequestSerializer(exam_requests, many=True)
+            return Response(serializer.data)
 
     if request.method == "POST":
         serializer = ExamRequestSerializer(data=request.data)
@@ -165,18 +159,18 @@ def examrequests_list(request, pk=None):
 @permission_classes([IsAuthenticated])
 def reportrequests_list(request, pk=None):
     if request.method == "GET":
-        if pk is not None:
-            # Get specific antecedant
-            report_request = get_object_or_404(ReportRequest, pk=pk)
+        id = request.GET.get('id')  # Get the 'id' parameter from the request
+        if id:  # If 'id' is present, fetch a specific ExamRequest
+            report_request = get_object_or_404(ReportRequest, id=id)
             serializer = ReportRequestSerializer(report_request)
             return Response(serializer.data)
-
-        # Get all antecedants
-        report_requests = ReportRequest.objects.all()
-        serializer = ReportRequestSerializer(report_requests, many=True)
-        return Response(serializer.data)
+        else:  # Otherwise, fetch all ReportRequest instances
+            report_requests = ReportRequest.objects.all()
+            serializer = ReportRequestSerializer(report_requests, many=True)
+            return Response(serializer.data)
 
     if request.method == "POST":
+        print("So i'm love every night like it's the last time",request.data)
         serializer = ReportRequestSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -186,18 +180,105 @@ def reportrequests_list(request, pk=None):
 
 @api_view(["PATCH"])
 @permission_classes([IsAuthenticated])
-def valider_ordonnance(request, pk):
-    try:
-        item = Ordonnance.objects.get(pk=pk)
-    except Ordonnance.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+def valider_ordonnance(request):
+    id = request.GET.get('id')
+    if request.method == "PATCH":
+        if id:
+            # Get specific antecedant
+            ordonnance = get_object_or_404(Ordonnance, id=id)
+            request.data['valid'] = True  # Force the valid field to True
+            serializer = OrdonnanceSerializer(ordonnance, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
-    serializer = OrdonnanceSerializer(item, data=request.data, partial=True)
+@api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
+def list_soin(request, pk=None):
+    if request.method == "GET":
+        infirmier = request.GET.get('infirmier')  # Get the 'infirmier' parameter from the request
+        if infirmier:  # If 'infirmier' is present, fetch a specific Consultation
+            soin = get_object_or_404(Soin, infirmier__id=infirmier)
+            serializer = SoinSerializer(soin)
+            return Response(serializer.data)
+        else:  # Otherwise, fetch all Consultation instances
+            dpi = request.GET.get('dpi')
+            # Filter consultations by the specific dpi_id
+            soins = Soin.objects.filter(dpi__id=dpi)
+            serializer = SoinSerializer(soins, many=True)
+            return Response(serializer.data)
+    if request.method == "GET":
+        if pk is not None:
+            soin = get_object_or_404(Soin, pk=pk)
+            serializer = SoinSerializer(soin)
+            return Response(serializer.data)
+        soins = Soin.objects.all()
+        serializer = SoinSerializer(soins, many=True)
+        return Response(serializer.data)
+    if request.method == "POST":
+        serializer = SoinSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST', 'GET'])
+@permission_classes([IsAuthenticated])
+def add_bilan_biologique(request):
+    if request.method == "POST":
+        serializer = BilanBiologiqueSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == "GET":
+        dpi = request.GET.get('dpi')  # Get the 'dpi' parameter from the request
+        if dpi:  # If 'id' is present, fetch a specific ExamRequest
+            bilan_biologique = get_object_or_404(BilanBiologique, dpi__id=dpi)
+            serializer = BilanBiologiqueSerializer(bilan_biologique)
+            return Response(serializer.data)
+        else:  # Otherwise, fetch all BilanBiologique instances
+            id = request.GET.get('id')  # Get the 'dpi' parameter from the request
+            bilan_biologique = get_object_or_404(BilanBiologique, id=id)
+            serializer = BilanBiologiqueSerializer(bilan_biologique)
+            return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def list_bilan_biologique(request, pk=None):
+    dpi = request.GET.get('dpi')  # Get the 'dpi' parameter from the request
+    if dpi:  # If 'id' is present, fetch a specific ExamRequest
+        bilan_biologique = get_object_or_404(BilanBiologique, id=id)
+        serializer = BilanBiologiqueSerializer(bilan_biologique)
+        return Response(serializer.data)
+    else:  # Otherwise, fetch all BilanBiologique instances
+        id = request.GET.get('id')  # Get the 'dpi' parameter from the request
+        bilan_biologiques = BilanBiologique.objects.all()
+        serializer = BilanBiologiqueSerializer(bilan_biologiques, many=True)
+        return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_bilan_radiologique(request):
+    parser_classes = [MultiPartParser, FormParser]  # Required for handling multipart/form-data
+    serializer = BilanRadiologiqueSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def list_bilan_radiologique(request, pk=None):
+    if pk is not None:
+        bilan = get_object_or_404(BilanRadiologique, pk=pk)
+        serializer = BilanRadiologiqueSerializer(bilan)
+        return Response(serializer.data)
+    bilans = BilanRadiologique.objects.all()
+    serializer = BilanRadiologiqueSerializer(bilans, many=True)
+    return Response(serializer.data)
 
 @csrf_exempt
 def get_patient_by_social_security_number(request):
@@ -236,14 +317,127 @@ def get_patient_by_social_security_number(request):
     except json.JSONDecodeError:
         return JsonResponse({"error": "Invalid JSON format"}, status=400)
 
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def consultation_list(request, pk=None):
+    if request.method == "GET":
+        id = request.GET.get('id')  # Get the 'id' parameter from the request
+        if id:  # If 'id' is present, fetch a specific Consultation
+            consultation = get_object_or_404(Consultation, id=id)
+            serializer = ConsultationSerializer(consultation)
+            return Response(serializer.data)
+        else:  # Otherwise, fetch all Consultation instances
+            dpi = request.GET.get('dpi')
+            # Filter consultations by the specific dpi_id
+            consultations = Consultation.objects.filter(dpi__id=dpi)
+            serializer = ConsultationSerializer(consultations, many=True)
+            return Response(serializer.data)
 
-@csrf_exempt
+    if request.method == "POST":
+        data = request.data
+        dpi_id = get_object_or_404(DPI, patient=data.get("dpi"))
+        data["dpi"] = dpi_id.id
+        serializer = ConsultationSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def ordonnance_list(request, pk=None):
+    if request.method == "GET":
+        id = request.GET.get('id')  # Get the 'id' parameter from the request
+        if id:  # If 'id' is present, fetch a specific Ordonnance
+            ordonnance = get_object_or_404(Ordonnance, id=id)
+            serializer = OrdonnanceSerializer(ordonnance)
+            return Response(serializer.data)
+        else:  # Otherwise, fetch all Ordonnance instances
+            print("123")
+            cons_id = request.GET.get('cons_id')
+            if cons_id:
+                print("456")
+                # Filter ordonnances by the specific cons_id_id
+                ordonnances = Ordonnance.objects.filter(consultation_id=cons_id)
+                print("789")
+                serializer = OrdonnanceSerializer(ordonnances, many=True)
+                return Response(serializer.data)
+            else:
+                ordonnance = Ordonnance.objects.all()
+                serializer = OrdonnanceSerializer(ordonnance, many=True)
+                return Response(serializer.data)
+
+    if request.method == "POST":
+        """data = request.data
+        dpi_id = get_object_or_404(DPI, patient=data.get("dpi"))
+        data["dpi"] = dpi_id.id
+        serializer = OrdonnanceSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)"""
+        try:
+            # Extract ordonnance data
+            ordonnance_data = {
+                'valid': request.data.get('valid', False),
+                'consultation': request.data.get('consultation'),
+                'patient_name': request.data.get('patient_name'),
+                'patient_age': request.data.get('patient_age'),
+                'medecin': request.data.get('medecin')
+            }
+            """consultation_id = get_object_or_404(Consultation, patient=ordonnance_data.get("consultation"))
+            ordonnance_data["consultation"] = consultation_id.id"""
+            
+            # Create Ordonnance instance
+            ordonnance_serializer = OrdonnanceSerializer(data=ordonnance_data)
+            if ordonnance_serializer.is_valid():
+                ordonnance = ordonnance_serializer.save()
+                
+                # Extract medicaments data
+                medicaments_data = request.data.get('medicaments', [])
+                
+                # Create Medicament instances
+                medicaments = []
+                for med_data in medicaments_data:
+                    med_data['ordonnance'] = ordonnance.id
+                    medicament_serializer = MedicamentSerializer(data=med_data)
+                    if medicament_serializer.is_valid():
+                        medicament_serializer.save()
+                        medicaments.append(medicament_serializer.data)
+                    else:
+                        ordonnance.delete()
+                        return Response(
+                            medicament_serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST
+                        )
+                
+                # Return combined response
+                response_data = {
+                    'ordonnance': ordonnance_serializer.data,
+                    'medicaments': medicaments
+                }
+                return Response(response_data, status=status.HTTP_201_CREATED)
+            
+            return Response(
+                ordonnance_serializer.errors,
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        except Exception as e:
+            return Response(
+                {'error': str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+    
+"""
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def add_consultation(request):
     if request.method == "POST":
         try:
             # Get data from the request body (assuming it's JSON)
             data = json.loads(request.body)
-            dpi_id = data.get("dpi_id")
+            consultation_id = data.get("dpi_id")
             medecin_id = data.get("medecin_id")
             date_cons = data.get("date_cons")
             diagnostic = data.get("diagnostic")
@@ -284,9 +478,6 @@ def add_consultation(request):
 
 
 def list_consultation(request, consultation_id=None):
-    """
-    Returns a list of consultations or a specific consultation by its ID.
-    """
     if consultation_id:
         # Fetch a specific consultation by ID
         try:
@@ -319,7 +510,6 @@ def list_consultation(request, consultation_id=None):
             for cons in consultations
         ]
         return JsonResponse(data, safe=False)
-
 
 @csrf_exempt
 def create_ordonnance_view(request, consultation_id):
@@ -406,7 +596,7 @@ def list_ordonnance(request, ordonnance_id=None):
             return JsonResponse({"ordonnances": ordonnances_list}, safe=False)
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
-
+"""
 
 @csrf_exempt
 def add_consultation_resume(request, consultation_id):

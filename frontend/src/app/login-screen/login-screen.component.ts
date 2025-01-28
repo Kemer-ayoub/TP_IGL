@@ -125,13 +125,14 @@ export class LoginScreenComponent {
     const roleRoutes: { [key: string]: string } = {
       'PATIENT': '/patient',
       'PHARMACIEN': '/pharmacien',
-      'INFIRMIER': '/infirmer',
+      'infirmier': '/infirmer',
       'RADIOLOGUE': '/radiologue',
-      'ADMIN': '/createDPI'
+      'ADMIN': '/createDPI',
+      'MEDECIN': '/medecin',
     };
   
-    const route = roleRoutes[role];
-    if (route) {
+    const route = roleRoutes[role.toUpperCase()];
+    if (route) { 
       this.router.navigate([route]);
     } else {
       console.error('Unknown role:', role);

@@ -18,6 +18,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, switchMap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { DpiService } from '../dpi.service';
+import { OrdonnanceService } from '../ordonnance.service';
+import { ConsultationService } from '../consultation.service';
 
 @Component({
   selector: 'app-pharmacien',
@@ -43,6 +45,9 @@ import { DpiService } from '../dpi.service';
 export class PharmacienComponent {
   authService = inject(AuthService);
   dpiService = inject(DpiService);
+  consultationService = inject(ConsultationService);
+  ordonnanceService = inject(OrdonnanceService);
+  
   user?: any;
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly API_URL = 'http://127.0.0.1:8000/api/';
@@ -52,8 +57,10 @@ export class PharmacienComponent {
   error: string | null = null;
   dpi: any = null;
   theid: any = null;
-  ordonnances: any[] = [];
-  patients = [
+
+  errorMessage: string = '';
+
+ patients = [
     {
       nss: '111',
       firstName: 'Oussama',
@@ -214,9 +221,7 @@ export class PharmacienComponent {
 
   // Méthode pour afficher la liste des prescriptions
 
-  onViewConsultations() {
-    this.showConsultationsList = true; // Show consultations list
-  }
+
   selectConsultation(consultation: any) {
     console.log('Consultation sélectionnée:', consultation);
 
@@ -258,6 +263,71 @@ export class PharmacienComponent {
 
     return age;
   }
+
+
+  onViewConsultations() {
+    this.consultationService.getAllConsultation(this.patient.id).subscribe({
+      next: (response) => {
+        console.log("the reda response:", response)
+        const formattedHistory: any = {
+          consultations: []
+        };
+        
+        // Format each consultation into an object with consultation ID as key
+        response.forEach((consultation: any) => {
+          formattedHistory.consultations[consultation.id] = consultation;
+          this.authService.getNom(consultation.medecin).subscribe({
+            next: (innerresponse: any) => {
+              formattedHistory.consultations[consultation.id].medecin = innerresponse;
+              const formattedPrescription: any = {
+                prescriptions: []
+              };
+              this.ordonnanceService.getAllOrdonnance(consultation.id).subscribe({
+                next: (outerresponse: any) => {
+                  console.log("1",formattedHistory.consultations[consultation.id] )
+                  formattedPrescription.prescriptions = outerresponse
+                  formattedHistory.consultations[consultation.id] = {
+                    ...formattedHistory.consultations[consultation.id],
+                    ...formattedPrescription
+                  };           
+                  console.log("2",formattedHistory.consultations[consultation.id] )
+    
+                }
+              })
+            }
+            
+          })
+          /*const formattedPrescription: any = {
+            prescriptions: []
+          };
+          this.ordonnanceService.getAllOrdonnance(consultation.id).subscribe({
+            next: (outerresponse: any) => {
+              console.log("1",formattedHistory.consultations[consultation.id] )
+              formattedPrescription.prescription = outerresponse
+              formattedHistory.consultations[consultation.id] = {
+                ...formattedHistory.consultations[consultation.id],
+                ...formattedPrescription
+              };           
+              console.log("2",formattedHistory.consultations[consultation.id] )
+
+            }
+          })*/
+        });
+        this.patient = { ...this.patient, ...formattedHistory };
+        console.log("This is the end hold your breath and count to ten",this.patient)
+        if (this.patient?.consultations) {
+          this.showConsultationsList = true;  // Show consultations list
+        } else {
+          this.errorMessage = 'Consultations not available for this patient!';
+        }
+      },
+      error: (error) => console.error('Error fetching DPI:', error)
+    })
+  }
+
+
+
+ 
 
   onViewPrescriptions() {
     this.showPrescriptionsList = true;

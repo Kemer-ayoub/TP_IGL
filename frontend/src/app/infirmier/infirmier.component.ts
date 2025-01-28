@@ -15,6 +15,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, switchMap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { DpiService } from '../dpi.service';
+import { SoinService } from "../soin.service";
 
 @Component({
   selector: 'app-infirmier',
@@ -25,6 +26,7 @@ import { DpiService } from '../dpi.service';
 export class InfirmierComponent {
   authService = inject(AuthService);
   dpiService = inject(DpiService);
+  soinService = inject(SoinService);
   user?: any;
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly API_URL = 'http://127.0.0.1:8000/api/';
@@ -158,10 +160,62 @@ export class InfirmierComponent {
     });
   }
  
-  onViewCares() {
+   // Afficher la liste des soins infirmiers
+   onViewCares() {
+    
+    this.authService.getCurrentAuthUser().subscribe((r) => {
+      console.log(r);
+      this.user = r;
+      this.soinService.getAllSoinInf(this.user.id).subscribe({
+        next: (response) => {
+          console.log("the reda response:", response)
+          const formattedHistory: any = {
+            nursingCare: []
+          };
+          const dataArray = [response];
+          
+          // Format each consultation into an object with consultation ID as key
+          dataArray.forEach((consultation: any) => {
+            formattedHistory.nursingCare[consultation.id] = consultation;
+            this.authService.getNom(consultation.infirmier).subscribe({
+              next: (innerresponse: any) => {
+                formattedHistory.nursingCare[consultation.id].infirmier = innerresponse;
+                /*const formattedPrescription: any = {
+                  prescriptions: []
+                };
+                this.ordonnanceService.getAllOrdonnance(consultation.id).subscribe({
+                  next: (outerresponse: any) => {
+                    console.log("1",formattedHistory.consultations[consultation.id] )
+                    formattedPrescription.prescriptions = outerresponse
+                    formattedHistory.consultations[consultation.id] = {
+                      ...formattedHistory.consultations[consultation.id],
+                      ...formattedPrescription
+                    };           
+                    console.log("2",formattedHistory.consultations[consultation.id] )
+      
+                  }
+                })*/
+              }
+              
+            })
+          });
+          this.patient = { ...this.patient, ...formattedHistory };
+          console.log("This is the end hold your breath and count to ten",this.patient)
+          if (this.patient?.nursingCare) {
+            this.showCaresList = true;  
+            this.errorMessage = 'Consultations not available for this patient!';
+          }
+        },
+        error: (error) => console.error('Error fetching DPI:', error)
+      });
+    })
+    
+    
+  }
+  /*onViewCares() {
     console.log("the view get called")
     this.showCaresList = true;  
-  }
+  }*/
   AddCare() {
     this.showNursing = true; // Montre la liste des soins infirmiers
   }

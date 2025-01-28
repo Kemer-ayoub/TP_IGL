@@ -1,7 +1,8 @@
-import { Component,Input, Output, EventEmitter } from '@angular/core';
+import { Component,Input, Output, EventEmitter, inject } from '@angular/core';
 import { PatientComponent } from '../patient/patient.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { OrdonnanceService } from '../ordonnance.service';
 
 @Component({
   selector: 'app-prescription-detail-pharmacien',
@@ -15,6 +16,8 @@ export class PrescriptionDetailPharmacienComponent {
   @Input() selectedPrescription: any = null;  // Reçoit la prescription sélectionnée
   @Output() backToConsultationList = new EventEmitter<void>();
   @Output() backToPrescriptionList = new EventEmitter<void>();
+  ordonnanceService = inject(OrdonnanceService);
+  
   
   calculateAge(dob: string): number {
     const [day, month, year] = dob.split('/').map(num => parseInt(num, 10));
@@ -30,6 +33,12 @@ export class PrescriptionDetailPharmacienComponent {
     return age;
   }
   onBackToConsultationList() {
+    console.log('the ordonnancejfdmg ', this.selectedPrescription)
+    this.ordonnanceService.validateOrdonnance(this.selectedPrescription.id).subscribe({
+      next: (response: any) => {
+
+      }
+    })
     this.backToConsultationList.emit();  // Émet l'événement lorsque l'utilisateur clique sur "Retour à la consultation"
   }
   onBackToPrescriptionList() {

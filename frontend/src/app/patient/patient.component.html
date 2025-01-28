@@ -8,109 +8,75 @@
 
     <!-- Main Content -->
     <div class="main-container">
-      <!-- search.component -->
-      <app-search-bar
-        *ngIf="
-          !showConsultationsList &&
-          !selectedConsultation &&
-          !showNursingCareList &&
-          !selectedNursingCare &&
-          !showMedicalHistory
-        "
-        (ssnEntered)="onSSNEntered($event)"
-      >
-      </app-search-bar>
 
-      <!-- Error Message -->
-      <div *ngIf="errorMessage" class="error-message">
-        <p>{{ errorMessage }}</p>
-      </div>
+        <!-- search.component -->
+        <app-search-bar
+            *ngIf="!showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory && !showCaresList" 
+            (ssnEntered)="onSSNEntered($event)"></app-search-bar>
 
-      <!-- Patient Information Section -->
-      <div
-        class="container"
-        *ngIf="
-          patient &&
-          !showConsultationsList &&
-          !selectedConsultation &&
-          !showNursingCareList &&
-          !selectedNursingCare &&
-          !showMedicalHistory
-        "
-      >
-        <!-- Patient Info -->
-        <app-patient-info [patient]="patient"></app-patient-info>
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="error-message">
+            <p>{{ errorMessage }}</p>
+        </div>
 
-        <!-- Buttons -->
-        <app-buttons-patient
-          (toggleMedicalHistory)="toggleMedicalHistory()"
-          (viewConsultations)="onViewConsultations()"
-          (viewNursingCareList)="onViewNursingCareList()"
-          (viewExamsResults)="toggleMedicalHistory()"
-        >
-        </app-buttons-patient>
-      </div>
+        <div class="container"
+            *ngIf="patient && !showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory && !showCaresList">
+            <!-- Patient Info -->
+            <app-patient-info [patient]="patient"></app-patient-info>
 
-      <!-- Consultations List -->
-      <div class="consultations_container">
-        <app-consultation-list
-          *ngIf="showConsultationsList"
-          [consultations]="consultations"
-          [selectedConsultation]="selectedConsultation"
-          (consultationSelected)="viewConsultationDetails($event)"
-          (backToPatientInfo)="backToPatientInfoConsultation()"
-        >
-        </app-consultation-list>
-      </div>
+            <!-- Buttons -->
+            <app-buttons-patient (toggleMedicalHistory)="toggleMedicalHistory()"
+                (viewConsultations)="onViewConsultations()" (viewNursingCareList)="onViewNursingCareList()"
+                (viewExamsResults)="onViewCares()">
+            </app-buttons-patient>
+        </div>
 
-      <!-- Consultation Details -->
-      <div *ngIf="selectedConsultation && !selectedPrescription">
-        <h3>Consultation Details</h3>
-        <p><strong>Doctor:</strong> {{ selectedConsultation.medecin }}</p>
-        <p><strong>Date:</strong> {{ selectedConsultation.date_cons }}</p>
-        <p><strong>Diagnosis:</strong> {{ selectedConsultation.diagnostic }}</p>
-        <p><strong>Resume:</strong> {{ selectedConsultation.resume }}</p>
-        <button (click)="backToConsultationList()">
-          Back to Consultations
-        </button>
-        <button (click)="viewOrdonnanceDetails(selectedConsultation.id)">
-          View Prescription
-        </button>
-      </div>
+        <!-- Liste des consultations -->
+        <div class="consultations_container">
+            <app-consultation-list *ngIf="showConsultationsList" [consultations]="patient?.consultations"
+                [selectedConsultation]="selectedConsultation" (consultationSelected)="selectConsultation($event)"
+                (backToPatientInfo)="backToPatientInfoConsultation()">
+            </app-consultation-list>
+        </div>
 
-      <!-- Prescription Details -->
-      <div *ngIf="selectedPrescription">
-        <h3>Prescription Details</h3>
-        <p><strong>Date:</strong> {{ selectedPrescription.date }}</p>
-        <ul>
-          <li *ngFor="let med of selectedPrescription.medications">
-            {{ med.name }} - {{ med.dosage }} - {{ med.duration }}
-          </li>
-        </ul>
-        <button (click)="backToConsultationList()">Back to Consultation</button>
-      </div>
 
-      <!-- Liste et détail des Nursing -->
-      <div class="consultations_container">
-        <app-nursing
-          [patient]="patient"
-          [showNursingCareList]="showNursingCareList"
-          [selectedNursingCareIndex]="selectedNursingCareIndex"
-          [selectedNursingCare]="selectedNursingCare"
-          (selectNursingCare)="selectNursingCare($event)"
-          (backToPatientInfoNursing)="backToPatientInfoNursing()"
-          (backToNursingCareList)="backToNursingCareList()"
-        >
+        <!--Consultation détails -->
+
+        <app-consultation-detail [selectedConsultation]="selectedConsultation"
+            [selectedPrescription]="selectedPrescription" (backToConsultationList)="backToConsultationList()"
+            (selectPrescription)="selectPrescription($event)">
+        </app-consultation-detail>
+
+
+
+        <!--- Prescription Detail  -->
+        <app-prescriptions-detail [patient]="patient" [selectedPrescription]="selectedPrescription"
+            (backToConsultationList)="backToConsultationList()">
+        </app-prescriptions-detail>
+
+        <!-- Liste et détail des Nursing -->
+         <div class="consultations_container">
+            <app-nursing [patient]="patient" [showNursingCareList]="showNursingCareList"
+            [selectedNursingCareIndex]="selectedNursingCareIndex" [selectedNursingCare]="selectedNursingCare"
+            (selectNursingCare)="selectNursingCare($event)" (backToPatientInfoNursing)=" backToPatientInfoNursing()"
+            (backToNursingCareList)=" backToNursingCareList()">
         </app-nursing>
-      </div>
+         </div>
 
-      <!-- Medical History -->
-      <app-medical-history
-        [patient]="patient"
-        [showMedicalHistory]="showMedicalHistory"
-        (backToPatientInfoMedicalHistory)="backToPatientInfoMedicalHistory()"
-      >
-      </app-medical-history>
+        <!-- Affichage de l'historique médical -->
+        <app-medical-history [patient]="patient" [showMedicalHistory]="showMedicalHistory"
+            (backToPatientInfoMedicalHistory)="backToPatientInfoMedicalHistory()">
+        </app-medical-history>
+
+        <app-exams-list-patient *ngIf="showCaresList && patient && patient.previousCares" [cares]="patient?.previousCares"
+            [selectedCare]="selectedCare" (consultationSelected)="selectConsultation1($event)"
+            (backToPatientInfo)="backToPatientInfoConsultation1()">
+        </app-exams-list-patient>
+
+        <app-exam-detail-patient [selectedCare]="selectedCare"
+            (backToConsultationList)="backToConsultationList1()">
+        </app-exam-detail-patient>
+
     </div>
   </body>
 </html>

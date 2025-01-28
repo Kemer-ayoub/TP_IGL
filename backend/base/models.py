@@ -328,18 +328,24 @@ class Consultation(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return f"Consultation de {self.patient.prenom} {self.patient.nom} le {self.date_cons}"
+        return f"Consultation le {self.date_cons}"
 
 
 class Ordonnance(models.Model):
-    date = models.DateField()
-    valid = models.BooleanField()  # ca sera validé par le pharmacie
+    valid = models.BooleanField(default=False)  # ca sera validé par le pharmacie
     consultation = models.ForeignKey(
-        Consultation, on_delete=models.SET_NULL, null=True, related_name="ordonnances"
+        Consultation, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        related_name="ordonnances"
     )
+    patient_name = models.CharField(max_length=100)
+    patient_age = models.IntegerField()
+    medecin = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.date
+        return f"Ordonnance for {self.patient_name}"
+
 
 
 class Soin(models.Model):
@@ -378,9 +384,9 @@ class Medicament(models.Model):
     ordonnance = models.ForeignKey(
         Ordonnance, on_delete=models.CASCADE, null=True, related_name="medicaments"
     )
-    soin = models.ForeignKey(
+    """soin = models.ForeignKey(
         Soin, on_delete=models.CASCADE, null=True, related_name="medicaments"
-    )
+    )"""
 
     def __str__(self):
         return self.nom
@@ -394,24 +400,29 @@ class BilanRadiologique(models.Model):
         null=True,
         related_name="bilan_radiologiques_red",
     )
-    medecin = models.ForeignKey(
+    """medecin = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
         limit_choices_to={"role": User.Role.MEDECIN},
         null=True,
         related_name="bilan_radiologiques_med",
-    )
+    )"""
     dpi = models.ForeignKey(
         DPI, on_delete=models.CASCADE, related_name="bilans_radiologiques"
     )
-    title = models.TextField(max_length=50)
-    observation = models.TextField(max_length=500)
-    recommendation = models.TextField(max_length=500)
+    date = models.DateField()
+    time = models.TimeField()
+    type_br = models.CharField(max_length=50)
+    description = models.TextField(max_length=500, null=True, blank=True)
+    # help_text="Description détaillée du soin prodigué"
+
+    # Observations générales
+    observations = models.TextField(max_length=500, blank=True, null=True)
     # Image principale de l'examen
     image = models.ImageField(upload_to="examens_radiologiques/")
 
     def __str__(self):
-        return self.radio
+        return self.type_br
 
 
 class BilanBiologique(models.Model):
@@ -422,27 +433,33 @@ class BilanBiologique(models.Model):
         null=True,
         related_name="bilan_biologiques_lab",
     )
-    medecin = models.ForeignKey(
+    """medecin = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
         limit_choices_to={"role": User.Role.MEDECIN},
         null=True,
         related_name="bilan_biologiques_med",
-    )
+    )"""
+    date = models.DateField()
+    value1 = models.CharField(max_length=50, blank=True, null=True)
+    value2 = models.CharField(max_length=50, blank=True, null=True)
+    value3 = models.CharField(max_length=50, blank=True, null=True)    
+    observation = models.TextField(max_length=500, blank=True, null=True)
+
     dpi = models.ForeignKey(
         DPI, on_delete=models.CASCADE, related_name="bilans_biologiques"
     )
-    statut = models.CharField(
+    type_bb = models.CharField(
         max_length=20,
-        choices=[
-            ("EN_ATTENTE", "En attente"),
-            ("TERMINE", "Terminé"),
-            ("URGENT", "Urgent"),
-        ],
+        choices = [
+        ("CHOLESTEROL", "Cholesterol"),
+        ("IRON", "Iron"),
+        ("HYPERTENSION", "Hypertension"),
+        ]
     )
 
     def __str__(self):
-        return self.status
+        return self.statut
 
 
 class ExamRequest(models.Model):  # Request le bilan biologique

@@ -6,52 +6,37 @@
 
     <!-- Main Content -->
     <div class="main-container">
-      <!-- Composant de recherche -->
-      <app-search-bar
-        *ngIf="
-          !showConsultationsList &&
-          !selectedConsultation &&
-          !showNursingCareList &&
-          !selectedNursingCare &&
-          !showMedicalHistory
-        "
-        (ssnEntered)="onnssEntered($event)"
-      >
-      </app-search-bar>
+        <!-- Composant de recherche -->
 
-      <!-- Error Message -->
-      <div *ngIf="error" class="error-message">
-        <p>{{ error }}</p>
-      </div>
+        <app-search-bar
+            *ngIf="!showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory"
+            (ssnEntered)="onnssEntered($event)"></app-search-bar>
 
-      <!-- Patient Info and Actions -->
-      <div
-        class="container"
-        *ngIf="
-          patient &&
-          !showConsultationsList &&
-          !selectedConsultation &&
-          !showNursingCareList &&
-          !selectedNursingCare &&
-          !showMedicalHistory
-        "
-      >
-        <!-- Patient Info -->
-        <app-patient-info [patient]="patient"></app-patient-info>
+        <!-- Error Message 
+        <div *ngIf="errorMessage" class="error-message">
+            <p>{{ errorMessage }}</p>
+        </div> -->
 
-        <!-- Buttons for actions -->
-        <div class="button-container">
-          <!-- Show consultations -->
-          <div class="single-button" (click)="onViewConsultations()">
-            <img src="Photo\Vector (17).png" alt="Consultations Icon" />
-            <span>Show Consultations</span>
-          </div>
+        <div class="container"
+            *ngIf="patient && !showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory">
+            <!-- Patient Info -->
+            <app-patient-info [patient]="patient"></app-patient-info>
 
-          <!-- Show prescriptions -->
-          <div class="single-button" (click)="onViewPrescriptions()">
-            <img src="Photo\Vector (18).png" alt="Prescriptions Icon" />
-            <span>Show Prescriptions</span>
-          </div>
+            <!-- Bouton pour afficher/masquer les prescriptions -->
+            <div class="single-button-container">
+                <div class="single-button" (click)="onViewConsultations()">
+                    <img src="Photo\Vector (17).png" alt="Action Icon" />
+                    <span>{{ showPrescriptionsList ? 'Hide Prescriptions' : 'Show Presecriptions' }}</span>
+                </div>
+            </div>
+
+        </div>
+        <!-- Liste des consultations -->
+        <div class="consultations_container">
+            <app-consultation-list *ngIf="showConsultationsList" [consultations]="patient?.consultations"
+                [selectedConsultation]="selectedConsultation" (consultationSelected)="selectConsultation($event)"
+                (backToPatientInfo)="backToPatientInfoConsultation()">
+            </app-consultation-list>
         </div>
       </div>
 

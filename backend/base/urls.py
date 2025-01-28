@@ -16,47 +16,23 @@ urlpatterns = [
     path("user-nom/", views.get_user_nom, name="user-nom"),  # GET specific DPI
     path("antecedants/", views.antecedant_list, name="antecedant-list"),
     path("examrequests/", views.examrequests_list, name="exam-requests"),
-    path(
-        "examrequests/<int:pk>/", views.examrequests_list, name="exam-requests-detail"
-    ),  # GET specific exam request
-    path("reportrequests/", views.reportrequests_list, name="report-requests"),
-    path(
-        "reportrequests/<int:pk>/",
-        views.reportrequests_list,
-        name="report-requests-detail",
-    ),  # GET specific report request
-    path(
-        "ordonnances/<int:pk>/valider/",
-        views.valider_ordonnance,
-        name="ordonnance-valider",
-    ),  # GET specific report request
+    path("reportrequests/", views.reportrequests_list, name="report-requests"), 
+    path("valider_ordonnance/", views.valider_ordonnance, name="ordonnance-valider",),  # GET specific report request
+    path('soins/', views.list_soin, name='list_soin'),  
+    path("add-bilan-biologique/", views.add_bilan_biologique, name="add-bilan-biologique"),
+    path("add-bilan-radiologique/", views.add_bilan_radiologique, name="add-bilan-radiologique"),
+    path('bilan_biologiques/', views.list_bilan_biologique, name='list_bilan_biologique'),  
+    path('bilan_biologiques/<int:pk>/', views.list_bilan_biologique, name='detail_bilan_biologique'),  # GET a single bilan biologique by pk
+
+    path('bilan_radiologiques/', views.add_bilan_radiologique, name='list_bilan_radiologique'),  
+    path('bilan_radiologiques/<int:pk>/', views.list_bilan_radiologique, name='detail_bilan_radiologique'),  # GET a single bilan radiologique by pk
     path(
         "search-patient-nss/",
         views.get_patient_by_social_security_number,
         name="search_patient_nss",
     ),
-    path(
-        "add-consultation/",
-        views.add_consultation,
-        name="add_consultation",
-    ),
-    path("list-consultation/", views.list_consultation, name="list_consultation"),
-    path(
-        "list-consultation/<int:consultation_id>/",
-        views.list_consultation,
-        name="get_consultation",
-    ),
-    path(
-        "create-ordonnance/<int:consultation_id>/",
-        views.create_ordonnance_view,
-        name="create_ordonnance",
-    ),
-    path("list-ordonnance/", views.list_ordonnance, name="list_ordonnances"),
-    path(
-        "list-ordonnance/<int:ordonnance_id>/",
-        views.list_ordonnance,
-        name="specific_ordonnance",
-    ),
+    path("consultation/", views.consultation_list, name="add_consultation"),
+    path("ordonnance/", views.ordonnance_list, name="list_ordonnances"),
     path(
         "add-consultation-resume/<int:consultation_id>/",
         views.add_consultation_resume,
@@ -64,3 +40,6 @@ urlpatterns = [
     ),
     path('user_info/', views.user_info, name='user_info'),
 ]
+
+
+

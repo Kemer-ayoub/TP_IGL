@@ -1,26 +1,59 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { PatientInfoComponent } from '../patient-info/patient-info.component';
 import {MedecinAddNewConsultationComponent } from '../medecin-add-new-consultation/medecin-add-new-consultation.component'
 import { MedicalHistoryComponent } from '../medical-history/medical-history.component';
 import {MedecinExamRequestComponent} from '../medecin-exam-request/medecin-exam-request.component'
 import { MedecinReportRequestComponent } from '../medecin-report-request/medecin-report-request.component';
+import { ButtonRadiologueComponent } from "../button-radiologue/button-radiologue.component";
+import { ReportListRadiologueComponent } from "../report-list-radiologue/report-list-radiologue.component";
+import { ReportDetailRadiologueComponent } from "../report-detail-radiologue/report-detail-radiologue.component";
+import { AddReportRadiologueComponent } from "../add-report-radiologue/add-report-radiologue.component";
+import { Component,HostListener, inject, OnInit  } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, switchMap } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { DpiService } from '../dpi.service';
+import { PatientInfoComponent } from '../patient-info/patient-info.component';
+import { MedHistoryService } from '../medHistory.service';
 
 
 @Component({
   selector: 'app-medecin-consulter-dpi',
-  imports: [FormsModule,MedecinAddNewConsultationComponent,MedecinReportRequestComponent, MedecinExamRequestComponent, MedicalHistoryComponent, CommonModule, HeaderComponent, SearchBarComponent, PatientInfoComponent,],
+  imports: [FormsModule,MedecinAddNewConsultationComponent,MedecinReportRequestComponent, MedecinExamRequestComponent, MedicalHistoryComponent, CommonModule, HeaderComponent, SearchBarComponent, PatientInfoComponent, ReactiveFormsModule],
   templateUrl: './medecin-consulter-dpi.component.html',
   styleUrl: './medecin-consulter-dpi.component.css'
 })
 
 export class MedecinConsulterDpiComponent {
+
+  Typeofrecord: string = '';
+  Nameofrecord: string = '';
+  Dateofrecord: string = '';
+  Dosage: number | null = null; // Initialize as null if optional
+
+  
+  
+
+  authService = inject(AuthService);
+  dpiService = inject(DpiService);
+  medHistoryService = inject(MedHistoryService);
+  user?: any;
+  private readonly JWT_TOKEN = 'JWT_TOKEN';
+  private readonly API_URL = 'http://127.0.0.1:8000/api/';
+  private readonly REFRESH_URL = `${this.API_URL}token/refresh/`;
+  private DPI_URL!: string;
+  private http = inject(HttpClient);
+  error: string | null = null;
+  dpi: any = null;
+  theid: any = null;
+  data: any = null;
+
  patients = [
     {
-      ssn: '111',
+      nss: '111',
       firstName: 'Oussama',
       lastName: 'Benhebbadj',
       address: 'Algiers',
@@ -68,7 +101,7 @@ export class MedecinConsulterDpiComponent {
 
     },
     {
-      ssn: '22222',
+      nss: '22222',
       firstName: 'John',
       lastName: 'Doe',
       address: 'Oran',
@@ -90,7 +123,7 @@ export class MedecinConsulterDpiComponent {
       ]
     },
     {
-      ssn: '33333',
+      nss: '33333',
       firstName: 'Jane',
       lastName: 'Smith',
       address: 'Tlemcen',
@@ -112,7 +145,7 @@ export class MedecinConsulterDpiComponent {
     }
   ];
 
-  ssn: string = '';
+  nss: string = '';
   patient: any = null;
   errorMessage: string = '';
   showPrescriptionsList: boolean = false;
@@ -124,18 +157,63 @@ export class MedecinConsulterDpiComponent {
   showMedicalHistory: boolean = false;
   showExamRequest: boolean = false ;
   showReportRequest: boolean = false ;
+  
 
   searchPatient() {
-    this.errorMessage = '';
-    this.patient = this.patients.find(patient => patient.ssn === this.ssn);
+    this.fetchDpi(this.nss);
     if (!this.patient) {
-      this.errorMessage = 'Patient not found!';
     }
   }
-  onSSNEntered(ssn: string) {
-    this.ssn = ssn;
+  onnssEntered(nss: string) {
+    this.nss = nss;
     this.searchPatient();
   }
+
+  fetchDpi(nss: any) {
+    this.dpiService.getDpi(nss).subscribe({
+      next: (outerData) => {
+        this.authService.getNom(outerData.medecin_traitant).subscribe({
+          next: (innerData) => {
+            outerData.medecin_traitant = innerData;
+            this.patient = outerData
+          },
+          error: (error) => console.error('Error fetching DPI:', error)
+        })
+        // Add more lines of code here
+    },
+      error: (error) => console.error('Error fetching DPI:', error)
+    });
+  }
+
+
+  addMedicalRecord() {
+
+    if (!this.Typeofrecord || !this.Nameofrecord || !this.Dateofrecord) {
+      return; // If any field is empty, don't proceed
+    }
+    this.data = {
+      "type_record": this.Typeofrecord,
+      "name_record": this.Nameofrecord,
+      "antec_date": this.Dateofrecord,
+      "dosage": this.Dosage,
+      "dpi": this.patient.id
+    }
+
+      console.log("that's where i follow", this.data)
+      // Handle the form submission here
+      this.medHistoryService.createAntecedants(this.data).subscribe({
+        next: (response) => {
+          console.log("the badi",response)
+        },
+        error: (error) => console.error('Error fetching DPI:', error)
+      })
+      
+      // You can emit these values to a parent component or send to a service
+      // this.medicalRecordAdded.emit(this.medicalForm.value);
+      
+      // Reset the form after successful submission
+  }
+
   selectPrescription(prescription: any) {
     if (prescription === null) {
       this.selectedPrescription = null;
@@ -221,19 +299,57 @@ export class MedecinConsulterDpiComponent {
     this.showPrescriptionsList = false;
     this.selectedPrescription = null;
   }
+  // Méthode pour afficher ou masquer l'historique médical
   toggleMedicalHistory() {
-    if (this.patient?.medicalHistory) {
-      this.showMedicalHistory = !this.showMedicalHistory;
-    } else {
-      this.errorMessage = 'Medical history not available for this patient!';
-    }
+    this.medHistoryService.getAntecedants(this.patient.id).subscribe({
+      next: (response) => {
+        console.log("the reda response:", response)
+        // Define a mapping for `type_record` values to the desired categories
+        const typeMapping: { [key: string]: string } = {
+          "allergie": "allergies",
+          "vaccination": "vaccination",
+          "medication": "medications",
+          "personal medical": "chronicIllnesses" // Map 'personal medical' to 'chronicIllnesses'
+        };
+
+        const medicalHistory = response.reduce((acc: any, item: any) => {
+          const type = typeMapping[item.type_record];
+          if (!type) return acc; // Skip if the type is not mapped
+          if (!acc[type]) {
+            acc[type] = [];
+          }
+          acc[type].push({ name: item.name_record, date: item.antec_date });
+          return acc;
+        }, {});
+
+        const formattedHistory = {
+          medicalHistory: {
+            chronicIllnesses: medicalHistory.chronicIllnesses || [],
+            surgeries: medicalHistory.vaccination || [],
+            allergies: medicalHistory.allergies || [],
+            medications: medicalHistory.medications || [],
+          },
+        };
+        console.log("formatted baby",formattedHistory);
+        this.patient = { ...this.patient, ...formattedHistory };
+        console.log("the patient",this.patient)
+        if (this.patient?.medicalHistory) {
+          this.showMedicalHistory = !this.showMedicalHistory;
+        } else {
+          this.errorMessage = 'Medical history not available for this patient!';
+        }
+      },
+      error: (error) => console.error('Error fetching DPI:', error)
+    })
   }
-  toggleExamRequest(){
-    this.showExamRequest = !this.showExamRequest ;
-  }
+
   toggleReportRequest(){
     console.log('toggleReportRequest');
     this.showReportRequest = !this.showReportRequest ;
+  }
+  toggleExamRequest(){
+    console.log('toggleExamRequest');
+    this.showExamRequest = !this.showExamRequest ;
   }
   backToPatientInfoMedicalHistory() {
     this.showMedicalHistory = !this.showMedicalHistory;

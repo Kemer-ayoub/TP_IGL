@@ -1,10 +1,10 @@
 <div *ngIf="selectedCare " class="consultation-details">
     <h3>Care Details</h3>
-    <p><strong>Type of imaging :</strong> {{ selectedCare.type }}</p>
+    <p><strong>Type of imaging :</strong> {{ selectedCare.type_test }}</p>
     <p><strong>Body Part :</strong> {{ selectedCare.body_part }}</p>
     <p><strong>Priority :</strong> {{ selectedCare.priority }}</p>
-    <p><strong>Reason for Request :</strong> {{ selectedCare.reason }}</p>
-    <p><strong>Desired date :</strong> {{ selectedCare.date }}</p>
-    <p><strong>Doctor name :</strong> {{ selectedCare.dname }}</p>
+    <p><strong>Reason for Request :</strong> {{ selectedCare.reason_req }}</p>
+    <p><strong>Desired date :</strong> {{ selectedCare.req_date }}</p>
+    <p><strong>Doctor name :</strong> {{ selectedCare.medecin.first_name }}</p>
     <button class="back-btn" (click)="onBackToConsultationList()">Retour à la liste des consultations</button>
 </div>
