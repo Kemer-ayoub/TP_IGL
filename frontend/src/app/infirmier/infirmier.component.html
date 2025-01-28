@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+
+<body>
+    <app-header></app-header>
+    <div class="main-container">
+   
+        <app-search-bar
+        *ngIf="!showCaresList && !selectedCare && !showNursing " 
+        (ssnEntered)="onnssEntered($event)"></app-search-bar>
+
+
+        <!-- <div *ngIf="errorMessage" class="error-message">
+            <p>{{ errorMessage }}</p>
+        </div> -->
+
+        <div class="container"
+        *ngIf="patient && !showCaresList && !selectedCare && !showNursing ">
+        <!-- Patient Info -->
+        <app-patient-info [patient]="patient"></app-patient-info>
+    
+        <!-- Buttons -->
+        <app-button-patient-infirmier 
+            (viewCares)="onViewCares()" (Nursing)="AddCare()"> 
+        </app-button-patient-infirmier>
+    
+    
+    </div>
+    <app-care-list-infirmier *ngIf="showCaresList" [cares]="patient?.previousCares"
+    [selectedCare]="selectedCare" (consultationSelected)="selectConsultation($event)"
+    (backToPatientInfo)="backToPatientInfoConsultation()">
+    </app-care-list-infirmier>
+
+    <app-care-detail-infirmier [selectedCare]="selectedCare"
+     (backToConsultationList)="backToConsultationList()">
+    </app-care-detail-infirmier>
+    <app-add-care-infirmier   *ngIf="!showCaresList && !selectedCare && showNursing " [dpiId]="patient?.id"
+    ></app-add-care-infirmier>
+    </div>
+</body>

@@ -1,0 +1,33 @@
+<div class="Card">
+    <div class="cardtext">
+        <span>New Care</span>
+    </div>
+    <div class="careproprities">
+        <div class="input-Date">
+            <input type="text" id="date-input" placeholder="Date" [(ngModel)]="date">
+        </div>
+        <div class="input-Time">
+            <input type="text" id="time-input" placeholder="Time" [(ngModel)]="time">
+        </div>
+        <div class="input-type">
+            <input type="text" id="type-input" placeholder="Type of care" [(ngModel)]="typecare">
+        </div>
+        <div class="input-description">
+            <textarea type="text" id="description-input" placeholder="Description" [(ngModel)]="description"></textarea>
+        </div>
+        <div class="input-observation">
+            <textarea type="text" id="observation-input" placeholder="Observations" [(ngModel)]="observation"></textarea>
+        </div>
+        <!-- File Upload Button -->
+        <label class="custom-file-upload">
+            <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+            Attach Images
+        </label>
+
+        <!-- Display selected file name -->
+        <div *ngIf="selectedFileName" class="file-name">
+            Selected file: {{ selectedFileName }}
+        </div>
+    </div>
+    <button class="create-btn" (click)="addBilanRadiologique()">Create</button>
+</div>

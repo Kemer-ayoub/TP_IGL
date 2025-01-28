@@ -1,0 +1,123 @@
+.consultation-list {
+    background-color: #DFDFDF;
+    padding: 0;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 700px;
+    font-family: 'Geologica', sans-serif;
+    height: 100%;
+    margin-top: 80px;
+}
+
+.consultation-list h3 {
+    font-size: 24px;
+    color: #558A8D;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.consultation-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.consultation-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: #DFDFDF;
+    font-size: 12px;
+    color: #0B2025;
+    cursor: pointer;
+    transition: background-color 0.3s, border-left 0.3s;
+    width: auto;
+    position: relative;
+    border-radius: 10px;
+    max-width: 150px;
+}
+
+.consultation-list li:hover {
+    background-color: #9EBDBF;
+    border-left: 5px solid #558A8D;
+}
+
+.consultation-icon {
+    width: 40px;
+    height: 20px;
+    object-fit: contain;
+    margin-left: -10px;
+}
+
+.consultation-list li span {
+    font-family: 'Geologica', sans-serif;
+    font-weight: bold;
+    color: #305a66;
+    font-size: 15px;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+.consultation-list li.selected {
+    background-color: #9EBDBF;
+    border-left: 17px solid #558A8D;
+}
+
+.back-btn {
+    background-color: #558A8D;
+    color: #DFDFDF;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    width: 200px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #305a66;
+}
+
+.separator {
+    width: 100%;
+    height: 1px;
+    background-color: #558A8D;
+    margin: 5px;
+    display: block;
+}
+
+@media (max-width: 480px) {
+    .consultation-list {
+        width: 100%;
+        max-width: 300px;
+    }
+    .consultation-list li {
+        font-size: 8px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .consultation-list {
+        width: 100%;
+        max-width: 500px;
+    }
+    .consultation-list li {
+        font-size: 10px;
+    }
+}
+
+@media (min-width: 769px) {
+    .consultation-list {
+        width: 100%;
+        max-width: 700px;
+    }
+    .consultation-list li {
+        font-size: 12px;
+    }
+}

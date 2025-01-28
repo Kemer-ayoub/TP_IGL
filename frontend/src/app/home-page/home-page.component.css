@@ -1,0 +1,796 @@
+    
+* {
+    box-sizing: border-box;
+}
+html, body {
+
+    background-color: #DFDFDF;
+    min-height: 100vh;
+    max-width: 100vw;
+    margin: 0;
+    overflow: hidden;
+}
+.container {
+    width: 100%;
+    height: 100%;
+    background-color: #DFDFDF !important; 
+    scroll-behavior: smooth;
+}
+#services{
+    padding: 50px 20px;
+    scroll-margin-top: -20px; 
+    
+}
+
+#contact #about-us{
+    padding: 50px 20px;
+    scroll-margin-top: 100px;
+    margin-top: 50px;
+}
+.header {
+    margin: 0; 
+    padding-right: 70px;
+    padding-left: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 88px;
+    top: 0; 
+    left: 0;
+    width: 100%;  
+    background-color: #DFDFDF;
+    border-bottom: 0.5px solid #558A8D;
+    margin-bottom: 100px;
+}
+
+.logo-container{
+    display: flex;
+    align-items: center;
+}
+.logo {
+    display: block;
+    width: 64PX;
+    height: 64px;
+    top: 16px;
+    padding-right: 20px;
+}
+.company-name {
+    width: 144PX;
+    height: 40px;
+    top: 28px;
+    font-family: 'Geologica',sans-serif;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 40px;
+    color: #558A8D;
+}
+.nav-links{
+    display: flex;
+    align-items: center;
+
+}
+.Services{
+    width: 96PX;
+    height: 30px;
+    top: 33px;
+    font-family: 'Geologica',sans-serif; 
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    color: #0B2025;
+    padding-right: 10px;
+    margin-right: 20px;
+    
+}
+
+
+
+.About-us{
+    width: 120PX;
+    height: 30px; 
+    left: 660px;
+    top: 33px;
+    font-family:'Geologica',sans-serif; 
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    color: #0B2025;
+    padding-right: 10px;
+    margin-right: 5px;
+
+}
+.Contact{
+    width: 93PX;
+    height: 30px;
+    left: 803px;
+    top: 33px;
+    font-family: 'Geologica',sans-serif; 
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    color: #0B2025;
+}
+.login-btn {
+    width: 164px;
+    height: 37px;
+    text-align: center;
+    font-family: 'Geologica', sans-serif; 
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 25px;
+    border: none;
+    border-radius: 15px;
+    background-color: #558A8D;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.login-btn:hover {
+    background-color: #3C6568; 
+    transform: scale(1.05); 
+}
+
+div .login-btn {
+    border: none !important;
+}
+.container1{
+    width:  100%;
+    height: 671px;
+    top: 232px;
+}
+.container11{
+    width:  100%;
+    height: 178px;
+    top: 241px;
+    display: flex;
+    flex-direction: column; 
+    align-items:center;
+    margin-bottom: 60px;
+}
+.container-gt{
+    
+    width:50%;
+    height: 144px;
+    top: 241px;
+    justify-content: center; 
+    place-items: center;
+   text-align: center; 
+    font-family: 'Geologica',sans-serif; 
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 80px; 
+    margin-left: 20%px;
+    margin-bottom: 30px;
+    color: #0B2025;
+}
+
+.container-pt{
+    width:  100%;
+    height: 30px;
+    top: 389px;
+    justify-content: center; 
+    place-items: center;
+    text-align: center; 
+    font-family:'Geologica',sans-serif; 
+    font-weight: 100;
+    font-size: 24px;
+    line-height: 30px; 
+    margin-bottom: 10px;
+    color: #3C3C3C;
+}
+
+.container12{
+    width:  1184PX;
+    height: 420px;
+    top: 483px;
+    text-align: center; 
+   
+    justify-content: center; 
+    place-items: center;
+   
+}
+.grande-image {
+    width: 90%; 
+    height: auto; 
+    object-fit: cover; 
+    border-radius: 10px; 
+}
+.highlight{
+    color :#558A8D;
+}
+.main-container {
+    margin-top: -100px;
+    width: 90%;
+    padding: 20px;
+    margin-left: 70px;
+    font-family: 'Geologica', sans-serif; 
+    height: 100%;
+}
+
+.text-container {
+    text-align: center; 
+    margin-bottom: 40px; 
+}
+
+.header-text {
+    font-size: 48px; 
+    font-weight: bold; 
+    color: #000000;
+    line-height: 60px;
+
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 340px); 
+    grid-template-rows: repeat(2, 313px); 
+    gap: 21px; 
+    justify-content: center;  
+    
+}
+
+.grid-item {
+    padding: 20px;
+    vertical-align: middle; 
+    border-radius: 10px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    border: 1px solid  #558A8D;
+    
+}
+.grid-item:nth-child(odd) {
+    background-color: #558A8D; 
+    color: #DFDFDF ;
+    font-size: 16px;
+    
+}
+
+.grid-item:nth-child(even) {
+    background-color: #DFDFDF; 
+    color:  #558A8D; 
+    font-size: 16px;
+   
+}
+.grid-item img.grid-image {
+    max-width: 44px; 
+    max-height: 55px; 
+    object-fit: cover;
+}
+.grid-item p {
+    text-align: justify;
+    hyphens: auto; 
+    overflow-wrap: break-word; 
+}
+.container2 {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start; 
+    padding: 20px;
+    gap: 20px;
+    margin-left: 95px; 
+  }
+  
+.left-content {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; 
+  }
+  
+.small-text {
+    font-size: 36px;
+    font-weight: bold;
+    color: #000000;
+  }
+  
+  .highlight {
+    color: #558A8D 
+  }
+  
+.paragraph {
+    width: 75%;
+    height: 273px;
+    border: 1.5px solid #558A8D; 
+    border-radius: 15px; 
+    padding: 15px; 
+    font-size: 22px;
+    line-height: 1.5; 
+    text-align: justify; 
+    color: #3C3C3C;
+    
+  }
+  
+.image-container {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-end; 
+    margin-top: 130px; 
+    padding-right: 65px; 
+}
+  
+.image {
+    max-width: 369px; 
+    height: auto;
+    border-radius: 10px; 
+}
+
+.signature {
+    margin-top: 150px;
+    height: auto;
+    background-color: #558A8D;
+    padding: 20px 0;
+    font-family: 'Geologica', sans-serif;
+    color: #DFDFDF;
+    text-align: center;
+}
+
+.footer-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.header1 {
+    display: flex;
+    align-items: center; 
+    gap: 10px;
+    justify-content: center; 
+    margin-bottom: 5px;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.contact-info {
+    background-color: #558A8D;
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    margin-top: 5px;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    margin: 0;
+}
+
+.contact-info img {
+    width: 20px;
+    height: auto;
+}
+
+.copyright-container {
+    background-color: #DFDFDF;
+    color: #558A8D;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+
+.nav-links a {
+    text-decoration: none;
+    color: #0B2025;
+    font-size: 24px;
+    margin-right: 20px;
+    font-family: 'Geologica', sans-serif;
+    transition: color 0.3s, text-decoration 0.3s;
+}
+
+.nav-links a:hover {
+    color: #558A8D; 
+    text-decoration: underline;
+    cursor: pointer;
+}
+@media screen and (max-width: 1024px) {
+    .footer-container {
+        padding: 20px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header1 h1 {
+        font-size: 20px; /* Réduction de la taille du titre */
+    }
+
+    .contact-info p {
+        font-size: 14px; /* Réduction de la taille des informations de contact */
+    }
+
+    .logo {
+        width: 40px; /* Réduction de la taille du logo */
+    }
+}
+
+/* Smartphones (480px - 768px) */
+@media screen and (max-width: 768px) {
+    .footer-container {
+        padding: 15px;
+    }
+
+    .header1 h1 {
+        font-size: 18px; /* Réduction de la taille du titre */
+    }
+
+    .contact-info p {
+        font-size: 14px; /* Réduction de la taille des informations de contact */
+    }
+
+    .logo {
+        width: 35px; /* Réduction de la taille du logo */
+    }
+}
+
+/* Smartphones très petits (<480px) */
+@media screen and (max-width: 480px) {
+    .footer-container {
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .header1 h1 {
+        font-size: 16px; /* Réduction de la taille du titre */
+    }
+
+    .contact-info p {
+        font-size: 12px; /* Réduction de la taille des informations de contact */
+    }
+
+    .logo {
+        width: 30px; /* Réduction de la taille du logo */
+    }
+
+    .copyright-container {
+        font-size: 12px; /* Réduction de la taille du texte du copyright */
+    }
+   
+}
+
+/*-------------------------------------------------------------------------------------------------------------------*/
+@media screen and (max-width: 1024px) {
+    .container2 {
+        margin-left: 20px; /* Réduit le marge pour s'ajuster aux petits écrans */
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-content {
+        width: 100%; /* La largeur devient 100% sur les écrans plus petits */
+        text-align: center; /* Centre le texte */
+    }
+
+    .image-container {
+        width: 100%; /* L'image occupe 100% de la largeur disponible */
+        justify-content: center; /* Centre l'image */
+        padding-right: 0;
+    }
+
+    .paragraph {
+        width: 100%; /* Le paragraphe prend 100% de la largeur */
+        height: auto; /* La hauteur devient automatique */
+    }
+
+    .image {
+        max-width: 80%; /* Limite la taille de l'image */
+    }
+  
+}
+
+
+/* Smartphones (480px - 768px) */
+@media screen and (max-width: 768px) {
+    .small-text {
+        font-size: 28px; /* Réduit la taille de la police pour les petits écrans */
+    }
+
+    .paragraph {
+        font-size: 18px; /* Réduit la taille de la police du paragraphe */
+        padding: 10px; /* Réduit le padding */
+    }
+
+    .image {
+        max-width: 90%; /* L'image prend 90% de la largeur */
+    }
+    
+}
+
+/* Smartphones très petits (<480px) */
+@media screen and (max-width: 480px) {
+    .small-text {
+        font-size: 22px; /* Réduit encore la taille de la police pour les très petits écrans */
+    }
+
+    .paragraph {
+        font-size: 16px; /* Réduit la taille de la police du paragraphe */
+        padding: 8px; /* Réduit encore le padding */
+        height: auto; /* Permet à la hauteur d'être fluide */
+    }
+
+    .image {
+        max-width: 100%; /* L'image prend toute la largeur disponible */
+    }
+
+   
+}
+/*--------------------------------------------------------------------------------------------------------------------*/
+@media screen and (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* Deux colonnes */
+        gap: 16px; /* Réduit l'écart entre les éléments */
+    }
+
+    .header-text {
+        font-size: 40px;
+        line-height: 50px;
+    }
+}
+
+/* Smartphones moyens (480px - 768px) */
+@media screen and (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* Une colonne */
+    }
+
+    .header-text {
+        font-size: 32px;
+        line-height: 40px;
+    }
+
+    .grid-item img.grid-image {
+        width: 50px; /* Ajuste les images */
+        height: 50px;
+    }
+
+    .grid-item {
+        padding: 15px;
+    }
+    .main-container {
+        margin-left: 12px;
+        margin-top: -260px;
+    }
+}
+
+/* Smartphones très petits (<480px) */
+@media screen and (max-width: 480px) {
+    .header-text {
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    .grid-item img.grid-image {
+        width: 40px; /* Ajuste les images pour très petits écrans */
+        height: 40px;
+    }
+
+    .grid-item p {
+        font-size: 14px;
+    }
+
+    .grid-item {
+        padding: 10px;
+    }
+
+    .main-container {
+        margin-left: 4px;
+        margin-top: -260px;
+    }
+}
+
+/* Écrans très petits (380px et plus bas) */
+@media screen and (max-width: 380px) {
+    .header-text {
+        font-size: 20px; /* Texte réduit pour tenir sur l'écran */
+        line-height: 28px;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr; /* Une seule colonne */
+        gap: 10px; /* Réduction des espaces */
+    }
+
+    .grid-item {
+        padding: 8px; /* Padding plus réduit */
+        font-size: 12px; /* Taille de police réduite */
+    }
+
+    .grid-item img.grid-image {
+        width: 24px; /* Taille d'image réduite */
+        height: 24px;
+    }
+
+    .grid-item p {
+        font-size: 12px; /* Police encore plus petite pour les descriptions */
+    }
+}
+/*----------------------------------------------------------------------------------------------------------*/
+@media screen and (max-width: 4000px) {
+    .container1 {
+        flex-direction: column; /* Passe en colonne */
+        align-items: center;
+        gap: 20px; /* Espace entre les sections */
+    }
+
+    .container11, .container12 {
+        width: 100%; /* Prend toute la largeur */
+    }
+
+    .container-gt {
+        font-size: 40px; /* Taille réduite pour les écrans moyens */
+        line-height: 50px;
+    }
+
+    .container-pt {
+        font-size: 18px; /* Taille réduite pour les écrans moyens */
+        line-height: 24px;
+    }
+
+    .grande-image {
+        max-width: 55% /* Taille maximale de l'image */
+    }
+}
+@media screen and (max-width: 2000px) {
+    .container1 {
+        flex-direction: column; /* Passe en colonne */
+        align-items: center;
+        gap: 20px; /* Espace entre les sections */
+    }
+
+    .container11, .container12 {
+        width: 100%; /* Prend toute la largeur */
+    }
+
+    .container-gt {
+        font-size: 40px; /* Taille réduite pour les écrans moyens */
+        line-height: 50px;
+    }
+
+    .container-pt {
+        font-size: 18px; /* Taille réduite pour les écrans moyens */
+        line-height: 24px;
+    }
+
+    .grande-image {
+        max-width: 70% /* Taille maximale de l'image */
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .container1 {
+        flex-direction: column; /* Passe en colonne */
+        align-items: center;
+        gap: 20px; /* Espace entre les sections */
+    }
+
+    .container11, .container12 {
+        width: 100%; /* Prend toute la largeur */
+    }
+
+    .container-gt {
+        font-size: 40px; /* Taille réduite pour les écrans moyens */
+        line-height: 50px;
+    }
+
+    .container-pt {
+        font-size: 18px; /* Taille réduite pour les écrans moyens */
+        line-height: 24px;
+    }
+
+    .grande-image {
+        max-width: 80% /* Taille maximale de l'image */
+    }
+}
+
+/* Écrans petits (smartphones) */
+@media screen and (max-width: 768px) {
+    .container-gt {
+        font-size: 32px; /* Taille encore plus petite */
+        line-height: 40px;
+    }
+
+    .container-pt {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .grande-image {
+        max-width: 85%; /* Réduction de la taille de l'image */
+    }
+}
+
+/* Écrans très petits (moins de 480px) */
+@media screen and (max-width: 480px) {
+    .container-gt {
+        font-size: 24px; /* Ajustement pour très petits écrans */
+        line-height: 32px;
+    }
+
+    .container-pt {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .grande-image {
+        max-width: 80%; /* Limitation de la taille de l'image */
+    }
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 1024px) {
+    .header {
+        padding: 0 30px;
+    }
+
+    .company-name {
+        font-size: 22px;
+    }
+
+    .nav-links a {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        flex-wrap: wrap;
+        height: auto; /* Permet à l'en-tête de s'étendre si nécessaire */
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%; /* Prend toute la largeur */
+        margin-top: 10px;
+    }
+
+    .nav-links a {
+        font-size: 18px;
+        padding: 5px 0;
+    }
+
+    .login-btn {
+        align-self: flex-end;
+        margin-left: -4px; /* Bouton à droite */
+        margin-top: 5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo {
+        width: 40px; /* Encore plus petit */
+        height: 40px;
+    }
+
+    .company-name {
+        font-size: 18px;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+    }
+
+    .login-btn {
+        width: 120px;
+        font-size: 16px;
+    }
+}
+
+

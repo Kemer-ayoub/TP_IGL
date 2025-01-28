@@ -1,0 +1,231 @@
+.consultation-details {
+  background-color: #558A8D;
+  color: #DFDFDF;
+  font-family: 'Geologica', sans-serif;
+  padding: 40px;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 1200px;
+  margin: 80px auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-right: 20px;
+}
+
+.consultation-details h3 {
+  font-size: 22px;
+  color: #DFDFDF;
+  text-align: center;
+}
+
+.consultation-details p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.consultation-details h4 {
+  font-size: 18px;
+  color: #DFDFDF;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.consultation-details ul {
+  width: 90%;
+  margin: 0 auto; 
+  padding: 0; /
+}
+
+.consultation-details li {
+  background-color: #DFDFDF;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 14px;
+  padding: 15px 20px;
+  position: relative;
+  height: auto;
+}
+
+.consultation-details li p {
+  margin: 0;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.consultation-details li p strong {
+  color: #558A8D;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.details-link {
+  color: #558A8D;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.consultation-details li:hover {
+  background-color: #9EBDBF;
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.consultation-details .back-btn {
+  background-color: #305a66;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+  max-width: 200px;
+}
+
+.consultation-details .back-btn:hover {
+  background-color: #9EBDBF;
+}
+
+@media (max-width: 480px) {
+  .consultation-details {
+    width: 80%;
+    padding: 20px;
+  }
+
+  .consultation-details h3 {
+    font-size: 18px;
+  }
+
+  .consultation-details p {
+    font-size: 12px;
+  }
+
+  .consultation-details h4 {
+    font-size: 16px;
+  }
+
+  .consultation-details li {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .details-link {
+    font-size: 12px;
+  }
+
+  .consultation-details .back-btn {
+    width: 60%;
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .consultation-details {
+    width: 70%;
+    padding: 30px;
+  }
+
+  .consultation-details h3 {
+    font-size: 20px;
+  }
+
+  .consultation-details p {
+    font-size: 14px;
+  }
+
+  .consultation-details h4 {
+    font-size: 18px;
+  }
+
+  .consultation-details li {
+    font-size: 14px;
+    padding: 15px;
+  }
+
+  .details-link {
+    font-size: 14px;
+  }
+
+  .back-btn {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .consultation-details {
+    width: 70%;
+    padding: 20px;
+    margin-left: 15%;
+  }
+
+  .consultation-details h3 {
+    font-size: 24px;
+  }
+
+  .consultation-details p {
+    font-size: 16px;
+  }
+
+  .consultation-details h4 {
+    font-size: 20px;
+  }
+
+  .consultation-details li {
+    font-size: 16px;
+    padding: 20px 40px;
+  }
+
+  .details-link {
+    font-size: 16px;
+  }
+
+  .back-btn {
+    font-size: 16px;
+    max-width: 200px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .consultation-details {
+    width: 80%;
+    padding: 20px;
+    margin-left: 10%;
+  }
+
+  .consultation-details h3 {
+    font-size: 24px;
+  }
+
+  .consultation-details p {
+    font-size: 16px;
+  }
+
+  .consultation-details h4 {
+    font-size: 20px;
+  }
+
+  .consultation-details li {
+    font-size: 16px;
+    padding: 20px 40px;
+  }
+
+  .details-link {
+    font-size: 16px;
+  }
+
+  .back-btn {
+    font-size: 16px;
+    max-width: 200px;
+  }
+}

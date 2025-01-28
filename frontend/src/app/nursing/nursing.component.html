@@ -1,0 +1,30 @@
+<!-- Liste des soins infirmiers -->
+
+<div *ngIf="patient && showNursingCareList && !selectedNursingCare" class="consultation-list">
+  <h3>Previous Care</h3>
+  <ul *ngFor="let care of patient?.nursingCare; let i = index">
+    <li (click)="onSelectNursingCare(care, i)">
+      <img src="Photo/Group (3).png" alt="Soin" class="consultation-icon">
+      <span>Care {{ i + 1 }}</span>
+    </li>
+    <div class="separator" *ngIf="i !== patient?.nursingCare.length - 1"></div>
+  </ul>
+
+  <button class="back-btn" (click)="onBackToPatientInfoNursing()">Retour</button>
+</div>
+
+
+
+<!-- Détails d'un soin infirmier -->
+
+<div *ngIf="selectedNursingCare" class="nursing-care-details">
+  <h3> Care {{ selectedNursingCareIndex !== null ? selectedNursingCareIndex + 1 : '' }}</h3>
+  <!-- Affichage de l'index -->
+  <p><strong>Date :</strong> {{ selectedNursingCare.date }}</p>
+  <p><strong>Heure :</strong> {{ selectedNursingCare.time }}</p>
+  <p><strong>Type :</strong> {{ selectedNursingCare.type }}</p>
+  <p><strong>Description :</strong> {{ selectedNursingCare.description }}</p>
+  <p><strong>Observations :</strong> {{ selectedNursingCare.observations }}</p>
+
+  <button class="back-btn" (click)="onBackToNursingCareList()">Retour à la Liste</button>
+</div>
