@@ -5,7 +5,7 @@
 <body>
     <app-header></app-header>
     <div class="main-container">
-   
+    
         <app-search-bar
         *ngIf="!showCaresList && !selectedCare && !showNursing " 
         (ssnEntered)="onnssEntered($event)"></app-search-bar>
@@ -33,6 +33,8 @@
     <app-request-detail-labo [selectedCare]="selectedCare"
      (backToConsultationList)="backToConsultationList()">
     </app-request-detail-labo>
+    <app-add-exam-labo *ngIf="!showCaresList && !selectedCare && showNursing " [dpiId]="patient?.id"
+    ></app-add-exam-labo>
     
 
     </div>

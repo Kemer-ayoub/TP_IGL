@@ -433,23 +433,29 @@ class BilanBiologique(models.Model):
         null=True,
         related_name="bilan_biologiques_lab",
     )
-    medecin = models.ForeignKey(
+    """medecin = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
         limit_choices_to={"role": User.Role.MEDECIN},
         null=True,
         related_name="bilan_biologiques_med",
-    )
+    )"""
+    date = models.DateField()
+    value1 = models.CharField(max_length=50, blank=True, null=True)
+    value2 = models.CharField(max_length=50, blank=True, null=True)
+    value3 = models.CharField(max_length=50, blank=True, null=True)    
+    observation = models.TextField(max_length=500, blank=True, null=True)
+
     dpi = models.ForeignKey(
         DPI, on_delete=models.CASCADE, related_name="bilans_biologiques"
     )
-    statut = models.CharField(
+    type_bb = models.CharField(
         max_length=20,
-        choices=[
-            ("EN_ATTENTE", "En attente"),
-            ("TERMINE", "Terminé"),
-            ("URGENT", "Urgent"),
-        ],
+        choices = [
+        ("CHOLESTEROL", "Cholesterol"),
+        ("IRON", "Iron"),
+        ("HYPERTENSION", "Hypertension"),
+        ]
     )
 
     def __str__(self):

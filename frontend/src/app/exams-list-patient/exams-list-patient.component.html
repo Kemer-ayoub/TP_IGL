@@ -1,6 +1,6 @@
 <div *ngIf="cares?.length && !selectedCare" class="consultation-list">
     <h3>Exam’s requests</h3>
-    <ul *ngFor="let care of cares; let i = index">
+    <ul *ngFor="let care of cares; let i = index; trackBy: trackByFn">
         <li 
             (click)="selectConsultation(care)">
             <img src="Photo/Group (3).png" alt="Consultation" class="consultation-icon">

@@ -27,7 +27,7 @@
     
     
     </div>
-    <app-care-list-infirmier *ngIf="showCaresList" [cares]="patient?.previousCares"
+    <app-care-list-infirmier *ngIf="showCaresList" [cares]="patient?.nursingCare"
     [selectedCare]="selectedCare" (consultationSelected)="selectConsultation($event)"
     (backToPatientInfo)="backToPatientInfoConsultation()">
     </app-care-list-infirmier>

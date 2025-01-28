@@ -13,7 +13,7 @@
 
         <!-- search.component -->
         <app-search-bar
-            *ngIf="!showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory" 
+            *ngIf="!showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory && !showCaresList" 
             (ssnEntered)="onSSNEntered($event)"></app-search-bar>
 
         <!-- Error Message -->
@@ -22,14 +22,14 @@
         </div>
 
         <div class="container"
-            *ngIf="patient && !showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory">
+            *ngIf="patient && !showConsultationsList && !selectedConsultation && !showNursingCareList && !selectedNursingCare && !showMedicalHistory && !showCaresList">
             <!-- Patient Info -->
             <app-patient-info [patient]="patient"></app-patient-info>
 
             <!-- Buttons -->
             <app-buttons-patient (toggleMedicalHistory)="toggleMedicalHistory()"
                 (viewConsultations)="onViewConsultations()" (viewNursingCareList)="onViewNursingCareList()"
-                (viewExamsResults)="toggleMedicalHistory()">
+                (viewExamsResults)="onViewCares()">
             </app-buttons-patient>
         </div>
 
@@ -69,6 +69,15 @@
         <app-medical-history [patient]="patient" [showMedicalHistory]="showMedicalHistory"
             (backToPatientInfoMedicalHistory)="backToPatientInfoMedicalHistory()">
         </app-medical-history>
+
+        <app-exams-list-patient *ngIf="showCaresList && patient && patient.previousCares" [cares]="patient?.previousCares"
+            [selectedCare]="selectedCare" (consultationSelected)="selectConsultation1($event)"
+            (backToPatientInfo)="backToPatientInfoConsultation1()">
+        </app-exams-list-patient>
+
+        <app-exam-detail-patient [selectedCare]="selectedCare"
+            (backToConsultationList)="backToConsultationList1()">
+        </app-exam-detail-patient>
 
     </div>
 </body>

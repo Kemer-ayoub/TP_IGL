@@ -18,13 +18,16 @@ import { catchError, switchMap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { MedHistoryService } from '../medHistory.service';
 import { ConsultationService } from '../consultation.service';
+import { ExamDetailPatientComponent } from '../exam-detail-patient/exam-detail-patient.component';
+import { ExamsListPatientComponent } from '../exams-list-patient/exams-list-patient.component';
 import { OrdonnanceService } from '../ordonnance.service';
 import { SoinService } from '../soin.service';
+import { BilanbiologiqueService } from '../bilanbiologique.service';
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
 @Component({
   selector: 'app-patient',
-  imports: [FormsModule, MedicalHistoryComponent,NursingComponent, ButtonsPatientComponent,RouterLink, ConsultationDetailComponent, CommonModule, ConsultationListComponent, HeaderComponent, SearchBarComponent, PatientInfoComponent, PrescriptionsDetailComponent, PrescriptionsListComponent,],
+  imports: [FormsModule,ExamDetailPatientComponent,ExamsListPatientComponent, MedicalHistoryComponent,NursingComponent, ButtonsPatientComponent,RouterLink, ConsultationDetailComponent, CommonModule, ConsultationListComponent, HeaderComponent, SearchBarComponent, PatientInfoComponent, PrescriptionsDetailComponent, PrescriptionsListComponent,],
   templateUrl: './patient.component.html',
   styleUrls: ['./patient.component.css']
 })
@@ -33,6 +36,8 @@ export class PatientComponent implements OnInit {
   medHistoryService = inject(MedHistoryService);
   consultationService = inject(ConsultationService);
   ordonnanceService = inject(OrdonnanceService);
+  bilanbiologiqueService = inject(BilanbiologiqueService);
+  
   soinService = inject(SoinService);
   user?: any;
   private readonly JWT_TOKEN = 'JWT_TOKEN';
@@ -53,6 +58,10 @@ export class PatientComponent implements OnInit {
   selectedNursingCare: any = null;
   showMedicalHistory: boolean = false;
   selectedNursingCareIndex: number | null = null;
+  nss: string = '';
+  selectedCare: any = null;
+  showCaresList: boolean = false;
+  showNursing: boolean = false;
 
 
   constructor() {
@@ -569,5 +578,61 @@ export class PatientComponent implements OnInit {
   backToPatientInfoMedicalHistory() {
     this.showMedicalHistory = false;
   }
+  /*getAllBilanBiologique(){
+  console.log("the view get called hhhhhhhhhhhhhhhhhh",this.dpi.id)
+  this.bilanbiologiqueService.getAllBilanBiologique(this.dpi.id).subscribe({
+    next: (response) => {
+      console.log("ah i love it and i hate it at the same time",response);
+      this.patient.previousCares = response;
+      this.showCaresList = true; 
+      console.log(this.showCaresList,"hahahahahhaha",this.patient) 
+    },
+    error: () => console.error('Error fetching DPI:')
+  })
+}*/
+
+normalizeCares(cares: any): any[] {
+  // If cares is an object, wrap it in an array; if already an array, return it as is
+  return Array.isArray(cares) ? cares : cares ? [cares] : [];
+}
+
+async getAllBilanBiologique(): Promise<void> {
+  console.log("The view gets called hhhhhhhhhhhhhhhhhh", this.dpi.id);
+  try {
+    const response = await this.bilanbiologiqueService.getAllBilanBiologique(this.dpi.id).toPromise();
+    console.log("Ah, I love it and I hate it at the same time", response);
+    this.patient.previousCares = response;
+    this.showCaresList = true; 
+    console.log(this.showCaresList, "hahahahahhaha", this.patient);
+  } catch (error) {
+    console.error('Error fetching DPI:', error);
+  }
+}
+
+async onViewCares() {
+  console.log("The view gets called");
+  await this.getAllBilanBiologique();
+  console.log(this.showCaresList, "hahahahahhaha", this.patient.previousCares);
+}
+
+selectConsultation1(care: any) {
+  if (!care) {
+    // Si aucune consultation n'est sélectionnée, affiche la liste des consultations
+    this.showCaresList = true;
+    this.selectedCare = null;
+  } else {
+    // Si une consultation est sélectionnée, masque la liste et affiche les détails
+    this.selectedCare = care;
+    this.showCaresList = false;
+  }
+}
+backToPatientInfoConsultation1() {
+  this.showCaresList = false;
+  this.selectedCare = null;
+}
+backToConsultationList1() {
+  this.selectedCare = null;
+  this.showCaresList = true;
+}
  
 }

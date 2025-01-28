@@ -172,9 +172,10 @@ export class InfirmierComponent {
           const formattedHistory: any = {
             nursingCare: []
           };
+          const dataArray = [response];
           
           // Format each consultation into an object with consultation ID as key
-          response.forEach((consultation: any) => {
+          dataArray.forEach((consultation: any) => {
             formattedHistory.nursingCare[consultation.id] = consultation;
             this.authService.getNom(consultation.infirmier).subscribe({
               next: (innerresponse: any) => {

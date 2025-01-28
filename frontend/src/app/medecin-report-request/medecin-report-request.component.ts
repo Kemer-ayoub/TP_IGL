@@ -51,8 +51,8 @@ export class MedecinReportRequestComponent {
             "priority": this.priority,
             "reason_req": this.reasonrequest,
             "req_date": this.testdate,
-            "medecin": this.thedoctor.id,
-            "radiologue": this.user.id
+            "medecin": this.user.id,
+            "radiologue": this.thedoctor.id
           }
           console.log("that's where i follow", this.data)
           // Handle the form submission here

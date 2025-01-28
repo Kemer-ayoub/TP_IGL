@@ -50,8 +50,8 @@ export class MedecinExamRequestComponent {
             "priority": this.priority,
             "medical_just": this.medicalJustification,
             "req_date": this.testDate,
-            "laborantin": this.user.id,
-            "medecin": this.thedoctor.id
+            "laborantin": this.thedoctor.id,
+            "medecin": this.user.id
           }
       
             console.log("that's where i follow", this.data)

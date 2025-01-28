@@ -224,25 +224,40 @@ def list_soin(request, pk=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
+@api_view(['POST', 'GET'])
 @permission_classes([IsAuthenticated])
 def add_bilan_biologique(request):
-    serializer = BilanBiologiqueSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == "POST":
+        serializer = BilanBiologiqueSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == "GET":
+        dpi = request.GET.get('dpi')  # Get the 'dpi' parameter from the request
+        if dpi:  # If 'id' is present, fetch a specific ExamRequest
+            bilan_biologique = get_object_or_404(BilanBiologique, dpi__id=dpi)
+            serializer = BilanBiologiqueSerializer(bilan_biologique)
+            return Response(serializer.data)
+        else:  # Otherwise, fetch all BilanBiologique instances
+            id = request.GET.get('id')  # Get the 'dpi' parameter from the request
+            bilan_biologique = get_object_or_404(BilanBiologique, id=id)
+            serializer = BilanBiologiqueSerializer(bilan_biologique)
+            return Response(serializer.data)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def list_bilan_biologique(request, pk=None):
-    if pk is not None:
-        bilan = get_object_or_404(BilanBiologique, pk=pk)
-        serializer = BilanBiologiqueSerializer(bilan)
+    dpi = request.GET.get('dpi')  # Get the 'dpi' parameter from the request
+    if dpi:  # If 'id' is present, fetch a specific ExamRequest
+        bilan_biologique = get_object_or_404(BilanBiologique, id=id)
+        serializer = BilanBiologiqueSerializer(bilan_biologique)
         return Response(serializer.data)
-    bilans = BilanBiologique.objects.all()
-    serializer = BilanBiologiqueSerializer(bilans, many=True)
-    return Response(serializer.data)
+    else:  # Otherwise, fetch all BilanBiologique instances
+        id = request.GET.get('id')  # Get the 'dpi' parameter from the request
+        bilan_biologiques = BilanBiologique.objects.all()
+        serializer = BilanBiologiqueSerializer(bilan_biologiques, many=True)
+        return Response(serializer.data)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

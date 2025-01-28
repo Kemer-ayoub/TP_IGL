@@ -12,6 +12,7 @@ import Chart  from 'chart.js/auto';
 export class ExamDetailPatientComponent implements AfterViewInit {
   @Input() selectedConsultation: any;
   @Input() selectedPrescription: any;
+  @Input() selectedCare: any;
   
   @Output() backToConsultationList: EventEmitter<void> = new EventEmitter();
   @Output() selectPrescription: EventEmitter<any> = new EventEmitter();

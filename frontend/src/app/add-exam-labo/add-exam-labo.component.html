@@ -4,29 +4,29 @@
     </div>
     <div class="careproprities">
         <div class="input-Date">
-            <textarea type="text" id="description-input" placeholder="Laborantin name"></textarea>
+            <textarea type="text" id="description-input" placeholder="Laborantin name" [(ngModel)]="name"></textarea>
           
         </div>
         <div class="input-Time">
-            <textarea type="text" id="description-input" placeholder="Date of the exam"></textarea>
+            <textarea type="text" id="description-input" placeholder="Date of the exam" [(ngModel)]="date"></textarea>
         </div>
         <div class="input-type">
-            <select id="type-input">
+            <select id="type-input" [(ngModel)]="typecare">
                 <option value="" disabled selected>Select type of exam</option>
-                <option value="exam1">cholesterol</option>
-                <option value="exam2">Iron</option>
-                <option value="exam3">Hypertension</option>
+                <option value="CHOLESTEROL">cholesterol</option>
+                <option value="IRON">Iron</option>
+                <option value="HYPERTENSION">Hypertension</option>
                 <!-- Add more options as needed -->
             </select>
         </div>
         <div class="input-description">
-            <textarea type="text" id="description-input2" placeholder="Result ( level in mg/dL )"></textarea>
+            <textarea type="text" id="description-input2" placeholder="Result ( level in mg/dL )"  [(ngModel)]="value1"></textarea>
         </div>
         <div class="input-observation">
-            <textarea type="text" id="observation-input" placeholder="Observations" va></textarea>
+            <textarea type="text" id="observation-input" placeholder="Observations"  [(ngModel)]="observation"></textarea>
         </div>
     </div>
     <button class="addgraph-btn" (click)="AddGraph()">Add Graph</button>
     <canvas id="myChart" width="400" height="200"></canvas>
-    <button class="create-btn">Create</button>
+    <button class="create-btn" (click)="addBilanBiologique()">Create</button>
     </div>

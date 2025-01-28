@@ -105,9 +105,8 @@ class BilanRadiologiqueSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BilanBiologiqueSerializer(serializers.ModelSerializer):
-    medecin = UserSerializer(read_only=True)
-    dpi = DPISerializer(read_only=True)
-    laborantin = UserSerializer(read_only=True)
+    laborantin = serializers.PrimaryKeyRelatedField(queryset=Laborantin.objects.all())
+    dpi = serializers.PrimaryKeyRelatedField(queryset=DPI.objects.all())
 
     class Meta:
         model = BilanBiologique
