@@ -197,6 +197,18 @@ def valider_ordonnance(request):
 @permission_classes([IsAuthenticated])
 def list_soin(request, pk=None):
     if request.method == "GET":
+        infirmier = request.GET.get('infirmier')  # Get the 'infirmier' parameter from the request
+        if infirmier:  # If 'infirmier' is present, fetch a specific Consultation
+            soin = get_object_or_404(Soin, infirmier__id=infirmier)
+            serializer = SoinSerializer(soin)
+            return Response(serializer.data)
+        else:  # Otherwise, fetch all Consultation instances
+            dpi = request.GET.get('dpi')
+            # Filter consultations by the specific dpi_id
+            soins = Soin.objects.filter(dpi__id=dpi)
+            serializer = SoinSerializer(soins, many=True)
+            return Response(serializer.data)
+    if request.method == "GET":
         if pk is not None:
             soin = get_object_or_404(Soin, pk=pk)
             serializer = SoinSerializer(soin)

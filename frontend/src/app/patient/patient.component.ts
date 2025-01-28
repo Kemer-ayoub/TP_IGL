@@ -19,6 +19,7 @@ import { throwError } from 'rxjs';
 import { MedHistoryService } from '../medHistory.service';
 import { ConsultationService } from '../consultation.service';
 import { OrdonnanceService } from '../ordonnance.service';
+import { SoinService } from '../soin.service';
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
 @Component({
@@ -32,6 +33,7 @@ export class PatientComponent implements OnInit {
   medHistoryService = inject(MedHistoryService);
   consultationService = inject(ConsultationService);
   ordonnanceService = inject(OrdonnanceService);
+  soinService = inject(SoinService);
   user?: any;
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly API_URL = 'http://127.0.0.1:8000/api/';
@@ -351,21 +353,6 @@ export class PatientComponent implements OnInit {
             }
             
           })
-          /*const formattedPrescription: any = {
-            prescriptions: []
-          };
-          this.ordonnanceService.getAllOrdonnance(consultation.id).subscribe({
-            next: (outerresponse: any) => {
-              console.log("1",formattedHistory.consultations[consultation.id] )
-              formattedPrescription.prescription = outerresponse
-              formattedHistory.consultations[consultation.id] = {
-                ...formattedHistory.consultations[consultation.id],
-                ...formattedPrescription
-              };           
-              console.log("2",formattedHistory.consultations[consultation.id] )
-
-            }
-          })*/
         });
         this.patient = { ...this.patient, ...formattedHistory };
         console.log("This is the end hold your breath and count to ten",this.patient)
@@ -458,8 +445,49 @@ export class PatientComponent implements OnInit {
 
   // Afficher la liste des soins infirmiers
   onViewNursingCareList() {
-    this.showNursingCareList = true; // Montre la liste des soins infirmiers
-    this.selectedNursingCare = null; // Réinitialise le soin sélectionné
+    this.soinService.getAllSoin(this.dpi.id).subscribe({
+      next: (response) => {
+        console.log("the reda response:", response)
+        const formattedHistory: any = {
+          nursingCare: []
+        };
+        
+        // Format each consultation into an object with consultation ID as key
+        response.forEach((consultation: any) => {
+          formattedHistory.nursingCare[consultation.id] = consultation;
+          this.authService.getNom(consultation.infirmier).subscribe({
+            next: (innerresponse: any) => {
+              formattedHistory.nursingCare[consultation.id].infirmier = innerresponse;
+              /*const formattedPrescription: any = {
+                prescriptions: []
+              };
+              this.ordonnanceService.getAllOrdonnance(consultation.id).subscribe({
+                next: (outerresponse: any) => {
+                  console.log("1",formattedHistory.consultations[consultation.id] )
+                  formattedPrescription.prescriptions = outerresponse
+                  formattedHistory.consultations[consultation.id] = {
+                    ...formattedHistory.consultations[consultation.id],
+                    ...formattedPrescription
+                  };           
+                  console.log("2",formattedHistory.consultations[consultation.id] )
+    
+                }
+              })*/
+            }
+            
+          })
+        });
+        this.patient = { ...this.patient, ...formattedHistory };
+        console.log("This is the end hold your breath and count to ten",this.patient)
+        if (this.patient?.nursingCare) {
+          this.showNursingCareList = true; // Montre la liste des soins infirmiers
+          this.selectedNursingCare = null; // Réinitialise le soin sélectionné        } else {
+          this.errorMessage = 'Consultations not available for this patient!';
+        }
+      },
+      error: (error) => console.error('Error fetching DPI:', error)
+    })
+    
   }
 
   // Sélectionner un soin infirmier
